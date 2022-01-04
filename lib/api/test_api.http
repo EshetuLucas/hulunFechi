@@ -1,0 +1,88 @@
+// This file gets all api values and simulate them with out using any other tools.
+// You can also make pos requests
+
+
+GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/getAllEventCategory/
+
+###
+
+GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/getAllEvent/1/1
+
+###
+
+GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/getTodayEvent/10/1
+###
+
+GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/getNewEvent/10/1
+###
+
+GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/getUpcomingEvent/10/1
+###
+
+GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/getNewEvent/1/1
+
+###
+
+GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/getAllUser
+
+###
+GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/showEventType/1
+
+###
+GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/searchEvent/hi/10/1
+
+###
+
+###
+GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/searchEventByCategory/2/10/1
+
+###
+POST https://example.com/comments HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+###
+POST http://hulunfechi.ethioscholarship.com/api/hulunfechi/login_s
+content-type: application/json
+Accept: application/json
+
+{
+    "email": "user1@mail.com",
+    "password": "P@$$w0rd"
+      
+    }
+###
+POST http://hulunfechi.ethioscholarship.com/api/hulunfechi/createCloudeUser
+content-type: application/json
+Accept: application/json
+
+{
+  "name": "Tilahun Dessalegn",
+  "email": "dessalugn@gmail.com",
+  "mobile": "0913511986",
+  "password": "P@$$w0rd",
+  "password_confirmation": "P@$$w0rd",
+  "dateOfBirth": "1990/12/12"
+}
+###
+POST http://localhost:5001/poly-market-jester/us-central1/order_status-default  /hulunfechi/createUser
+content-type: application/json
+Authorization: token eyJhbGciOiJSUzI1NiIsImtpZCI6IjdiODcxMTIzNzU0MjdkNjU3ZjVlMjVjYTAxZDU2NWU1OTJhMjMxZGIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRXNoZXR1IEx1a2FzIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdpQ2xBendRc0NXUlZiNno5Q1FBWTY3bFQ2STBMN0JuUEt2QWU4TXlBPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3BvbHktbWFya2V0LWplc3RlciIsImF1ZCI6InBvbHktbWFya2V0LWplc3RlciIsImF1dGhfdGltZSI6MTYzMTYxMTc5NiwidXNlcl9pZCI6InZ5WVZEMzc1b25UWUJSN3FVeEsyTjE5QW9FeTEiLCJzdWIiOiJ2eVlWRDM3NW9uVFlCUjdxVXhLMk4xOUFvRXkxIiwiaWF0IjoxNjMzMDk0Njk2LCJleHAiOjE2MzMwOTgyOTYsImVtYWlsIjoidGVrYWx1a2FzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTE0MTYwNjUyMDc2NDUyMTYwNTMwIl0sImVtYWlsIjpbInRla2
+Accept: application/json
+
+{
+    "data":{
+       "receiverPushToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdiODcxMTIzNzU0MjdkNjU3ZjVlMjVjYTAxZDU2NWU1OTJhMjMxZGIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRXNoZXR1IEx1a2FzIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdpQ2xBendRc0NXUlZiNno5Q1FBWTY3bFQ2STBMN0JuUEt2QWU4TXlBPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3BvbHktbWFya2V0LWplc3RlciIsImF1ZCI6InBvbHktbWFya2V0LWplc3RlciIsImF1dGhfdGltZSI6MTYzMTYxMTc5NiwidXNlcl9pZCI6InZ5WVZEMzc1b25UWUJSN3FVeEsyTjE5QW9FeTEiLCJzdWIiOiJ2eVlWRDM3NW9uVFlCUjdxVXhLMk4xOUFvRXkxIiwiaWF0IjoxNjMzMDk0Njk2LCJleHAiOjE2MzMwOTgyOTYsImVtYWlsIjoidGVrYWx1a2FzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTE0MTYwNjUyMDc2NDUyMTYwNTMwIl0sImVtYWlsIjpbInRla2FsdWthc0BnbW",
+        "senderName": "Eshetu",
+        "gigName": "Dance party",
+        "updatedStatus": "REQUESTED",
+        
+    }
+}
+
+
+

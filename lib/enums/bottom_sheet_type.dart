@@ -1,0 +1,7 @@
+enum BottomSheetType {
+  EVENT_MORE_TYPE,
+  FILTER,
+  CATEGORY,
+  SUB_CATEGORY,
+  DATE_PICKER,
+}
