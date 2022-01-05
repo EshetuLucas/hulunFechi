@@ -3,6 +3,7 @@ import 'package:hulunfechi/enums/bottom_sheet_type.dart';
 import 'package:hulunfechi/ui/bottom_sheet/all_platform.dart';
 import 'package:hulunfechi/ui/bottom_sheet/date_picker.dart';
 import 'package:hulunfechi/ui/bottom_sheet/filter/filter_sheet.dart';
+import 'package:hulunfechi/ui/bottom_sheet/media_uploading/media_uploading_sheet.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void setupBottomSheetUi() {
@@ -21,6 +22,11 @@ void setupBottomSheetUi() {
         ),
     BottomSheetType.DATE_PICKER: (context, sheetRequest, completer) =>
         DatePickerBottomSheet(
+          completer: completer,
+          request: sheetRequest,
+        ),
+    BottomSheetType.MEDIA_UPLOADING: (context, sheetRequest, completer) =>
+        MediaUploadBottomSheet(
           completer: completer,
           request: sheetRequest,
         ),

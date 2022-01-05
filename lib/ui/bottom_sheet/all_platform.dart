@@ -5,10 +5,12 @@ import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
 import 'package:hulunfechi/ui/shared/widgets/action_item.dart';
+import 'package:hulunfechi/ui/widgets/dumb_widgets/app_button.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/app_divider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import 'all_platform_model.dart';
 import 'event_detail_more_sheetmodel.dart';
 
 class AllPlatformBottomSheet extends StatelessWidget {
@@ -23,8 +25,9 @@ class AllPlatformBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<EventOptionsBottomSheetViewModel>.reactive(
+    return ViewModelBuilder<AllPlatformBottomSheetModel>.reactive(
       builder: (context, model, child) => Container(
+        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: kcAppBackgroundColor,
           borderRadius: BorderRadius.only(
@@ -32,19 +35,35 @@ class AllPlatformBottomSheet extends StatelessWidget {
             topRight: Radius.circular(15),
           ),
         ),
-        child: _Header(
-          event: request.data,
-          completer: completer,
-          request: request,
+        child: Scaffold(
+          floatingActionButton: request.mainButtonTitle != null
+              ? Padding(
+                  padding: appSymmetricEdgePadding,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: AppButton(
+                      title: 'Done',
+                      onTap: () => completer
+                          ?.call(SheetResponse(data: model.selectedValue)),
+                    ),
+                  ),
+                )
+              : SizedBox.shrink(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          body: _Header(
+            event: request.data,
+            completer: completer,
+            request: request,
+          ),
         ),
       ),
-      viewModelBuilder: () =>
-          EventOptionsBottomSheetViewModel(event: request.data),
+      viewModelBuilder: () => AllPlatformBottomSheetModel(),
     );
   }
 }
 
-class _Header extends ViewModelWidget<EventOptionsBottomSheetViewModel> {
+class _Header extends ViewModelWidget<AllPlatformBottomSheetModel> {
   const _Header({
     required this.event,
     required this.request,
@@ -55,7 +74,7 @@ class _Header extends ViewModelWidget<EventOptionsBottomSheetViewModel> {
   final SheetRequest request;
   final Function(SheetResponse)? completer;
   @override
-  Widget build(BuildContext context, EventOptionsBottomSheetViewModel model) {
+  Widget build(BuildContext context, AllPlatformBottomSheetModel model) {
     return Stack(children: [
       SafeArea(
         child: Padding(
@@ -76,6 +95,17 @@ class _Header extends ViewModelWidget<EventOptionsBottomSheetViewModel> {
                 ),
               ),
               verticalSpaceMedium,
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  request.title ?? 'Select from the list',
+                  style: ktsMediumDarkTextStyle.copyWith(
+                      color: kcDarkGreyColor,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 17),
+                ),
+              ),
+              verticalSpaceTiny,
               Expanded(
                 child: ListView.separated(
                   shrinkWrap: true,
@@ -84,11 +114,27 @@ class _Header extends ViewModelWidget<EventOptionsBottomSheetViewModel> {
                     return AppDivider();
                   },
                   itemBuilder: (BuildContext context, int index) {
-                    return ActionsItem(
-                      title: request.customData[index],
-                      iconData: Icons.ac_unit,
-                      hasTrailingIcon: false,
-                      onTap: () => completer?.call(SheetResponse(data: index)),
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: ActionsItem(
+                            title: request.customData[index],
+                            iconData: Icons.ac_unit,
+                            hasTrailingIcon: false,
+                            onTap: () => request.mainButtonTitle != null
+                                ? model.onSelected(index)
+                                : completer?.call(SheetResponse(data: index)),
+                          ),
+                        ),
+                        if (request.mainButtonTitle != null)
+                          Checkbox(
+                            side: BorderSide(color: kcPrimaryColor),
+                            focusColor: kcPrimaryColor,
+                            activeColor: kcPrimaryColor,
+                            value: model.selectedValue.contains(index),
+                            onChanged: (value) => model.onSelected(index),
+                          ),
+                      ],
                     );
                   },
                 ),

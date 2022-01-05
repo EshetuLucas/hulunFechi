@@ -4,4 +4,5 @@ enum BottomSheetType {
   CATEGORY,
   SUB_CATEGORY,
   DATE_PICKER,
+  MEDIA_UPLOADING,
 }

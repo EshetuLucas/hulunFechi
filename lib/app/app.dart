@@ -3,11 +3,13 @@ import 'package:hulunfechi/api/post_apis.dart';
 import 'package:hulunfechi/services/event_service.dart';
 import 'package:hulunfechi/services/shared_preferences_service.dart';
 import 'package:hulunfechi/services/user_service.dart';
+import 'package:hulunfechi/ui/views/about/about_viewmodel.dart';
 import 'package:hulunfechi/ui/views/account/account_view.dart';
 import 'package:hulunfechi/ui/views/category_view/category_view.dart';
 import 'package:hulunfechi/ui/views/event_detail/event_detail_view.dart';
 import 'package:hulunfechi/ui/views/login/login_view.dart';
 import 'package:hulunfechi/ui/views/post/post_view.dart';
+import 'package:hulunfechi/ui/views/preference/preference_view.dart';
 import 'package:hulunfechi/ui/views/setting/setting_view.dart';
 import 'package:hulunfechi/ui/views/signup/signup_view.dart';
 import 'package:hulunfechi/ui/views/startup/startup_view.dart';
@@ -31,6 +33,8 @@ import '../ui/views/home/home_view.dart';
     CupertinoRoute(page: StartupView),
     CupertinoRoute(page: SettingView),
     CupertinoRoute(page: PostView),
+    CupertinoRoute(page: PreferenceView),
+    CupertinoRoute(page: AboutView),
   ],
   dependencies: [
     LazySingleton(classType: DialogService),

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:hulunfechi/app/app.locator.dart';
 import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/app/app.router.dart';
+import 'package:hulunfechi/enums/bottom_sheet_type.dart';
 import 'package:hulunfechi/enums/dialog_type.dart';
 import 'package:hulunfechi/services/user_service.dart';
 import 'package:stacked/stacked.dart';
@@ -23,6 +24,7 @@ class AccountViewModel extends BaseViewModel {
 
     switch (index) {
       case 0:
+        onPreference();
         break;
       case 1:
         onLanguage();
@@ -37,12 +39,29 @@ class AccountViewModel extends BaseViewModel {
       case 5:
         break;
       case 6:
+        onAbout();
         break;
       case 7:
         await onLogout();
         break;
       default:
     }
+  }
+
+  Future<void> onCamera() async {
+    log.i('');
+    await _bottomSheetService.showCustomSheet(
+      isScrollControlled: false,
+      variant: BottomSheetType.MEDIA_UPLOADING,
+    );
+  }
+
+  Future<void> onPreference() async {
+    _navigationService.navigateTo(Routes.preferenceView);
+  }
+
+  Future<void> onAbout() async {
+    _navigationService.navigateTo(Routes.aboutView);
   }
 
   Future onLanguage() async {

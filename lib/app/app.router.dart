@@ -12,12 +12,14 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
 import '../datamodels/app_data_model.dart';
+import '../ui/views/about/about_viewmodel.dart';
 import '../ui/views/account/account_view.dart';
 import '../ui/views/category_view/category_view.dart';
 import '../ui/views/event_detail/event_detail_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/login/login_view.dart';
 import '../ui/views/post/post_view.dart';
+import '../ui/views/preference/preference_view.dart';
 import '../ui/views/setting/setting_view.dart';
 import '../ui/views/signup/signup_view.dart';
 import '../ui/views/startup/startup_view.dart';
@@ -32,6 +34,8 @@ class Routes {
   static const String startupView = '/startup-view';
   static const String settingView = '/setting-view';
   static const String postView = '/post-view';
+  static const String preferenceView = '/preference-view';
+  static const String aboutView = '/about-view';
   static const all = <String>{
     homeView,
     eventDetailView,
@@ -42,6 +46,8 @@ class Routes {
     startupView,
     settingView,
     postView,
+    preferenceView,
+    aboutView,
   };
 }
 
@@ -58,6 +64,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.startupView, page: StartupView),
     RouteDef(Routes.settingView, page: SettingView),
     RouteDef(Routes.postView, page: PostView),
+    RouteDef(Routes.preferenceView, page: PreferenceView),
+    RouteDef(Routes.aboutView, page: AboutView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -127,8 +135,23 @@ class StackedRouter extends RouterBase {
       );
     },
     PostView: (data) {
+      var args = data.getArgs<PostViewArguments>(
+        orElse: () => PostViewArguments(),
+      );
       return CupertinoPageRoute<dynamic>(
-        builder: (context) => PostView(),
+        builder: (context) => PostView(key: args.key),
+        settings: data,
+      );
+    },
+    PreferenceView: (data) {
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => const PreferenceView(),
+        settings: data,
+      );
+    },
+    AboutView: (data) {
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => const AboutView(),
         settings: data,
       );
     },
@@ -163,4 +186,10 @@ class LoginViewArguments {
 class SignUpViewArguments {
   final Key? key;
   SignUpViewArguments({this.key});
+}
+
+/// PostView arguments holder class
+class PostViewArguments {
+  final Key? key;
+  PostViewArguments({this.key});
 }

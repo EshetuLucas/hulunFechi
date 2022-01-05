@@ -6,15 +6,15 @@ import 'app_colors.dart';
 // status bar
 void ksStatusBarStyle(
     {Color statusBarColor = Colors.transparent,
-    Brightness statusBarIconBrightness = Brightness.light}) {
+    Brightness statusBarIconBrightness = Brightness.dark}) {
   SystemChrome.setSystemUIOverlayStyle(
     (SystemUiOverlayStyle(
         statusBarColor: statusBarColor,
-        statusBarBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: statusBarIconBrightness,
         systemNavigationBarColor: kcAppBackgroundColor,
         systemNavigationBarDividerColor: kcAppBackgroundColor,
-        systemNavigationBarIconBrightness: Brightness.light)),
+        systemNavigationBarIconBrightness: Brightness.dark)),
   );
 }
 

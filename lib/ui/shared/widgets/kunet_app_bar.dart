@@ -30,12 +30,14 @@ class hulunfechiAppbar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget>? actions;
   final String title;
   final Function()? onBackButtonTap;
-  const hulunfechiAppbar({
-    Key? key,
-    this.actions,
-    required this.title,
-    this.onBackButtonTap,
-  }) : super(key: key);
+  final Color backgroundColor;
+  const hulunfechiAppbar(
+      {Key? key,
+      this.actions,
+      required this.title,
+      this.onBackButtonTap,
+      this.backgroundColor = kcVeryLightGrey})
+      : super(key: key);
 
   @override
   PreferredSizeWidget build(BuildContext context) {
@@ -43,7 +45,7 @@ class hulunfechiAppbar extends StatelessWidget implements PreferredSizeWidget {
       backwardsCompatibility: false,
       elevation: 0,
       automaticallyImplyLeading: false,
-      backgroundColor: kcVeryLightGrey,
+      backgroundColor: backgroundColor,
       leading: onBackButtonTap != null
           ? Padding(
               padding: const EdgeInsets.all(11.0),

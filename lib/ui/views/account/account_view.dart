@@ -143,13 +143,13 @@ class _UserProfile extends StatelessWidget {
   }
 }
 
-class _ProfilePic extends StatelessWidget {
+class _ProfilePic extends ViewModelWidget<AccountViewModel> {
   const _ProfilePic({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, AccountViewModel model) {
     return Stack(
       alignment: Alignment.bottomRight,
       children: [
@@ -185,7 +185,7 @@ class _ProfilePic extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(3.0),
                     child: GestureDetector(
-                      onTap: () => null,
+                      onTap: model.onCamera,
                       child: Icon(
                         Icons.camera_alt_rounded,
                         color: kcPrimaryColor,
