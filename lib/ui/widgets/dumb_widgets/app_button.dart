@@ -29,7 +29,7 @@ class AppButton extends StatelessWidget {
       this.textColor = kcWhite,
       this.shadow = true,
       this.height = 54,
-      this.enablebuttonTextStyle = ktsWhiteSmallTextStyle,
+      this.enablebuttonTextStyle = ktsButtonTextTextStyle,
       this.disablebuttonTextStyle = ktsWhiteSmallTextStyle,
       required this.onTap,
       this.showButton = true,

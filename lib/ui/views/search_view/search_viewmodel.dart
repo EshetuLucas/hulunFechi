@@ -84,4 +84,9 @@ class SearchViewModel extends FormViewModel {
       }
     }
   }
+
+  void onComment(Post post) => _navigationService.navigateTo(
+        Routes.commentView,
+        arguments: CommentViewArguments(post: post),
+      );
 }

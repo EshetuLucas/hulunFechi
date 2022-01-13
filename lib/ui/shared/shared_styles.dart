@@ -31,7 +31,8 @@ const RoundedRectangleBorder krrBoxBorderShape = RoundedRectangleBorder(
   Radius.circular(10),
 ));
 // Text Styles
-
+const TextStyle ktsButtonTextTextStyle = const TextStyle(
+    fontWeight: FontWeight.w700, color: kcLDeepGreen, fontSize: 16);
 const TextStyle ktsAppTitleTextStyle =
     const TextStyle(fontWeight: FontWeight.w600, color: kcWhite, fontSize: 28);
 const TextStyle ktsMediumDarkTextStyle = const TextStyle(

@@ -15,6 +15,7 @@ import '../datamodels/app_data_model.dart';
 import '../ui/views/about/about_viewmodel.dart';
 import '../ui/views/account/account_view.dart';
 import '../ui/views/category_view/category_view.dart';
+import '../ui/views/comment/comment_view.dart';
 import '../ui/views/event_detail/event_detail_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/login/login_view.dart';
@@ -36,6 +37,7 @@ class Routes {
   static const String postView = '/post-view';
   static const String preferenceView = '/preference-view';
   static const String aboutView = '/about-view';
+  static const String commentView = '/comment-view';
   static const all = <String>{
     homeView,
     eventDetailView,
@@ -48,6 +50,7 @@ class Routes {
     postView,
     preferenceView,
     aboutView,
+    commentView,
   };
 }
 
@@ -66,6 +69,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.postView, page: PostView),
     RouteDef(Routes.preferenceView, page: PreferenceView),
     RouteDef(Routes.aboutView, page: AboutView),
+    RouteDef(Routes.commentView, page: CommentView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -155,6 +159,16 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    CommentView: (data) {
+      var args = data.getArgs<CommentViewArguments>(nullOk: false);
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => CommentView(
+          post: args.post,
+          key: args.key,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -192,4 +206,11 @@ class SignUpViewArguments {
 class PostViewArguments {
   final Key? key;
   PostViewArguments({this.key});
+}
+
+/// CommentView arguments holder class
+class CommentViewArguments {
+  final Post post;
+  final Key? key;
+  CommentViewArguments({required this.post, this.key});
 }

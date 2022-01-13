@@ -21,7 +21,7 @@ class SettingView extends StatelessWidget {
         ),
         body: SafeArea(
             child: Padding(
-                padding: appSymmetricEdgePadding,
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -185,9 +185,16 @@ class _AccountWidgets extends StatelessWidget {
           children: [
             horizontalSpaceMedium,
             Text(title),
-            Spacer(),
-            Text(subTitle),
-            horizontalSpaceMedium,
+            horizontalSpaceSmall,
+            Expanded(
+              child: Text(
+                subTitle,
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.fade,
+              ),
+            ),
+            horizontalSpaceSmall,
           ],
         ),
         verticalSpaceSmall,

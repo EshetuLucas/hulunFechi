@@ -1137,3 +1137,657 @@ abstract class _UserAccount extends UserAccount {
   _$UserAccountCopyWith<_UserAccount> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+Post _$PostFromJson(Map<String, dynamic> json) {
+  return _Post.fromJson(json);
+}
+
+/// @nodoc
+class _$PostTearOff {
+  const _$PostTearOff();
+
+  _Post call(
+      {required int id,
+      required String userId,
+      required String userProfilePic,
+      required String userName,
+      required Group group,
+      required String country,
+      required String platform,
+      required String category,
+      required String subCategory,
+      required String title,
+      required String body,
+      required int likes,
+      required int comments,
+      required int share}) {
+    return _Post(
+      id: id,
+      userId: userId,
+      userProfilePic: userProfilePic,
+      userName: userName,
+      group: group,
+      country: country,
+      platform: platform,
+      category: category,
+      subCategory: subCategory,
+      title: title,
+      body: body,
+      likes: likes,
+      comments: comments,
+      share: share,
+    );
+  }
+
+  Post fromJson(Map<String, Object?> json) {
+    return Post.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Post = _$PostTearOff();
+
+/// @nodoc
+mixin _$Post {
+  int get id => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
+  String get userProfilePic => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
+  Group get group => throw _privateConstructorUsedError;
+  String get country => throw _privateConstructorUsedError;
+  String get platform => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
+  String get subCategory => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get body => throw _privateConstructorUsedError;
+  int get likes => throw _privateConstructorUsedError;
+  int get comments => throw _privateConstructorUsedError;
+  int get share => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PostCopyWith<$Res> {
+  factory $PostCopyWith(Post value, $Res Function(Post) then) =
+      _$PostCopyWithImpl<$Res>;
+  $Res call(
+      {int id,
+      String userId,
+      String userProfilePic,
+      String userName,
+      Group group,
+      String country,
+      String platform,
+      String category,
+      String subCategory,
+      String title,
+      String body,
+      int likes,
+      int comments,
+      int share});
+}
+
+/// @nodoc
+class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
+  _$PostCopyWithImpl(this._value, this._then);
+
+  final Post _value;
+  // ignore: unused_field
+  final $Res Function(Post) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? userId = freezed,
+    Object? userProfilePic = freezed,
+    Object? userName = freezed,
+    Object? group = freezed,
+    Object? country = freezed,
+    Object? platform = freezed,
+    Object? category = freezed,
+    Object? subCategory = freezed,
+    Object? title = freezed,
+    Object? body = freezed,
+    Object? likes = freezed,
+    Object? comments = freezed,
+    Object? share = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userProfilePic: userProfilePic == freezed
+          ? _value.userProfilePic
+          : userProfilePic // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      group: group == freezed
+          ? _value.group
+          : group // ignore: cast_nullable_to_non_nullable
+              as Group,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      platform: platform == freezed
+          ? _value.platform
+          : platform // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      subCategory: subCategory == freezed
+          ? _value.subCategory
+          : subCategory // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      likes: likes == freezed
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as int,
+      comments: comments == freezed
+          ? _value.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as int,
+      share: share == freezed
+          ? _value.share
+          : share // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
+  factory _$PostCopyWith(_Post value, $Res Function(_Post) then) =
+      __$PostCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {int id,
+      String userId,
+      String userProfilePic,
+      String userName,
+      Group group,
+      String country,
+      String platform,
+      String category,
+      String subCategory,
+      String title,
+      String body,
+      int likes,
+      int comments,
+      int share});
+}
+
+/// @nodoc
+class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
+    implements _$PostCopyWith<$Res> {
+  __$PostCopyWithImpl(_Post _value, $Res Function(_Post) _then)
+      : super(_value, (v) => _then(v as _Post));
+
+  @override
+  _Post get _value => super._value as _Post;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? userId = freezed,
+    Object? userProfilePic = freezed,
+    Object? userName = freezed,
+    Object? group = freezed,
+    Object? country = freezed,
+    Object? platform = freezed,
+    Object? category = freezed,
+    Object? subCategory = freezed,
+    Object? title = freezed,
+    Object? body = freezed,
+    Object? likes = freezed,
+    Object? comments = freezed,
+    Object? share = freezed,
+  }) {
+    return _then(_Post(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      userProfilePic: userProfilePic == freezed
+          ? _value.userProfilePic
+          : userProfilePic // ignore: cast_nullable_to_non_nullable
+              as String,
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
+      group: group == freezed
+          ? _value.group
+          : group // ignore: cast_nullable_to_non_nullable
+              as Group,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String,
+      platform: platform == freezed
+          ? _value.platform
+          : platform // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: category == freezed
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      subCategory: subCategory == freezed
+          ? _value.subCategory
+          : subCategory // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      likes: likes == freezed
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as int,
+      comments: comments == freezed
+          ? _value.comments
+          : comments // ignore: cast_nullable_to_non_nullable
+              as int,
+      share: share == freezed
+          ? _value.share
+          : share // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Post extends _Post {
+  _$_Post(
+      {required this.id,
+      required this.userId,
+      required this.userProfilePic,
+      required this.userName,
+      required this.group,
+      required this.country,
+      required this.platform,
+      required this.category,
+      required this.subCategory,
+      required this.title,
+      required this.body,
+      required this.likes,
+      required this.comments,
+      required this.share})
+      : super._();
+
+  factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final String userId;
+  @override
+  final String userProfilePic;
+  @override
+  final String userName;
+  @override
+  final Group group;
+  @override
+  final String country;
+  @override
+  final String platform;
+  @override
+  final String category;
+  @override
+  final String subCategory;
+  @override
+  final String title;
+  @override
+  final String body;
+  @override
+  final int likes;
+  @override
+  final int comments;
+  @override
+  final int share;
+
+  @override
+  String toString() {
+    return 'Post(id: $id, userId: $userId, userProfilePic: $userProfilePic, userName: $userName, group: $group, country: $country, platform: $platform, category: $category, subCategory: $subCategory, title: $title, body: $body, likes: $likes, comments: $comments, share: $share)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Post &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.userId, userId) &&
+            const DeepCollectionEquality()
+                .equals(other.userProfilePic, userProfilePic) &&
+            const DeepCollectionEquality().equals(other.userName, userName) &&
+            const DeepCollectionEquality().equals(other.group, group) &&
+            const DeepCollectionEquality().equals(other.country, country) &&
+            const DeepCollectionEquality().equals(other.platform, platform) &&
+            const DeepCollectionEquality().equals(other.category, category) &&
+            const DeepCollectionEquality()
+                .equals(other.subCategory, subCategory) &&
+            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.body, body) &&
+            const DeepCollectionEquality().equals(other.likes, likes) &&
+            const DeepCollectionEquality().equals(other.comments, comments) &&
+            const DeepCollectionEquality().equals(other.share, share));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(userId),
+      const DeepCollectionEquality().hash(userProfilePic),
+      const DeepCollectionEquality().hash(userName),
+      const DeepCollectionEquality().hash(group),
+      const DeepCollectionEquality().hash(country),
+      const DeepCollectionEquality().hash(platform),
+      const DeepCollectionEquality().hash(category),
+      const DeepCollectionEquality().hash(subCategory),
+      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(body),
+      const DeepCollectionEquality().hash(likes),
+      const DeepCollectionEquality().hash(comments),
+      const DeepCollectionEquality().hash(share));
+
+  @JsonKey(ignore: true)
+  @override
+  _$PostCopyWith<_Post> get copyWith =>
+      __$PostCopyWithImpl<_Post>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_PostToJson(this);
+  }
+}
+
+abstract class _Post extends Post {
+  factory _Post(
+      {required int id,
+      required String userId,
+      required String userProfilePic,
+      required String userName,
+      required Group group,
+      required String country,
+      required String platform,
+      required String category,
+      required String subCategory,
+      required String title,
+      required String body,
+      required int likes,
+      required int comments,
+      required int share}) = _$_Post;
+  _Post._() : super._();
+
+  factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
+
+  @override
+  int get id;
+  @override
+  String get userId;
+  @override
+  String get userProfilePic;
+  @override
+  String get userName;
+  @override
+  Group get group;
+  @override
+  String get country;
+  @override
+  String get platform;
+  @override
+  String get category;
+  @override
+  String get subCategory;
+  @override
+  String get title;
+  @override
+  String get body;
+  @override
+  int get likes;
+  @override
+  int get comments;
+  @override
+  int get share;
+  @override
+  @JsonKey(ignore: true)
+  _$PostCopyWith<_Post> get copyWith => throw _privateConstructorUsedError;
+}
+
+Country _$CountryFromJson(Map<String, dynamic> json) {
+  return _Country.fromJson(json);
+}
+
+/// @nodoc
+class _$CountryTearOff {
+  const _$CountryTearOff();
+
+  _Country call(
+      {String name = '',
+      String code = '',
+      String dialCode = '',
+      String flag = ''}) {
+    return _Country(
+      name: name,
+      code: code,
+      dialCode: dialCode,
+      flag: flag,
+    );
+  }
+
+  Country fromJson(Map<String, Object?> json) {
+    return Country.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Country = _$CountryTearOff();
+
+/// @nodoc
+mixin _$Country {
+  String get name => throw _privateConstructorUsedError;
+  String get code => throw _privateConstructorUsedError;
+  String get dialCode => throw _privateConstructorUsedError;
+  String get flag => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CountryCopyWith<Country> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CountryCopyWith<$Res> {
+  factory $CountryCopyWith(Country value, $Res Function(Country) then) =
+      _$CountryCopyWithImpl<$Res>;
+  $Res call({String name, String code, String dialCode, String flag});
+}
+
+/// @nodoc
+class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
+  _$CountryCopyWithImpl(this._value, this._then);
+
+  final Country _value;
+  // ignore: unused_field
+  final $Res Function(Country) _then;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? dialCode = freezed,
+    Object? flag = freezed,
+  }) {
+    return _then(_value.copyWith(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      dialCode: dialCode == freezed
+          ? _value.dialCode
+          : dialCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      flag: flag == freezed
+          ? _value.flag
+          : flag // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$CountryCopyWith<$Res> implements $CountryCopyWith<$Res> {
+  factory _$CountryCopyWith(_Country value, $Res Function(_Country) then) =
+      __$CountryCopyWithImpl<$Res>;
+  @override
+  $Res call({String name, String code, String dialCode, String flag});
+}
+
+/// @nodoc
+class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
+    implements _$CountryCopyWith<$Res> {
+  __$CountryCopyWithImpl(_Country _value, $Res Function(_Country) _then)
+      : super(_value, (v) => _then(v as _Country));
+
+  @override
+  _Country get _value => super._value as _Country;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? code = freezed,
+    Object? dialCode = freezed,
+    Object? flag = freezed,
+  }) {
+    return _then(_Country(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      code: code == freezed
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      dialCode: dialCode == freezed
+          ? _value.dialCode
+          : dialCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      flag: flag == freezed
+          ? _value.flag
+          : flag // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Country implements _Country {
+  _$_Country(
+      {this.name = '', this.code = '', this.dialCode = '', this.flag = ''});
+
+  factory _$_Country.fromJson(Map<String, dynamic> json) =>
+      _$$_CountryFromJson(json);
+
+  @JsonKey()
+  @override
+  final String name;
+  @JsonKey()
+  @override
+  final String code;
+  @JsonKey()
+  @override
+  final String dialCode;
+  @JsonKey()
+  @override
+  final String flag;
+
+  @override
+  String toString() {
+    return 'Country(name: $name, code: $code, dialCode: $dialCode, flag: $flag)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Country &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.code, code) &&
+            const DeepCollectionEquality().equals(other.dialCode, dialCode) &&
+            const DeepCollectionEquality().equals(other.flag, flag));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(code),
+      const DeepCollectionEquality().hash(dialCode),
+      const DeepCollectionEquality().hash(flag));
+
+  @JsonKey(ignore: true)
+  @override
+  _$CountryCopyWith<_Country> get copyWith =>
+      __$CountryCopyWithImpl<_Country>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CountryToJson(this);
+  }
+}
+
+abstract class _Country implements Country {
+  factory _Country({String name, String code, String dialCode, String flag}) =
+      _$_Country;
+
+  factory _Country.fromJson(Map<String, dynamic> json) = _$_Country.fromJson;
+
+  @override
+  String get name;
+  @override
+  String get code;
+  @override
+  String get dialCode;
+  @override
+  String get flag;
+  @override
+  @JsonKey(ignore: true)
+  _$CountryCopyWith<_Country> get copyWith =>
+      throw _privateConstructorUsedError;
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hulunfechi/datamodels/app_data_model.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
@@ -8,21 +9,26 @@ import 'package:stacked/stacked.dart';
 
 import 'app_button.dart';
 
-class Post extends StatelessWidget {
-  const Post({
+class PostWidget extends StatelessWidget {
+  const PostWidget({
     this.isMe = false,
     this.loading = false,
+    required this.post,
+    required this.onComment,
     Key? key,
   }) : super(key: key);
 
   final bool isMe;
   final loading;
+  final Post post;
+  final Function() onComment;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(2, 2, 2, 3),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Text(
           //   '1 Day ago',
@@ -41,7 +47,9 @@ class Post extends StatelessWidget {
                       startColor: kcLightGrey3,
                       endColor: kcWhite,
                       loading: loading,
-                      child: Text('Mahlet Abebe'),
+                      child: Text(
+                        post.userName,
+                      ),
                     ),
                     verticalSpaceTiny,
                     SkeletonLoader(
@@ -49,7 +57,7 @@ class Post extends StatelessWidget {
                       endColor: kcWhite,
                       loading: loading,
                       child: Text(
-                        'Category | Sub-Category',
+                        '${post.category} | ${post.subCategory}',
                         style: ktsGreenBoldTextStyle.copyWith(fontSize: 13),
                       ),
                     )
@@ -94,7 +102,9 @@ class Post extends StatelessWidget {
             endColor: kcWhite,
             loading: loading,
             child: Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat lacinia finibus.'),
+              post.title,
+              style: ktsDarkSmallTextStyle,
+            ),
           ),
           verticalSpaceSmall,
           SkeletonLoader(
@@ -102,7 +112,7 @@ class Post extends StatelessWidget {
             endColor: kcWhite,
             loading: loading,
             child: Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat lacinia finibus. Morbi luctus sed urna nec sagittis. Proin posuere est convallis nisi congue, tincidunt facilisis mauris ultricies. Pellentesque efficitur et turpis a ultrices. Curabitur pellentesque, purus ut ultrices interdum, urna sapien iaculis libero, ut volutpat nisi lacus a justo. Fusce ac nisi dignissim, lacinia turpis quis, dignissim nulla. Vestibulum fringilla dui nisi, sit amet gravida eros molestie in.',
+              post.body,
               style: ktsLightGreyMeidumTextStyle.copyWith(
                   color: kcDarkGreyColor.withOpacity(0.7)),
             ),
@@ -138,29 +148,32 @@ class Post extends StatelessWidget {
                     endColor: kcWhite,
                     loading: loading,
                     child: Text(
-                      '1224',
+                      post.likes.toString(),
                       style: ktsLightGreyMeidumTextStyle,
                     ),
                   )
                 ],
               ),
-              Row(
-                children: [
-                  Icon(
-                    CupertinoIcons.bubble_middle_bottom,
-                    color: kcDarkGreyColor,
-                  ),
-                  horizontalSpaceSmall,
-                  SkeletonLoader(
-                    startColor: kcLightGrey3,
-                    endColor: kcWhite,
-                    loading: loading,
-                    child: Text(
-                      '1524',
-                      style: ktsLightGreyMeidumTextStyle,
+              GestureDetector(
+                onTap: onComment,
+                child: Row(
+                  children: [
+                    Icon(
+                      CupertinoIcons.bubble_middle_bottom,
+                      color: kcDarkGreyColor,
                     ),
-                  )
-                ],
+                    horizontalSpaceSmall,
+                    SkeletonLoader(
+                      startColor: kcLightGrey3,
+                      endColor: kcWhite,
+                      loading: loading,
+                      child: Text(
+                        post.comments.toString(),
+                        style: ktsLightGreyMeidumTextStyle,
+                      ),
+                    )
+                  ],
+                ),
               ),
               Row(
                 children: [
@@ -171,7 +184,7 @@ class Post extends StatelessWidget {
                     endColor: kcWhite,
                     loading: loading,
                     child: Text(
-                      '2466',
+                      post.share.toString(),
                       style: ktsLightGreyMeidumTextStyle,
                     ),
                   )

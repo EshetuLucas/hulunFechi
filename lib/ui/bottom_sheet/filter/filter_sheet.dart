@@ -28,6 +28,7 @@ class FilterBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<FilterSheetViewModel>.reactive(
       builder: (context, model, child) => Container(
+        clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: kcAppBackgroundColor,
           borderRadius: BorderRadius.only(
@@ -52,8 +53,19 @@ class _Header extends ViewModelWidget<FilterSheetViewModel> {
   final Function(SheetResponse)? completer;
   @override
   Widget build(BuildContext context, FilterSheetViewModel model) {
-    return Stack(children: [
-      SafeArea(
+    return Scaffold(
+      floatingActionButton: Padding(
+        padding: appSymmetricEdgePadding,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: AppButton(
+            title: 'Done',
+            onTap: model.onDone,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      body: SafeArea(
         child: Padding(
           padding: appSymmetricEdgePadding,
           child: Padding(
@@ -74,152 +86,140 @@ class _Header extends ViewModelWidget<FilterSheetViewModel> {
                   ),
                 ),
                 verticalSpaceMedium,
-                Text(
-                  'Select Country',
-                  style: ktsDarkGreyTextStyle,
-                ),
-                verticalSpaceSmall,
-                GestureDetector(
-                  onTap: () => showCountryPicker(
-                    context: context,
-                    onSelect: (Country country) {
-                      model.updateTags(0, country.name);
-                    },
-                  ),
-                  child: FittedBox(
-                    child: Row(
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        horizontalSpaceMedium,
                         Text(
-                          model.tags[0],
-                          maxLines: 1,
-                          softWrap: false,
-                          overflow: TextOverflow.fade,
-                          style: ktsGreenBoldTextStyle.copyWith(fontSize: 16),
+                          'Select Country',
+                          style: ktsDarkGreyTextStyle,
                         ),
-                        horizontalSpaceSmall,
-                        Icon(
-                          Icons.expand_more_outlined,
-                          color: kcPrimaryColor,
+                        verticalSpaceSmall,
+                        GestureDetector(
+                          onTap: model.onPickCountry,
+                          child: FittedBox(
+                            child: Row(
+                              children: [
+                                horizontalSpaceMedium,
+                                Text(
+                                  model.tags[0],
+                                  maxLines: 1,
+                                  softWrap: false,
+                                  overflow: TextOverflow.fade,
+                                  style: ktsGreenBoldTextStyle.copyWith(
+                                      fontSize: 16),
+                                ),
+                                horizontalSpaceSmall,
+                                Icon(
+                                  Icons.expand_more_outlined,
+                                  color: kcPrimaryColor,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
+                        AppDivider(),
+                        verticalSpaceMedium,
+                        Text(
+                          'Select Platform',
+                          style: ktsDarkGreyTextStyle,
+                        ),
+                        verticalSpaceSmall,
+                        GestureDetector(
+                          onTap: () => model.onCategories(1),
+                          child: FittedBox(
+                            child: Row(
+                              children: [
+                                horizontalSpaceMedium,
+                                Text(
+                                  model.tags[1],
+                                  maxLines: 1,
+                                  softWrap: false,
+                                  overflow: TextOverflow.fade,
+                                  style: ktsGreenBoldTextStyle.copyWith(
+                                      fontSize: 16),
+                                ),
+                                horizontalSpaceSmall,
+                                Icon(
+                                  Icons.expand_more_outlined,
+                                  color: kcPrimaryColor,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        AppDivider(),
+                        verticalSpaceMedium,
+                        Text(
+                          'Select Category',
+                          style: ktsDarkGreyTextStyle,
+                        ),
+                        verticalSpaceSmall,
+                        GestureDetector(
+                          onTap: () => model.onCategories(2),
+                          child: FittedBox(
+                            child: Row(
+                              children: [
+                                horizontalSpaceMedium,
+                                Text(
+                                  model.tags[2],
+                                  maxLines: 1,
+                                  softWrap: false,
+                                  overflow: TextOverflow.fade,
+                                  style: ktsGreenBoldTextStyle.copyWith(
+                                      fontSize: 16),
+                                ),
+                                horizontalSpaceSmall,
+                                Icon(
+                                  Icons.expand_more_outlined,
+                                  color: kcPrimaryColor,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        AppDivider(),
+                        verticalSpaceMedium,
+                        Text(
+                          'Select sub-category',
+                          style: ktsDarkGreyTextStyle,
+                        ),
+                        verticalSpaceSmall,
+                        GestureDetector(
+                          onTap: () => model.onCategories(3),
+                          child: FittedBox(
+                            child: Row(
+                              children: [
+                                horizontalSpaceMedium,
+                                Text(
+                                  model.tags[3],
+                                  maxLines: 1,
+                                  softWrap: false,
+                                  overflow: TextOverflow.fade,
+                                  style: ktsGreenBoldTextStyle.copyWith(
+                                      fontSize: 16),
+                                ),
+                                horizontalSpaceSmall,
+                                Icon(
+                                  Icons.expand_more_outlined,
+                                  color: kcPrimaryColor,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        verticalSpaceLarge,
+                        verticalSpaceLarge,
                       ],
                     ),
                   ),
                 ),
-                AppDivider(),
-                verticalSpaceMedium,
-                Text(
-                  'Select Platform',
-                  style: ktsDarkGreyTextStyle,
-                ),
-                verticalSpaceSmall,
-                GestureDetector(
-                  onTap: () => model.onCategories(1),
-                  child: FittedBox(
-                    child: Row(
-                      children: [
-                        horizontalSpaceMedium,
-                        Text(
-                          model.tags[1],
-                          maxLines: 1,
-                          softWrap: false,
-                          overflow: TextOverflow.fade,
-                          style: ktsGreenBoldTextStyle.copyWith(fontSize: 16),
-                        ),
-                        horizontalSpaceSmall,
-                        Icon(
-                          Icons.expand_more_outlined,
-                          color: kcPrimaryColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                AppDivider(),
-                verticalSpaceMedium,
-                Text(
-                  'Select Category',
-                  style: ktsDarkGreyTextStyle,
-                ),
-                verticalSpaceSmall,
-                GestureDetector(
-                  onTap: () => model.onCategories(2),
-                  child: FittedBox(
-                    child: Row(
-                      children: [
-                        horizontalSpaceMedium,
-                        Text(
-                          model.tags[2],
-                          maxLines: 1,
-                          softWrap: false,
-                          overflow: TextOverflow.fade,
-                          style: ktsGreenBoldTextStyle.copyWith(fontSize: 16),
-                        ),
-                        horizontalSpaceSmall,
-                        Icon(
-                          Icons.expand_more_outlined,
-                          color: kcPrimaryColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                AppDivider(),
-                verticalSpaceMedium,
-                Text(
-                  'Select sub-category',
-                  style: ktsDarkGreyTextStyle,
-                ),
-                verticalSpaceSmall,
-                GestureDetector(
-                  onTap: () => model.onCategories(3),
-                  child: FittedBox(
-                    child: Row(
-                      children: [
-                        horizontalSpaceMedium,
-                        Text(
-                          model.tags[3],
-                          maxLines: 1,
-                          softWrap: false,
-                          overflow: TextOverflow.fade,
-                          style: ktsGreenBoldTextStyle.copyWith(fontSize: 16),
-                        ),
-                        horizontalSpaceSmall,
-                        Icon(
-                          Icons.expand_more_outlined,
-                          color: kcPrimaryColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                verticalSpaceMedium, verticalSpaceSmall,
-                AppButton(
-                  title: 'Done',
-                  onTap: model.onDone,
-                ),
-
-                // ActionsItem(
-                //   title: "Select sub-category",
-                //   iconData: Icons.info_outline_rounded,
-                //   hasTrailingIcon: false,
-                //   onTap: () => completer?.call(SheetResponse(data: "Meteyek")),
-                // ),
               ],
             ),
           ),
         ),
       ),
-      // if (model.isBusy)
-      //   Material(
-      //     color: kcDarkBlueBlack.withOpacity(0.7),
-      //     child: Align(
-      //       alignment: Alignment.center,
-      //       child: CircularProgressIndicator(
-      //         color: kcPrimaryColor,
-      //       ),
-      //     ),
-      //   )
-    ]);
+    );
   }
 }

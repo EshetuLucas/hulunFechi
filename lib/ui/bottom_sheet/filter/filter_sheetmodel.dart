@@ -65,6 +65,17 @@ class FilterSheetViewModel extends BaseViewModel {
     }
   }
 
+  Future<void> onPickCountry() async {
+    log.i('');
+    final result = await _bottomSheetService.showCustomSheet(
+      isScrollControlled: false,
+      variant: BottomSheetType.COUNTRY_PICKER,
+    );
+    if (result != null) {
+      updateTags(0, result.data.country.name);
+    }
+  }
+
   void onDone() {
     _navigationService.back();
   }

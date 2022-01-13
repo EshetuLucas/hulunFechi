@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hulunfechi/enums/group.dart';
 part 'app_data_model.freezed.dart';
 part 'app_data_model.g.dart';
 
@@ -66,4 +67,40 @@ class UserAccount with _$UserAccount {
 
   factory UserAccount.fromJson(Map<String, dynamic> json) =>
       _$UserAccountFromJson(json);
+}
+
+@freezed
+class Post with _$Post {
+  Post._();
+  factory Post({
+    required int id,
+    required String userId,
+    required String userProfilePic,
+    required String userName,
+    required Group group,
+    required String country,
+    required String platform,
+    required String category,
+    required String subCategory,
+    required String title,
+    required String body,
+    required int likes,
+    required int comments,
+    required int share,
+  }) = _Post;
+
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+}
+
+@freezed
+class Country with _$Country {
+  factory Country({
+    @Default('') String name,
+    @Default('') String code,
+    @Default('') String dialCode,
+    @Default('') String flag,
+  }) = _Country;
+
+  factory Country.fromJson(Map<String, dynamic> json) =>
+      _$CountryFromJson(json);
 }

@@ -7,9 +7,13 @@ import 'package:stacked/stacked.dart';
 
 class SearchBar extends StatelessWidget {
   final TextEditingController controller;
+  final Function(String)? onChange;
+  final Function()? onClose;
   const SearchBar({
+    this.onChange,
     required this.loading,
     required this.controller,
+    this.onClose,
     Key? key,
   }) : super(key: key);
 
@@ -38,15 +42,28 @@ class SearchBar extends StatelessWidget {
                 Icon(
                   CupertinoIcons.search,
                   color: kcPrimaryColor,
+                  size: 20,
                 ),
                 horizontalSpaceSmall,
                 Expanded(
                   child: InputField(
+                    textInputAction: TextInputAction.done,
+                    onChanged: onChange,
                     controller: controller,
                     placeholder: 'Search',
                     hasInputDecoration: false,
                   ),
                 ),
+                if (controller.text.isNotEmpty)
+                  GestureDetector(
+                    onTap: onClose,
+                    child: Icon(
+                      CupertinoIcons.clear,
+                      color: kcPrimaryColor,
+                      size: 20,
+                    ),
+                  ),
+                horizontalSpaceSmall,
               ],
             ),
           ),

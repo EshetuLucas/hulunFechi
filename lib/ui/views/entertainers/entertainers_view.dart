@@ -1,8 +1,11 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hulunfechi/api/faker.dart';
 import 'package:hulunfechi/app/app.constant.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/enums/group.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/app_button.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/app_category.dart';
@@ -18,17 +21,11 @@ import 'package:stacked/stacked_annotations.dart';
 import 'entertainers_viewmodel.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
-import 'entertainers_view.form.dart';
+
+import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 
-@FormView(
-  fields: [
-    FormTextField(
-      name: "search",
-    ),
-  ],
-)
-class EntertainersView extends StatelessWidget with $EntertainersView {
+class EntertainersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<EntertainersViewModel>.reactive(
@@ -69,13 +66,15 @@ class EntertainersView extends StatelessWidget with $EntertainersView {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Expanded(
-                                child: false
+                                child: model.listOnScreen.isEmpty
                                     ? Center(
                                         child: Text(
                                           'No Posts Yet!',
                                           style:
-                                              ktsWhiteSmallTextStyle.copyWith(
-                                                  fontWeight: FontWeight.w600),
+                                              ktsButtonTitleTextStyle.copyWith(
+                                            color: kcDarkGreyColor,
+                                            fontWeight: FontWeight.normal,
+                                          ),
                                           textAlign: TextAlign.center,
                                         ),
                                       )
@@ -86,15 +85,18 @@ class EntertainersView extends StatelessWidget with $EntertainersView {
                                               const EdgeInsets.only(bottom: 30),
                                           child: AppDivider(),
                                         ),
-                                        itemCount: 10,
+                                        itemCount: model.listOnScreen.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Padding(
                                             padding: appSymmetricEdgePadding,
-                                            child: Post(
-                                              loading: model.isBusy ||
-                                                  model.busy(POST_BUSY_KEY),
-                                            ),
+                                            child: PostWidget(
+                                                loading: model.isBusy ||
+                                                    model.busy(POST_BUSY_KEY),
+                                                post: model.listOnScreen[index],
+                                                onComment: () =>
+                                                    model.onComment(model
+                                                        .listOnScreen[index])),
                                           );
                                         },
                                       ),
@@ -112,13 +114,16 @@ class EntertainersView extends StatelessWidget with $EntertainersView {
 }
 
 class Header extends HookViewModelWidget<EntertainersViewModel> {
-  Header({this.scrollToTop, Key? key}) : super(key: key);
-  TextEditingController searchController = TextEditingController();
+  const Header({this.scrollToTop, Key? key}) : super(key: key);
+
   final ValueChanged<bool>? scrollToTop;
 
   @override
   Widget buildViewModelWidget(
-      BuildContext context, EntertainersViewModel model) {
+    BuildContext context,
+    EntertainersViewModel model,
+  ) {
+    final searchController = useTextEditingController();
     return Material(
       color: kcVeryLightGrey,
       child: Column(
@@ -131,6 +136,12 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
                 child: Padding(
                     padding: const EdgeInsets.only(left: 24, right: 24),
                     child: SearchBar(
+                      onClose: () {
+                        searchController.text = '';
+                        model.onChange('');
+                        FocusScope.of(context).unfocus();
+                      },
+                      onChange: model.onChange,
                       loading: false,
                       controller: searchController,
                     )),
@@ -166,10 +177,10 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             scrollDirection: Axis.horizontal,
             child: Row(children: [
-              for (int i = 0; i < Categories.length; i++) ...[
+              for (int i = 0; i < Group.values.length; i++) ...[
                 AppCategory(
                   loading: false,
-                  text: Categories[i],
+                  text: Group.values[i].toShortString(),
                   onTap: () => model.setQucikFilterIndex(i),
                   active: model.currentIndex == i,
                 ),
@@ -186,13 +197,7 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
                 child: HulunfechiTag(
                   loading: false,
                   text: model.tags[0],
-                  onTap: () => showCountryPicker(
-                    context: context,
-                    onSelect: (Country country) {
-                      model.updateTags(0, country.name);
-                      model.makepostBusy();
-                    },
-                  ),
+                  onTap: model.onPickCountry,
                 ),
               ),
               horizontalSpaceSmall,

@@ -6,16 +6,16 @@ const String DATABASE_PATH = 'hulunfechi_database';
 const String EVENT_TABLE = 'event_table';
 const String USER_TABLE = 'user_table';
 
-List<String> Categories = [
-  'All',
-  'Belief',
-  'Technology',
-  'Knowledge',
-  'Health',
-  'Competition',
-  'Law & Regulation',
-  'Finance & Business',
-];
+// List<String> Categories = [
+//   'All',
+//   'Belief',
+//   'Technology',
+//   'Knowledge',
+//   'Health',
+//   'Competition',
+//   'Law & Regulation',
+//   'Finance & Business',
+// ];
 const List<Map<String, dynamic>> ACCOUNT_OPTIONS = [
   {
     'title': 'Preference',
@@ -143,7 +143,6 @@ List<String> Health = [
 ];
 
 List<String> get All => [
-      'All Platforms',
       ...Knowledge,
       ...Law,
       ...Finance,

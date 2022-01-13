@@ -123,7 +123,9 @@ class _Header extends ViewModelWidget<AllPlatformBottomSheetModel> {
                             hasTrailingIcon: false,
                             onTap: () => request.mainButtonTitle != null
                                 ? model.onSelected(index)
-                                : completer?.call(SheetResponse(data: index)),
+                                : completer?.call(
+                                    SheetResponse(data: index),
+                                  ),
                           ),
                         ),
                         if (request.mainButtonTitle != null)

@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hulunfechi/app/app.constant.dart';
+import 'package:hulunfechi/enums/group.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
 import 'package:hulunfechi/ui/shared/widgets/kunet_app_bar.dart';
@@ -67,10 +68,10 @@ class PostView extends StatelessWidget with $PostView {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 scrollDirection: Axis.horizontal,
                 child: Row(children: [
-                  for (int i = 1; i < Categories.length; i++) ...[
+                  for (int i = 1; i < Group.values.length; i++) ...[
                     AppCategory(
                       loading: false,
-                      text: Categories[i],
+                      text: Group.values[i].toShortString(),
                       onTap: () => model.setQucikFilterIndex(i),
                       active: model.currentIndex == i,
                     ),

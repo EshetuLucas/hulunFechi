@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hulunfechi/api/faker.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
@@ -48,8 +49,10 @@ class SearchView extends StatelessWidget with $SearchView {
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: appSymmetricEdgePadding,
-                          child: Post(
+                          child: PostWidget(
                             isMe: true,
+                            post: FAKE_POST,
+                            onComment: () {},
                           ),
                         );
                       },
