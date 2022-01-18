@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:hulunfechi/app/app.locator.dart';
 import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/app/app.router.dart';
+import 'package:hulunfechi/datamodels/user/user_model.dart';
 import 'package:hulunfechi/enums/bottom_sheet_type.dart';
 import 'package:hulunfechi/enums/dialog_type.dart';
 import 'package:hulunfechi/services/user_service.dart';
@@ -18,6 +19,9 @@ class AccountViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
 
   bool get hasUser => _userService.hasUser;
+  User get currentUser => _userService.currentUser;
+
+  String get userFullName => currentUser.firstname + ' ' + currentUser.lastname;
 
   Future<void> onOptionTap(int index) async {
     log.i('index:$index');

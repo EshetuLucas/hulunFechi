@@ -17,22 +17,6 @@ class Location with _$Location {
 }
 
 @freezed
-class Category with _$Category {
-  Category._();
-  factory Category({
-    required int id,
-    required String name,
-    String? description,
-    String? status,
-    double? longitude,
-    String? placeId,
-  }) = _Category;
-
-  factory Category.fromJson(Map<String, dynamic> json) =>
-      _$CategoryFromJson(json);
-}
-
-@freezed
 class Event with _$Event {
   Event._();
   factory Event({
@@ -70,32 +54,34 @@ class UserAccount with _$UserAccount {
 }
 
 @freezed
-class Post with _$Post {
-  Post._();
-  factory Post({
-    required int id,
-    required String userId,
-    required String userProfilePic,
-    required String userName,
-    required Group group,
-    required String country,
-    required String platform,
-    required String category,
-    required String subCategory,
-    required String title,
-    required String body,
-    required int likes,
-    required int comments,
-    required int share,
-  }) = _Post;
+// class Post with _$Post {
+//   Post._();
+//   factory Post({
+//     required int id,
+//     required String userId,
+//     required String userProfilePic,
+//     required String userName,
+//     required Group group,
+//     required String country,
+//     required String platform,
+//     required String category,
+//     required String subCategory,
+//     required String title,
+//     required String body,
+//     required int likes,
+//     required int comments,
+//     required int share,
+//   }) = _Post;
 
-  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
-}
+//   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+// }
 
 @freezed
 class Country with _$Country {
   factory Country({
-    @Default('') String name,
+    @Default(1) int id,
+    required String name,
+    @Default('') String description,
     @Default('') String code,
     @Default('') String dialCode,
     @Default('') String flag,

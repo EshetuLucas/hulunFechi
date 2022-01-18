@@ -21,49 +21,22 @@ class AccountView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
         body: SafeArea(
           child: Padding(
-              padding: appSymmetricEdgePadding,
-              child: !model.hasUser
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        verticalSpaceMedium,
-                        _UserProfile(),
-                        verticalSpaceMedium,
-                        verticalSpaceSmall,
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: _Actions(),
-                          ),
-                        ),
-                      ],
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.user,
-                            size: 100,
-                            color: kcPrimaryColor,
-                          ),
-                          verticalSpaceSmall,
-                          Text(
-                            'Sign up for an account',
-                            style: ktsSmallWhiteTextStyle.copyWith(
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          verticalSpaceSmall,
-                          Center(
-                            child: AppButton(
-                              title: "Sign up",
-                              onTap: model.onSignUp,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
+            padding: appSymmetricEdgePadding,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                verticalSpaceMedium,
+                _UserProfile(),
+                verticalSpaceMedium,
+                verticalSpaceSmall,
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: _Actions(),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -94,13 +67,13 @@ class _Actions extends ViewModelWidget<AccountViewModel> {
   }
 }
 
-class _UserProfile extends StatelessWidget {
+class _UserProfile extends ViewModelWidget<AccountViewModel> {
   const _UserProfile({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, AccountViewModel model) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -112,7 +85,7 @@ class _UserProfile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Eshetu Lukas',
+                model.userFullName,
                 style: ktsDarkGreyTextStyle,
               ),
               Text(

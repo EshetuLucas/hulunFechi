@@ -1,6 +1,7 @@
 import 'package:hulunfechi/api/get_apis.dart';
 import 'package:hulunfechi/api/post_apis.dart';
 import 'package:hulunfechi/services/event_service.dart';
+import 'package:hulunfechi/services/post_service.dart';
 import 'package:hulunfechi/services/shared_preferences_service.dart';
 import 'package:hulunfechi/services/user_service.dart';
 import 'package:hulunfechi/ui/views/about/about_viewmodel.dart';
@@ -41,11 +42,13 @@ import '../ui/views/home/home_view.dart';
   dependencies: [
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
+    LazySingleton(classType: SnackbarService),
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: GetApis),
     LazySingleton(classType: EventService),
     LazySingleton(classType: UserService),
     LazySingleton(classType: PostApi),
+    LazySingleton(classType: PostService),
     // presolve
     Presolve(
       classType: SharedPreferencesService,

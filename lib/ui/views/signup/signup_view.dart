@@ -148,7 +148,6 @@ class SignUpView extends StatelessWidget with $SignUpView {
                                     ],
                                   ),
                                 ),
-
                                 verticalSpaceMedium,
                                 InputField(
                                   controller: phoneNumberController,
@@ -159,7 +158,6 @@ class SignUpView extends StatelessWidget with $SignUpView {
                                   nextFocusNode: FocusScope.of(context),
                                   placeholder: 'Phone Number (09..)',
                                 ),
-
                                 if (model.phoneNumberValidationMessage != null)
                                   _ValidationMessage(
                                       title:
@@ -209,15 +207,14 @@ class SignUpView extends StatelessWidget with $SignUpView {
                                         'Confirm password $CantBeEmpty',
                                   ),
                                 verticalSpaceSmall,
-                                // if (model.hasValidationError)
-                                //   Column(
-                                //     children: <Widget>[
-                                //       Text(
-                                //         model.validationMessage!,
-                                //         style: TextStyle(color: Colors.red),
-                                //       ),
-                                //     ],
-                                //   ),
+                                if (model.erroMessage.isNotEmpty)
+                                  Center(
+                                    child: Text(
+                                      model.erroMessage,
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 15),
+                                    ),
+                                  ),
                                 verticalSpaceMedium,
                               ],
                             ),

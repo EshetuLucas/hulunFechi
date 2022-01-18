@@ -45,13 +45,13 @@ class SearchView extends StatelessWidget with $SearchView {
                         padding: const EdgeInsets.only(bottom: 30),
                         child: AppDivider(),
                       ),
-                      itemCount: 10,
+                      itemCount: model.posts.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: appSymmetricEdgePadding,
                           child: PostWidget(
                             isMe: true,
-                            post: FAKE_POST,
+                            post: model.posts[index],
                             onComment: () {},
                           ),
                         );

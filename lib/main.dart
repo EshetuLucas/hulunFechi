@@ -7,6 +7,7 @@ import 'package:hulunfechi/ui/bottom_sheet/setup_bottom_sheet_ui.dart';
 import 'package:hulunfechi/ui/dialog/setup_dialog_ui.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
+import 'package:hulunfechi/ui/snack_bar/setup_snack_bar.dart';
 import 'package:hulunfechi/ui/views/home/home_view.dart';
 import 'package:hulunfechi/ui/views/login/login_view.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -14,6 +15,7 @@ import 'package:stacked_services/stacked_services.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+  setupSnackbarUi();
   setupBottomSheetUi();
   setupDialogUi();
   runApp(MyApp());
@@ -53,7 +55,7 @@ class MyApp extends StatelessWidget {
             systemNavigationBarDividerColor: kcAppBackgroundColor,
             statusBarBrightness: Brightness.light,
             systemNavigationBarIconBrightness: Brightness.light),
-        child: HomeView(),
+        child: LoginView(),
       ),
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,

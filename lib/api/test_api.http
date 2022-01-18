@@ -37,36 +37,82 @@ GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/searchEvent/hi/10/1
 GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/searchEventByCategory/2/10/1
 
 ###
-POST https://example.com/comments HTTP/1.1
+GET  https://apiv2.hulunfechi.com/api/posts
 content-type: application/json
-
-{
-    "name": "sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
-}
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjQzODg4OSwiZXhwIjoxNjQyNTI1Mjg5fQ.t1ZHWrfPWtoHtcHk1Tmwu3B29cawCeh-hzIPjc2C-kcrrvwLyhCXKijp2Uxmf1KrJsSFbWBcBlX7AQ_8FKx4xQ
+Accept: application/json
 
 ###
-POST http://hulunfechi.ethioscholarship.com/api/hulunfechi/login_s
+GET  https://apiv2.hulunfechi.com/api/categories
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjQzMzY0MiwiZXhwIjoxNjQyNTIwMDQyfQ.S_QNLrTXUiSc1f3_9-jgoPydtSH7sG0wJIvPIYORxxHXfFykEi-9-W7ItZcsujik6ZiqbeNKuSwR80GfgcXtPQ
+Accept: application/json
+sectors
+###
+
+GET  https://apiv2.hulunfechi.com/api/platforms
+content-type: application/json
+Authorization: Bearer  eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjQzMzY0MiwiZXhwIjoxNjQyNTIwMDQyfQ.S_QNLrTXUiSc1f3_9-jgoPydtSH7sG0wJIvPIYORxxHXfFykEi-9-W7ItZcsujik6ZiqbeNKuSwR80GfgcXtPQ
+Accept: application/json
+sectors
+###
+POST https://apiv2.hulunfechi.com/api/auth/signin
 content-type: application/json
 Accept: application/json
 
 {
-    "email": "user1@mail.com",
-    "password": "P@$$w0rd"
+    "username": "tekalukas@gmail.com",
+    "password": "123456"
       
     }
 ###
-POST http://hulunfechi.ethioscholarship.com/api/hulunfechi/createCloudeUser
+
+POST https://apiv2.hulunfechi.com/api/posts
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWthbHVrYXNAZ21haWwuY29tIiwiaWF0IjoxNjQyMTkyMjIyLCJleHAiOjE2NDIyNzg2MjJ9.elFtcznlIS-uPXpRBAi8q87vrMRBtrOjiK2o_hBuNoOpwE_xaKDQe7Bqu5Q6Y920sGmQT4yMO_QAAv5Q2HQkkQ
+Accept: application/json
+
+{
+        "sector": 1, 
+        "title": "titled",
+        "description": "descriptions",
+        "published": false,
+        "expiry": null,
+        "user": {
+            "id": 9
+            
+        },
+        "category": {
+            "id": 3
+        },
+        "platform": {
+            "id": 1
+       
+        },
+        "subategory": {
+            "id": 1
+           
+        }
+
+    
+      
+    }
+    
+###
+POST https://apiv2.hulunfechi.com/api/auth/signup
 content-type: application/json
 Accept: application/json
 
 {
-  "name": "Tilahun Dessalegn",
-  "email": "dessalugn@gmail.com",
-  "mobile": "0913511986",
-  "password": "P@$$w0rd",
-  "password_confirmation": "P@$$w0rd",
-  "dateOfBirth": "1990/12/12"
+    "username": "eshestu@test.com",
+    "password": "123456",
+    "role": ["user"],
+    "email": "eshsetu@test.com",
+    "firstname": "Eshetu",
+    "lastname": "Lukas",
+    "gender":"Male",
+    "phone":"0916740322"
+     
 }
 ###
 POST http://localhost:5001/poly-market-jester/us-central1/order_status-default  /hulunfechi/createUser

@@ -17,7 +17,8 @@ class SignUpViewModel extends FormViewModel {
 
   String? _emailValidationMessage;
   String? get emailValidationMessage => _emailValidationMessage;
-
+  String _erroMessage = '';
+  String get erroMessage => _erroMessage;
   String? _passwordValidationMessage;
   String? get passwordValidationMessage => _passwordValidationMessage;
   String? _phoneNumberValidationMessage;
@@ -100,16 +101,22 @@ class SignUpViewModel extends FormViewModel {
     notifyListeners();
     if (enableCreateAccountButton) {
       setBusy(true);
+
       try {
-        // final result = await _userService.createUserAccount(
-        //     name: firstNameValue!,
-        //     password: passwordValue!,
-        //     email: emailValue!,
-        //     phoneNumber: phoneNumberValue);
-        // _userService.setCurrentuser(userAccount: result);
+        final result = await _userService.createUserAccount(
+          firstname: firstNameValue!,
+          lastname: lastNameValue!,
+          gender: _checkBoxValue == 1 ? 'Male' : 'Female',
+          password: passwordValue!,
+          email: emailValue!,
+          username: emailValue!,
+        );
+        _userService.setCurrentuser(user: result);
         navigateToHomeView();
       } catch (e) {
         log.e('Could not create user account. $e');
+        _erroMessage = e.toString();
+        notifyListeners();
       }
     }
     setBusy(false);

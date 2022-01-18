@@ -22,22 +22,17 @@ class EventService {
     return false;
   }
 
-  /// Get all categor
-  Future<List<Category>> getAllCategory() async {
-    return await _getApis.getAllCategory();
-  }
-
-  /// Get events based on category id
-  Future<List<Event>> searchEventByCategory({
-    required String eventCategoryId,
-    required int perPage,
-    required int currentPage,
-  }) async {
-    return await _getApis.searchEventByCategory(
-        eventCategoryId: eventCategoryId,
-        perPage: perPage,
-        currentPage: currentPage);
-  }
+  // /// Get events based on category id
+  // Future<List<Event>> searchEventByCategory({
+  //   required String eventCategoryId,
+  //   required int perPage,
+  //   required int currentPage,
+  // }) async {
+  //   return await _getApis.searchEventByCategory(
+  //       eventCategoryId: eventCategoryId,
+  //       perPage: perPage,
+  //       currentPage: currentPage);
+  // }
 
   /// Get events based on search key word
   Future<List<Event>> searchEvent({

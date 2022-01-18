@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hulunfechi/api/faker.dart';
 import 'package:hulunfechi/app/app.constant.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/enums/group.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/app_button.dart';
@@ -24,6 +25,15 @@ import 'package:hulunfechi/ui/shared/ui_helpers.dart';
 
 import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
+
+List<Post> _FAKE_POSTS = [
+  FAKE_POST,
+  FAKE_POST1,
+  FAKE_POST,
+  FAKE_POST1,
+  FAKE_POST,
+  FAKE_POST1,
+];
 
 class EntertainersView extends StatelessWidget {
   @override
@@ -50,14 +60,12 @@ class EntertainersView extends StatelessWidget {
                   Header(),
                   verticalSpaceSmall,
                   Expanded(
-                    child: false
+                    child: model.hasError
                         ? GestureDetector(
                             onTap: model.initialise,
                             child: Center(
                               child: Text(
                                 'Something went wrong.\nTap to Try again',
-                                style: ktsWhiteSmallTextStyle.copyWith(
-                                    fontWeight: FontWeight.w600),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -66,7 +74,8 @@ class EntertainersView extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Expanded(
-                                child: model.listOnScreen.isEmpty
+                                child: !model.isBusy &&
+                                        model.listOnScreen.isEmpty
                                     ? Center(
                                         child: Text(
                                           'No Posts Yet!',
@@ -85,7 +94,10 @@ class EntertainersView extends StatelessWidget {
                                               const EdgeInsets.only(bottom: 30),
                                           child: AppDivider(),
                                         ),
-                                        itemCount: model.listOnScreen.length,
+                                        itemCount: model.isBusy ||
+                                                model.busy(POST_BUSY_KEY)
+                                            ? 6
+                                            : model.listOnScreen.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Padding(
@@ -93,7 +105,11 @@ class EntertainersView extends StatelessWidget {
                                             child: PostWidget(
                                                 loading: model.isBusy ||
                                                     model.busy(POST_BUSY_KEY),
-                                                post: model.listOnScreen[index],
+                                                post: model.isBusy ||
+                                                        model
+                                                            .busy(POST_BUSY_KEY)
+                                                    ? _FAKE_POSTS[index]
+                                                    : model.listOnScreen[index],
                                                 onComment: () =>
                                                     model.onComment(model
                                                         .listOnScreen[index])),
@@ -142,7 +158,7 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
                         FocusScope.of(context).unfocus();
                       },
                       onChange: model.onChange,
-                      loading: false,
+                      loading: model.busyHeader,
                       controller: searchController,
                     )),
               ),
@@ -151,8 +167,8 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
                 child: SkeletonLoader(
                   startColor: kcLightGrey3,
                   endColor: kcWhite,
-                  loading: false,
-                  child: false
+                  loading: model.busyHeader,
+                  child: model.busyHeader
                       ? Container(
                           height: 30,
                           width: 40,
@@ -176,17 +192,29 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
           SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             scrollDirection: Axis.horizontal,
-            child: Row(children: [
-              for (int i = 0; i < Group.values.length; i++) ...[
-                AppCategory(
-                  loading: false,
-                  text: Group.values[i].toShortString(),
-                  onTap: () => model.setQucikFilterIndex(i),
-                  active: model.currentIndex == i,
-                ),
-                horizontalSpaceSmall,
-              ]
-            ]),
+            child: Row(
+              children: !model.busyHeader
+                  ? [
+                      for (int i = 0; i < model.sectors.length; i++) ...[
+                        AppCategory(
+                          loading: false,
+                          text: model.sectors[i].name,
+                          onTap: () => model.setQucikFilterIndex(i),
+                          active: model.currentIndex == i,
+                        ),
+                        horizontalSpaceSmall,
+                      ]
+                    ]
+                  : [
+                      for (int i = 0; i < Categories.length; i++) ...[
+                        AppCategory(
+                          loading: true,
+                          text: Categories[i],
+                        ),
+                        horizontalSpaceSmall,
+                      ]
+                    ],
+            ),
           ),
           verticalSpaceSmall,
           Padding(
@@ -195,7 +223,7 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
               horizontalSpaceSmall,
               Expanded(
                 child: HulunfechiTag(
-                  loading: false,
+                  loading: model.busyHeader,
                   text: model.tags[0],
                   onTap: model.onPickCountry,
                 ),
@@ -203,7 +231,7 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
               horizontalSpaceSmall,
               Expanded(
                 child: HulunfechiTag(
-                  loading: false,
+                  loading: model.busyHeader,
                   text: model.tags[1],
                   onTap: model.onAllCountries,
                 ),

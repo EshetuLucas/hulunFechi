@@ -118,7 +118,7 @@ class _Header extends ViewModelWidget<AllPlatformBottomSheetModel> {
                       children: [
                         Expanded(
                           child: ActionsItem(
-                            title: request.customData[index],
+                            title: request.customData[index].name,
                             iconData: Icons.ac_unit,
                             hasTrailingIcon: false,
                             onTap: () => request.mainButtonTitle != null

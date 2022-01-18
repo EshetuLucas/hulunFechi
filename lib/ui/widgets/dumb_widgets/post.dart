@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
@@ -48,7 +49,7 @@ class PostWidget extends StatelessWidget {
                       endColor: kcWhite,
                       loading: loading,
                       child: Text(
-                        post.userName,
+                        post.user.firstname,
                       ),
                     ),
                     verticalSpaceTiny,
@@ -57,7 +58,7 @@ class PostWidget extends StatelessWidget {
                       endColor: kcWhite,
                       loading: loading,
                       child: Text(
-                        '${post.category} | ${post.subCategory}',
+                        '${post.category?.name ?? ''} | ${post.subCategory?.name ?? ''}',
                         style: ktsGreenBoldTextStyle.copyWith(fontSize: 13),
                       ),
                     )
@@ -112,7 +113,7 @@ class PostWidget extends StatelessWidget {
             endColor: kcWhite,
             loading: loading,
             child: Text(
-              post.body,
+              post.description,
               style: ktsLightGreyMeidumTextStyle.copyWith(
                   color: kcDarkGreyColor.withOpacity(0.7)),
             ),
@@ -184,7 +185,7 @@ class PostWidget extends StatelessWidget {
                     endColor: kcWhite,
                     loading: loading,
                     child: Text(
-                      post.share.toString(),
+                      post.shares.toString(),
                       style: ktsLightGreyMeidumTextStyle,
                     ),
                   )

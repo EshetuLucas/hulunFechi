@@ -2,18 +2,23 @@ import 'package:hulunfechi/app/app.locator.dart';
 import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/app/app.router.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/services/event_service.dart';
 import 'package:hulunfechi/services/shared_preferences_service.dart';
+import 'package:hulunfechi/services/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'search_view.form.dart';
 
 class SearchViewModel extends FormViewModel {
   final log = getLogger('CategoryViewModel');
-  final NavigationService _navigationService = locator<NavigationService>();
+  final _userService = locator<UserService>();
+  final _navigationService = locator<NavigationService>();
   final EventService _eventService = locator<EventService>();
   final _sharedPreferencesService = locator<SharedPreferencesService>();
 
+  List<Post> get posts => List.from(_userService.posts
+      .where((element) => element.user.id == _userService.currentUser.id));
   String searchKey = '';
   List userSearchResult = [];
   List<Event> _searchResultEvents = [];

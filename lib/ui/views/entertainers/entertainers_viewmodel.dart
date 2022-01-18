@@ -4,16 +4,21 @@ import 'package:hulunfechi/app/app.locator.dart';
 import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/app/app.router.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/enums/bottom_sheet_type.dart';
 import 'package:hulunfechi/enums/group.dart';
+import 'package:hulunfechi/services/post_service.dart';
+import 'package:hulunfechi/services/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 const String POST_BUSY_KEY = 'Post busy key';
 
-class EntertainersViewModel extends FutureViewModel {
+class EntertainersViewModel extends FutureViewModel<List<Post>> {
   final log = getLogger('EntertainersViewModel ');
-  final NavigationService _navigationService = locator<NavigationService>();
+
+  final _userService = locator<UserService>();
+  final _navigationService = locator<NavigationService>();
 
   final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
   String _allPlatforms = 'All Platforms';
@@ -31,16 +36,13 @@ class EntertainersViewModel extends FutureViewModel {
   int _currentIndex = 0;
   int get currentIndex => _currentIndex;
 
-  List<Post> _posts = [
-    FAKE_POST,
-    FAKE_POST1,
-    FAKE_POST,
-    FAKE_POST1,
-  ];
+  List<Post> _posts = [];
   List<Post> get posts => _posts;
 
   bool _isSearchActive = false;
   bool get isSearchActive => _isSearchActive;
+
+  bool get busyHeader => _userService.sectors.isEmpty && isBusy;
   String _searchKeyWord = '';
   String _currentPlatform = 'All Platforms';
   void setCurrentPlatform(String platform) => _currentPlatform = platform;
@@ -57,16 +59,16 @@ class EntertainersViewModel extends FutureViewModel {
       setCurrentPlatform('All Platforms');
       _currentIndex = 0;
       if (_searchKeyWord.isNotEmpty) {
-        return List.from(_posts
+        return List.from(_posts.reversed
             .where(
               (element) =>
-                  element.userName.toLowerCase().contains(
+                  element.user.firstname.toLowerCase().contains(
                         _searchKeyWord.toLowerCase(),
                       ) ||
                   element.title.toLowerCase().contains(
                         _searchKeyWord.toLowerCase(),
                       ) ||
-                  element.body.toLowerCase().contains(
+                  element.description.toLowerCase().contains(
                         _searchKeyWord.toLowerCase(),
                       ),
             )
@@ -75,15 +77,16 @@ class EntertainersViewModel extends FutureViewModel {
     }
 
     return List.from(
-      _posts
+      _posts.reversed
           .where(
             (element) =>
                 (_currentIndex == 0 ||
-                    element.group == Group.values[_currentIndex]) &&
+                    element.sectors?.id == sectors[_currentIndex].id) &&
                 (_currentCountry == "All Countries" ||
-                    element.country == _currentCountry) &&
+                    element.country?.name == _currentCountry) &&
                 (_currentPlatform == _allPlatforms ||
-                    element.platform == _currentPlatform),
+                    element.platform?.id ==
+                        platforms[_selectedPlatformIndex].id),
           )
           .toList(),
     );
@@ -139,14 +142,20 @@ class EntertainersViewModel extends FutureViewModel {
     }
   }
 
+  int _selectedPlatformIndex = 0;
+  List<Sector> get sectors =>
+      [Sector(id: -1, name: 'All'), ..._userService.sectors];
+  List<Platform> get platforms =>
+      [Platform(id: -1, name: _allPlatforms), ..._userService.platforms];
   Future<void> onAllCountries() async {
     log.i('');
     final resut = await _bottomSheetService.showCustomSheet(
         isScrollControlled: false,
         variant: BottomSheetType.EVENT_MORE_TYPE,
-        customData: getList());
+        customData: platforms);
     if (resut != null) {
-      updateTags(1, getList()[resut.data]);
+      _selectedPlatformIndex = resut.data;
+      updateTags(1, platforms[resut.data].name);
     }
     await makepostBusy();
   }
@@ -155,12 +164,15 @@ class EntertainersViewModel extends FutureViewModel {
     _navigationService.navigateTo(Routes.postView);
   }
 
-  void onComment(Post post) => _navigationService.navigateTo(
-        Routes.commentView,
-        arguments: CommentViewArguments(post: post),
-      );
+  void onComment(Post post) {
+    // _navigationService.navigateTo(
+    //   Routes.commentView,
+    //   arguments: CommentViewArguments(post: post),
+    // );
+  }
 
   void setQucikFilterIndex(index) async {
+    log.i('index:$index');
     _currentIndex = index;
     _isSearchActive = false;
     _searchKeyWord = '';
@@ -183,6 +195,7 @@ class EntertainersViewModel extends FutureViewModel {
 
   Future<void> onFilter() async {
     log.i('');
+    await _userService.getCategories();
     final resut = await _bottomSheetService.showCustomSheet(
       isScrollControlled: false,
       variant: BottomSheetType.FILTER,
@@ -191,13 +204,16 @@ class EntertainersViewModel extends FutureViewModel {
   }
 
   @override
-  Future<void> futureToRun() async {
-    await Future.delayed(Duration(seconds: 2));
-    _posts = [
-      FAKE_POST,
-      FAKE_POST1,
-      FAKE_POST,
-      FAKE_POST1,
-    ];
+  Future<List<Post>> futureToRun() async {
+    await _userService.getHeaders();
+    return await _userService.getPosts();
+  }
+
+  @override
+  void onData(List<Post>? data) {
+    if (data != null) {
+      _posts = data;
+      log.d(posts);
+    }
   }
 }

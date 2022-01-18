@@ -44,7 +44,13 @@ class _CountryPickerBottomSheetState extends State<CountryPickerBottomSheet> {
     ..addListener(_handleQuery);
 
   void _handleQuery() {
+    allCountries.forEach((element) {
+      if (element.name == null) {
+        print(element);
+      }
+    });
     final String query = _controller.text;
+    print(query);
     if (query.isNotEmpty) {
       _filteredCountries = allCountries
           .where((country) =>
@@ -88,7 +94,10 @@ class _CountryPickerBottomSheetState extends State<CountryPickerBottomSheet> {
               verticalSpaceMedium,
               Text(
                 'Select Country',
-                style: ktsMediumDarkTextStyle,
+                style: ktsMediumDarkTextStyle.copyWith(
+                    color: kcPrimaryColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 17),
               ),
               verticalSpaceMedium,
               InputField(

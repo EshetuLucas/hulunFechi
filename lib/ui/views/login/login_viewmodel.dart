@@ -37,12 +37,12 @@ class LoginViewModel extends FormViewModel {
     if (enableLoginButton) {
       try {
         setBusy(true);
-        // await _userService.login(
-        //     email: phoneNumberValue!, password: passwordValue!);
+        await _userService.login(
+            email: phoneNumberValue!, password: passwordValue!);
         navigateToHomeView();
       } catch (e) {
         log.e(e);
-        // _apiValidationMessage = e.toString();
+        _apiValidationMessage = "Incorrect Email or Password";
       }
       setBusy(false);
     }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hulunfechi/app/app.constant.dart';
@@ -32,6 +34,10 @@ class PostView extends StatelessWidget with $PostView {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<PostViewModel>.reactive(
+      onModelReady: (model) {
+        model.setDatas();
+        listenToFormUpdated(model);
+      },
       viewModelBuilder: () => PostViewModel(),
       builder: (context, model, child) => Scaffold(
         floatingActionButton: Padding(
@@ -68,10 +74,10 @@ class PostView extends StatelessWidget with $PostView {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 scrollDirection: Axis.horizontal,
                 child: Row(children: [
-                  for (int i = 1; i < Group.values.length; i++) ...[
+                  for (int i = 0; i < model.sectors.length; i++) ...[
                     AppCategory(
                       loading: false,
-                      text: Group.values[i].toShortString(),
+                      text: model.sectors[i].name,
                       onTap: () => model.setQucikFilterIndex(i),
                       active: model.currentIndex == i,
                     ),
@@ -108,15 +114,9 @@ class PostView extends StatelessWidget with $PostView {
                         horizontalSpaceSmall,
                         Expanded(
                           child: HulunfechiTag(
-                            loading: false,
-                            text: model.tags[0],
-                            onTap: () => showCountryPicker(
-                              context: context,
-                              onSelect: (Country country) {
-                                model.updateTags(0, country.name);
-                              },
-                            ),
-                          ),
+                              loading: false,
+                              text: model.tags[0],
+                              onTap: model.onPickCountry),
                         ),
                         horizontalSpaceSmall,
                         Expanded(
@@ -232,7 +232,7 @@ class PostView extends StatelessWidget with $PostView {
                     textInputType: TextInputType.emailAddress,
                     isReadOnly: model.isBusy,
                     nextFocusNode: FocusScope.of(context),
-                    placeholder: 'Subject',
+                    placeholder: 'Title',
                   ),
                 ),
               ),
@@ -247,12 +247,27 @@ class PostView extends StatelessWidget with $PostView {
                     hasFocusedBorder: true,
                     textInputType: TextInputType.emailAddress,
                     isReadOnly: model.isBusy,
-                    placeholder: 'Body',
+                    placeholder: 'Description',
                     textInputAction: TextInputAction.done,
                   ),
                 ),
               ),
               verticalSpaceMedium,
+              Padding(
+                padding: appSymmetricEdgePadding,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      model.validationMessage,
+                      style: TextStyle(
+                        color: Colors.red.withOpacity(0.7),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               verticalSpaceMedium,
               verticalSpaceLarge
             ],

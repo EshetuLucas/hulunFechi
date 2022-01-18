@@ -13,6 +13,7 @@ import 'package:stacked_services/stacked_services.dart';
 import '../api/get_apis.dart';
 import '../api/post_apis.dart';
 import '../services/event_service.dart';
+import '../services/post_service.dart';
 import '../services/shared_preferences_service.dart';
 import '../services/user_service.dart';
 
@@ -27,11 +28,13 @@ Future setupLocator(
 // Register dependencies
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => NavigationService());
+  locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => GetApis());
   locator.registerLazySingleton(() => EventService());
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => PostApi());
+  locator.registerLazySingleton(() => PostService());
   final sharedPreferencesService = await SharedPreferencesService.getInstance();
   locator.registerSingleton(sharedPreferencesService);
 }

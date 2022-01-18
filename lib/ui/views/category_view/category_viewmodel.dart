@@ -7,7 +7,7 @@ import 'package:hulunfechi/services/event_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class CategoryViewModel extends FutureViewModel<List<Event>> {
+class CategoryViewModel extends FutureViewModel<void> {
   final log = getLogger('CategoryViewModel');
   final _navigationService = locator<NavigationService>();
   final _eventService = locator<EventService>();
@@ -34,17 +34,17 @@ class CategoryViewModel extends FutureViewModel<List<Event>> {
   void onBackButtonTap() => _navigationService.back();
 
   @override
-  Future<List<Event>> futureToRun() async {
+  Future<void> futureToRun() async {
     log.i('');
-    return await _eventService.searchEventByCategory(
-        eventCategoryId: eventCategoryId, perPage: 10, currentPage: 1);
+    // return await _eventService.searchEventByCategory(
+    //     eventCategoryId: eventCategoryId, perPage: 10, currentPage: 1);
   }
 
-  @override
-  void onData(List<Event>? data) {
-    if (data != null) {
-      _listToShow = data;
-    }
-    super.onData(data);
-  }
+  // @override
+  // void onData(List<Event>? data) {
+  //   if (data != null) {
+  //     _listToShow = data;
+  //   }
+  //   super.onData(data);
+  // }
 }

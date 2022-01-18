@@ -280,7 +280,6 @@ const List<Map<String, String>> COUNTRIES_LIST = [
   {'name': 'Nauru', 'code': 'NR', 'dialCode': '+674', 'flag': 'nr.png'},
   {'name': 'Nepal', 'code': 'NP', 'dialCode': '+977', 'flag': 'np.png'},
   {'name': 'Netherlands', 'code': 'NL', 'dialCode': '+31', 'flag': 'nl.png'},
-  {'code': 'AN', 'dialCode': '+599', 'flag': 'an.png'},
   {'name': 'New Caledonia', 'code': 'NC', 'dialCode': '+687', 'flag': 'nc.png'},
   {'name': 'New Zealand', 'code': 'NZ', 'dialCode': '+64', 'flag': 'nz.png'},
   {'name': 'Nicaragua', 'code': 'NI', 'dialCode': '+505', 'flag': 'ni.png'},

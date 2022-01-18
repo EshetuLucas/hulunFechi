@@ -7,8 +7,9 @@ class DioExceptions {
   // We need to test this as we go deploy the new apk.
   String getExceptionMessage(DioError e) {
     if (e.type == DioErrorType.response) {
-      print('catched');
-      return e.response?.data ?? '';
+      print('dio erro');
+
+      return e.response?.data['message'] ?? '';
     } else if (e.type == DioErrorType.connectTimeout) {
       print('check your connection');
       return 'Check your connection';

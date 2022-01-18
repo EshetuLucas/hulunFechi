@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
@@ -19,7 +20,7 @@ class CommentView extends StatelessWidget {
       viewModelBuilder: () => CommentViewModel(),
       builder: (context, model, child) => Scaffold(
         appBar: hulunfechiAppbar(
-          title: post.userName + "'s Post",
+          title: post.user.firstname + "'s Post",
           onBackButtonTap: model.onBack,
         ),
         body: SingleChildScrollView(
@@ -37,7 +38,7 @@ class CommentView extends StatelessWidget {
               Padding(
                 padding: appSymmetricEdgePadding,
                 child: Text(
-                  post.body,
+                  post.description,
                   style: ktsLightGreyMeidumTextStyle.copyWith(
                       color: kcDarkGreyColor.withOpacity(0.7)),
                 ),

@@ -53,10 +53,12 @@ class AppButton extends StatelessWidget {
               ? Colors.transparent
               : enabled
                   ? backgroundColor
-                  : backgroundColor,
+                  : kcLightGrey,
           border: isOutlined
               ? Border.all(color: backgroundColor)
-              : Border.all(color: kcPrimaryColor),
+              : Border.all(
+                  color: enabled ? backgroundColor : kcLightGrey,
+                ),
           borderRadius: BorderRadius.all(
             Radius.circular(54.0),
           ),
@@ -97,7 +99,9 @@ class AppButton extends StatelessWidget {
                   style: enabled
                       ? enablebuttonTextStyle.copyWith(
                           color: textColor, fontSize: 20)
-                      : disablebuttonTextStyle,
+                      : enablebuttonTextStyle.copyWith(
+                          color: kcDarkGreyColor.withOpacity(0.5),
+                          fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
                 if (subTitle != null)

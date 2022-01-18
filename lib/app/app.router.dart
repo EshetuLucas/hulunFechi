@@ -12,6 +12,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
 import '../datamodels/app_data_model.dart';
+import '../datamodels/post/post_model.dart';
 import '../ui/views/about/about_viewmodel.dart';
 import '../ui/views/account/account_view.dart';
 import '../ui/views/category_view/category_view.dart';

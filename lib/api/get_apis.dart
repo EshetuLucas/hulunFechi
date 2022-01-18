@@ -1,18 +1,43 @@
+import 'package:hulunfechi/api/post_apis.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:requests/requests.dart';
 import 'rest_response_parser.dart';
 
-const String base_url =
-    "http://hulunfechi.ethioscholarship.com/api/hulunfechi/";
-const String getAllCategoryUrl = base_url + "getAllEventCategory/";
+const String getPostsUrl = base_url + "posts";
+const String getCategoriesUrl = base_url + "categories";
+const String getSubCategoriesUrl = base_url + "subcategories";
+const String getSectorUrl = base_url + "sectors";
+const String getPlatformsUrl = base_url + "platforms";
 
 class GetApis {
   Future<List<Category>> getAllCategory() async {
     return RestResponseParser()
-        .runRestRequest<Category>(url: getAllCategoryUrl);
+        .runRestRequest<Category>(url: getCategoriesUrl, key: "Category");
   }
 
-  Future<List<Event>> searchEventByCategory(
+  Future<List<SubCategory>> getAllSubCategory() async {
+    return RestResponseParser().runRestRequest<SubCategory>(
+        url: getSubCategoriesUrl, key: "SubCategory");
+  }
+
+  Future<List<Sector>> getAllSectors() async {
+    return RestResponseParser()
+        .runRestRequest<Sector>(url: getSectorUrl, key: "Sector");
+  }
+
+  Future<List<Platform>> getPlatforms() async {
+    return RestResponseParser()
+        .runRestRequest<Platform>(url: getPlatformsUrl, key: "Platform");
+  }
+
+  Future<List<Post>> getPosts() async {
+    String searchEventByCategoryUrl = getPostsUrl;
+    return RestResponseParser()
+        .runRestRequest<Post>(url: searchEventByCategoryUrl, key: "Posts");
+  }
+
+  Future<List<Event>> getAllPosts(
       {required String eventCategoryId,
       required int perPage,
       required int currentPage}) async {
