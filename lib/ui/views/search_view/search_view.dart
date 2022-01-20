@@ -50,6 +50,8 @@ class SearchView extends StatelessWidget with $SearchView {
                         return Padding(
                           padding: appSymmetricEdgePadding,
                           child: PostWidget(
+                            onLike: () => model.onLike(model.posts[index].id),
+                            onShare: () => model.onShare(model.posts[index].id),
                             isMe: true,
                             post: model.posts[index],
                             onComment: () {},

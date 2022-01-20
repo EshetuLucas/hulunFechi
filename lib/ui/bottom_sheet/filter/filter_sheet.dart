@@ -8,6 +8,7 @@ import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
 import 'package:hulunfechi/ui/shared/widgets/action_item.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/app_button.dart';
+import 'package:hulunfechi/ui/widgets/dumb_widgets/app_category.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/app_divider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -91,6 +92,18 @@ class _Header extends ViewModelWidget<FilterSheetViewModel> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(children: [
+                            AppCategory(
+                              loading: false,
+                              text: 'My preference',
+                              onTap: () => model.onDone(),
+                            ),
+                            horizontalSpaceSmall,
+                          ]),
+                        ),
+                        verticalSpaceMedium,
                         Text(
                           'Select Country',
                           style: ktsDarkGreyTextStyle,

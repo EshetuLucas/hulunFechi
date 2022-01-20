@@ -16,7 +16,6 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       phone: json['phone'] as String?,
       profession: json['profession'] as String?,
       dob: json['dob'] as String?,
-      country: json['country'] as String?,
       region: json['region'] as String?,
       city: json['city'] as String?,
       woreda: json['woreda'] as String?,
@@ -29,6 +28,18 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       bank: json['bank'] as String?,
       accessToken: json['accessToken'] as String?,
       tokenType: json['tokenType'] as String?,
+      usercountry: (json['usercountry'] as List<dynamic>?)
+              ?.map((e) => e == null
+                  ? null
+                  : Country.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      usercategories: (json['usercategories'] as List<dynamic>?)
+              ?.map((e) => e == null
+                  ? null
+                  : Category.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -41,7 +52,6 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'phone': instance.phone,
       'profession': instance.profession,
       'dob': instance.dob,
-      'country': instance.country,
       'region': instance.region,
       'city': instance.city,
       'woreda': instance.woreda,
@@ -54,6 +64,8 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'bank': instance.bank,
       'accessToken': instance.accessToken,
       'tokenType': instance.tokenType,
+      'usercountry': instance.usercountry,
+      'usercategories': instance.usercategories,
     };
 
 _$_UserForm _$$_UserFormFromJson(Map<String, dynamic> json) => _$_UserForm(

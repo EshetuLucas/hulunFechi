@@ -21,7 +21,7 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 56,
+      height: 61,
       child: Card(
         clipBehavior: Clip.antiAlias,
         color: kcWhite,

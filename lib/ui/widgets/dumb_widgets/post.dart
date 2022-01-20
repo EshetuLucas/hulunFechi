@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hulunfechi/datamodels/app_data_model.dart';
 import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
@@ -16,6 +15,8 @@ class PostWidget extends StatelessWidget {
     this.loading = false,
     required this.post,
     required this.onComment,
+    required this.onLike,
+    required this.onShare,
     Key? key,
   }) : super(key: key);
 
@@ -23,6 +24,8 @@ class PostWidget extends StatelessWidget {
   final loading;
   final Post post;
   final Function() onComment;
+  final Function() onLike;
+  final Function() onShare;
 
   @override
   Widget build(BuildContext context) {
@@ -124,24 +127,31 @@ class PostWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  LikeButton(
-                    size: 30,
-                    circleColor:
-                        CircleColor(start: kcPrimaryColor, end: kcPrimaryColor),
-                    bubblesColor: BubblesColor(
-                      dotPrimaryColor: kcPrimaryColor,
-                      dotSecondaryColor: kcPrimaryColor,
+                  GestureDetector(
+                    onTap: onLike,
+                    child: LikeButton(
+                      onTap: (value) {
+                        onLike();
+                        return Future.value(true);
+                      },
+                      size: 30,
+                      circleColor: CircleColor(
+                          start: kcPrimaryColor, end: kcPrimaryColor),
+                      bubblesColor: BubblesColor(
+                        dotPrimaryColor: kcPrimaryColor,
+                        dotSecondaryColor: kcPrimaryColor,
+                      ),
+                      likeBuilder: (bool isLiked) {
+                        return Icon(
+                          Icons.thumb_up_off_alt_outlined,
+                          color: isLiked
+                              ? kcPrimaryColor
+                              : kcDarkGreyColor.withOpacity(0.8),
+                          size: 26,
+                        );
+                      },
+                      //likeCount: 98,
                     ),
-                    likeBuilder: (bool isLiked) {
-                      return Icon(
-                        Icons.thumb_up_off_alt_outlined,
-                        color: isLiked
-                            ? kcPrimaryColor
-                            : kcDarkGreyColor.withOpacity(0.8),
-                        size: 26,
-                      );
-                    },
-                    //likeCount: 98,
                   ),
                   horizontalSpaceSmall,
                   SkeletonLoader(
@@ -176,20 +186,23 @@ class PostWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  Icon(CupertinoIcons.arrowshape_turn_up_right),
-                  horizontalSpaceSmall,
-                  SkeletonLoader(
-                    startColor: kcLightGrey3,
-                    endColor: kcWhite,
-                    loading: loading,
-                    child: Text(
-                      post.shares.toString(),
-                      style: ktsLightGreyMeidumTextStyle,
-                    ),
-                  )
-                ],
+              GestureDetector(
+                onTap: onShare,
+                child: Row(
+                  children: [
+                    Icon(CupertinoIcons.arrowshape_turn_up_right),
+                    horizontalSpaceSmall,
+                    SkeletonLoader(
+                      startColor: kcLightGrey3,
+                      endColor: kcWhite,
+                      loading: loading,
+                      child: Text(
+                        post.shares.toString(),
+                        style: ktsLightGreyMeidumTextStyle,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           ),

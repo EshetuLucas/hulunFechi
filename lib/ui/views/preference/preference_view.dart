@@ -88,13 +88,14 @@ class PreferenceView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 scrollDirection: Axis.horizontal,
                 child: Row(children: [
-                  for (int i = 1; i < Group.values.length; i++) ...[
+                  for (int i = 0; i < model.sectors.length; i++) ...[
                     AppCategory(
                       loading: false,
-                      text: Group.values[i].toShortString(),
+                      text: model.sectors[i].name,
                       onTap: () => model.setQucikFilterIndex(i),
                       active: model.currentIndex == i,
                     ),
+                    horizontalSpaceSmall,
                     horizontalSpaceSmall,
                   ]
                 ]),
@@ -104,7 +105,7 @@ class PreferenceView extends StatelessWidget {
                 padding: appSymmetricEdgePadding,
                 child: Wrap(
                   children: [
-                    for (int i = 0; i < model.getList().length; i++)
+                    for (int i = 0; i < model.platforms.length; i++)
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: GestureDetector(
@@ -127,7 +128,7 @@ class PreferenceView extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  model.getList()[i],
+                                  model.platforms[i].name,
                                   style: model.selectedIndex[model.currentIndex]
                                           .contains(i)
                                       ? ktsDarkSmallTextStyle.copyWith(

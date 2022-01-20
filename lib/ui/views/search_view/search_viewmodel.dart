@@ -4,6 +4,7 @@ import 'package:hulunfechi/app/app.router.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
 import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/services/event_service.dart';
+import 'package:hulunfechi/services/post_service.dart';
 import 'package:hulunfechi/services/shared_preferences_service.dart';
 import 'package:hulunfechi/services/user_service.dart';
 import 'package:stacked/stacked.dart';
@@ -13,11 +14,12 @@ import 'search_view.form.dart';
 class SearchViewModel extends FormViewModel {
   final log = getLogger('CategoryViewModel');
   final _userService = locator<UserService>();
+  final _postService = locator<PostService>();
   final _navigationService = locator<NavigationService>();
   final EventService _eventService = locator<EventService>();
   final _sharedPreferencesService = locator<SharedPreferencesService>();
 
-  List<Post> get posts => List.from(_userService.posts
+  List<Post> get posts => List.from(_postService.posts
       .where((element) => element.user.id == _userService.currentUser.id));
   String searchKey = '';
   List userSearchResult = [];
@@ -90,8 +92,13 @@ class SearchViewModel extends FormViewModel {
     }
   }
 
-  void onComment(Post post) => _navigationService.navigateTo(
-        Routes.commentView,
-        arguments: CommentViewArguments(post: post),
-      );
+  void onComment(Post post) {
+    _navigationService.navigateTo(
+      Routes.commentView,
+      arguments: CommentViewArguments(post: post),
+    );
+  }
+
+  Future<void> onLike(int id) async {}
+  Future<void> onShare(int id) async {}
 }

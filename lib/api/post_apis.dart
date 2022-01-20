@@ -1,4 +1,6 @@
+import 'package:hulunfechi/api/get_apis.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/datamodels/comment/comment_model.dart';
 import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/datamodels/user/user_model.dart';
 import 'package:requests/requests.dart';
@@ -12,7 +14,8 @@ const String postUrl = base_url + "posts";
 class PostApi {
   // Future<User> userAuth(
   //     {required Map<String, dynamic> body, bool isLogin = false}) async {
-  //   return RestResponseParser().runUserRestRequest<User>(
+  //   return
+  //   RestResponseParser().runUserRestRequest<User>(
   //     url: isLogin ? login : create_user,
   //     body: body,
   //     key: 'UserForm',
@@ -34,5 +37,11 @@ class PostApi {
   Future<PostForm> post({required PostForm post}) async {
     return RestResponseParser().runPostRestRequest<PostForm>(
         url: postUrl, body: post.toJson(), key: 'PostForm');
+  }
+
+  Future<PostComment> addComment(
+      {required Map<String, dynamic> body, required int id}) async {
+    return RestResponseParser().runPostRestRequest<PostComment>(
+        url: getPostsUrl + '/$id/comments', body: body, key: 'PostComment');
   }
 }

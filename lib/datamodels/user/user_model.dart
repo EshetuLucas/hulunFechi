@@ -1,4 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hulunfechi/datamodels/post/post_model.dart';
+
+import '../app_data_model.dart';
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
@@ -16,7 +19,6 @@ class User with _$User {
     String? phone,
     String? profession,
     String? dob,
-    String? country,
     String? region,
     String? city,
     String? woreda,
@@ -29,6 +31,8 @@ class User with _$User {
     String? bank,
     String? accessToken,
     String? tokenType,
+    @Default([]) List<Country?> usercountry,
+    @Default([]) List<Category?> usercategories,
   }) = _User;
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

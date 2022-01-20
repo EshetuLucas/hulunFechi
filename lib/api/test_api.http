@@ -39,7 +39,7 @@ GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/searchEventByCategory/
 ###
 GET  https://apiv2.hulunfechi.com/api/posts
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjQzODg4OSwiZXhwIjoxNjQyNTI1Mjg5fQ.t1ZHWrfPWtoHtcHk1Tmwu3B29cawCeh-hzIPjc2C-kcrrvwLyhCXKijp2Uxmf1KrJsSFbWBcBlX7AQ_8FKx4xQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjY5Nzc5OSwiZXhwIjoxNjQyNzg0MTk5fQ.fXihom_Q_Nyqgz-6SCjVWGd1Y5vihkHUoKPtYEtrZoaJ7tWVXxO3PlYhznw-tzr5esPzOJEyC2r63NeGcevokQ
 Accept: application/json
 
 ###
@@ -50,52 +50,101 @@ Accept: application/json
 sectors
 ###
 
+GET  https://apiv2.hulunfechi.com/api/posts/139/comments
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjY5Nzc5OSwiZXhwIjoxNjQyNzg0MTk5fQ.fXihom_Q_Nyqgz-6SCjVWGd1Y5vihkHUoKPtYEtrZoaJ7tWVXxO3PlYhznw-tzr5esPzOJEyC2r63NeGcevokQ
+Accept: application/json
+
+###
 GET  https://apiv2.hulunfechi.com/api/platforms
 content-type: application/json
-Authorization: Bearer  eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjQzMzY0MiwiZXhwIjoxNjQyNTIwMDQyfQ.S_QNLrTXUiSc1f3_9-jgoPydtSH7sG0wJIvPIYORxxHXfFykEi-9-W7ItZcsujik6ZiqbeNKuSwR80GfgcXtPQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjY5Nzc5OSwiZXhwIjoxNjQyNzg0MTk5fQ.fXihom_Q_Nyqgz-6SCjVWGd1Y5vihkHUoKPtYEtrZoaJ7tWVXxO3PlYhznw-tzr5esPzOJEyC2r63NeGcevokQ
 Accept: application/json
-sectors
+
 ###
 POST https://apiv2.hulunfechi.com/api/auth/signin
 content-type: application/json
 Accept: application/json
 
 {
-    "username": "tekalukas@gmail.com",
+    "username": "test@admin.com",
     "password": "123456"
       
     }
 ###
-
-POST https://apiv2.hulunfechi.com/api/posts
+POST https://apiv2.hulunfechi.com/api/posts/139/comments
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWthbHVrYXNAZ21haWwuY29tIiwiaWF0IjoxNjQyMTkyMjIyLCJleHAiOjE2NDIyNzg2MjJ9.elFtcznlIS-uPXpRBAi8q87vrMRBtrOjiK2o_hBuNoOpwE_xaKDQe7Bqu5Q6Y920sGmQT4yMO_QAAv5Q2HQkkQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjY5Nzc5OSwiZXhwIjoxNjQyNzg0MTk5fQ.fXihom_Q_Nyqgz-6SCjVWGd1Y5vihkHUoKPtYEtrZoaJ7tWVXxO3PlYhznw-tzr5esPzOJEyC2r63NeGcevokQ
+Accept: application/json
+
+
+{
+"comment":"Buki",
+"user":{"id":33},
+"dateAdded":"2022-01-21"
+}
+###
+PUT https://apiv2.hulunfechi.com/api/auth/user/40
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjY5ODE5MywiZXhwIjoxNjQyNzg0NTkzfQ.F4jnTwlbOyKxkS3ODmoFCWbpVxKqY_degtJYA-htFPMIaN34jQcp6wDbLP-Uy9G6kTgQshP-OGBC2lm8lPofXw
 Accept: application/json
 
 {
-        "sector": 1, 
-        "title": "titled",
+    "username": "userc",
+    "firstname": "tam tesh  test",
+    "fathername": "tam tesh g",
+    "lastname": "tam tesh g",
+    "role": ["user"],
+    "email": "test@test.com",
+    "phone": "911509977",
+    "bank": "Awash",
+    "region": "Addis",
+    "dob": "null",
+    "profession": "Engieer",
+    "city": "ss",
+    "state": "Cal",
+    "street": "KK",
+    "woreda": "01",
+    "ssn": "ssn",
+    "subcity": "test",
+    "housenumber": "009",
+    "account": "1000445599",
+    "usercategories": [{"id":8}],
+    "usercountry": [{"id":1},{"id":2}]
+       
+    }
+    
+###
+
+POST https://apiv2.hulunfechi.com/api/posts
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWthbHVrYXNAZ21haWwuY29tIiwiaWF0IjoxNjQyNjE4NjUxLCJleHAiOjE2NDI3MDUwNTF9.R5u3Nri202cR4xDi6cUygd9H7-2xycEQyuWCE7BCWTk_hso8y3GjQ5OzXq9T_9EvCUWmpBOdUzQcj0dobh7W-A"
+Accept: application/json
+
+{
+        "title": "Post 1 Updated",
         "description": "descriptions",
         "published": false,
-        "expiry": null,
+        "likes": 10,
+        "shares": 6,
+        "sectors": {"id":3
+        },
+        "expiry": "2022-03-20",
         "user": {
-            "id": 9
-            
+            "id": 1
+
         },
         "category": {
-            "id": 3
+            "id": 8
+
         },
         "platform": {
-            "id": 1
-       
+            "id": 6
         },
         "subategory": {
-            "id": 1
-           
-        }
-
-    
-      
+            "id": 4
+       
+    }
     }
     
 ###
@@ -104,10 +153,10 @@ content-type: application/json
 Accept: application/json
 
 {
-    "username": "eshestu@test.com",
+    "username": "esherstu@test.com",
     "password": "123456",
     "role": ["user"],
-    "email": "eshsetu@test.com",
+    "email": "eshsretu@test.com",
     "firstname": "Eshetu",
     "lastname": "Lukas",
     "gender":"Male",

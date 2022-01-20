@@ -1,7 +1,7 @@
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/datamodels/comment/comment_model.dart';
 import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/datamodels/user/user_model.dart';
-import 'package:hulunfechi/enums/group.dart';
 
 Post FAKE_POST = Post(
   id: 1,
@@ -61,4 +61,35 @@ Post FAKE_POST1 = Post(
   likes: 120,
   comments: 84,
   shares: 5,
+);
+
+PostComment FAKE_COMMENT = PostComment(
+  id: 1,
+  user: User(
+    id: 1,
+    username: 'Eshetu Lukas',
+    firstname: 'Eshetu ',
+    lastname: 'Lukas',
+    email: 'tekalukas@gmail.com',
+    accessToken: '',
+    tokenType: '',
+    fullname: '',
+  ),
+  comment:
+      'That is Cool, Thank you for sharing this information i was looking for this',
+);
+
+PostComment FAKE_COMMENT1 = PostComment(
+  id: 1,
+  user: User(
+    id: 1,
+    username: 'Eshetu Lukas',
+    firstname: 'Eshetu ',
+    lastname: 'Lukas',
+    email: 'tekalukas@gmail.com',
+    accessToken: '',
+    tokenType: '',
+    fullname: '',
+  ),
+  comment: 'I don\'t agree with that.',
 );

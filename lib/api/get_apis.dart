@@ -1,5 +1,6 @@
 import 'package:hulunfechi/api/post_apis.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/datamodels/comment/comment_model.dart';
 import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:requests/requests.dart';
 import 'rest_response_parser.dart';
@@ -11,6 +12,11 @@ const String getSectorUrl = base_url + "sectors";
 const String getPlatformsUrl = base_url + "platforms";
 
 class GetApis {
+  Future<List<PostComment>> getAllComents({required int id}) async {
+    return RestResponseParser().runRestRequest<PostComment>(
+        url: getPostsUrl + '/$id/comments', key: "PostComment");
+  }
+
   Future<List<Category>> getAllCategory() async {
     return RestResponseParser()
         .runRestRequest<Category>(url: getCategoriesUrl, key: "Category");

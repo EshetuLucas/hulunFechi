@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
+import 'package:hulunfechi/ui/shared/ui_helpers.dart';
 
 class InputField extends StatelessWidget {
   final TextEditingController controller;
@@ -32,6 +33,7 @@ class InputField extends StatelessWidget {
   final bool hasInputDecoration;
   final BoxDecoration? boxDecoration;
   final bool obscureText;
+  final String? floatingPlaceholder;
   InputField({
     required this.controller,
     required this.placeholder,
@@ -61,83 +63,94 @@ class InputField extends StatelessWidget {
     this.boxDecoration,
     this.hasBoxDecoration = true,
     this.textAlignVertical = TextAlignVertical.center,
+    this.floatingPlaceholder,
   });
 
   Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      duration: const Duration(milliseconds: 300),
-      opacity: isReadOnly ? 0.3 : 1.0,
-      child: Container(
-        // height: smallVersion ? 40 : fieldHeight,
-        alignment: Alignment.centerLeft,
-        decoration: boxDecoration ?? null,
-        child: TextFormField(
-          style: ktsDarkGreyTextStyle,
-          textCapitalization: textInputType != TextInputType.emailAddress
-              ? TextCapitalization.sentences
-              : TextCapitalization.none,
-          textAlignVertical: textAlignVertical,
-          expands: expands,
-          maxLines: maxLine,
-          maxLength: maxTextLimit,
-          autofocus: autoFoucus,
-          autocorrect: true,
-          controller: controller,
-          keyboardType: textInputType,
-          focusNode: fieldFocusNode,
-          textInputAction: textInputAction,
-          onChanged: onChanged,
-          obscureText: obscureText,
-          onEditingComplete: () {
-            if (enterPressed != null) {
-              FocusScope.of(context).requestFocus(FocusNode());
-              enterPressed!();
-            }
-            if (nextFocusNode != null)
-              nextFocusNode!.nextFocus();
-            else
-              FocusScope.of(context).unfocus();
-          },
-          onFieldSubmitted: (value) {
-            if (nextFocusNode != null) {
-              nextFocusNode!.requestFocus();
-            }
-          },
-          readOnly: isReadOnly,
-          decoration: InputDecoration(
-            enabledBorder: hasInputDecoration
-                ? OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: kcItemsBackground, width: 1.2),
-                    borderRadius: BorderRadius.circular(8.0),
-                  )
-                : null,
-            focusedBorder: OutlineInputBorder(
-              borderSide: hasFocusedBorder
-                  ? BorderSide(
-                      color: hasFocusedBorder && !isReadOnly
-                          ? kcPrimaryColor
-                          : kcItemsBackground,
-                      width: 1.2)
-                  : BorderSide(color: Colors.transparent, width: 1.2),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            prefixIcon: prefixIcon ?? null,
-            suffixIcon: suffixIcon ?? null,
-            border: InputBorder.none,
-            hintText: placeholder,
-            labelStyle: ktsSmallDarkTextStyle,
-            hintStyle: ktsDarkGreyTextStyle.copyWith(
-                color: kcDarkGreyColor.withOpacity(0.5)),
-            contentPadding: EdgeInsets.only(
-              left: 18,
-              top: 14,
-              bottom: 12,
-              right: 10,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (floatingPlaceholder != null)
+          Text(
+            floatingPlaceholder!,
+          ),
+        if (floatingPlaceholder != null) verticalSpaceTiny,
+        AnimatedOpacity(
+          duration: const Duration(milliseconds: 300),
+          opacity: isReadOnly ? 0.3 : 1.0,
+          child: Container(
+            // height: smallVersion ? 40 : fieldHeight,
+            alignment: Alignment.centerLeft,
+            decoration: boxDecoration ?? null,
+            child: TextFormField(
+              style: ktsDarkGreyTextStyle,
+              textCapitalization: textInputType != TextInputType.emailAddress
+                  ? TextCapitalization.sentences
+                  : TextCapitalization.none,
+              textAlignVertical: textAlignVertical,
+              expands: expands,
+              maxLines: maxLine,
+              maxLength: maxTextLimit,
+              autofocus: autoFoucus,
+              autocorrect: true,
+              controller: controller,
+              keyboardType: textInputType,
+              focusNode: fieldFocusNode,
+              textInputAction: textInputAction,
+              onChanged: onChanged,
+              obscureText: obscureText,
+              onEditingComplete: () {
+                if (enterPressed != null) {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  enterPressed!();
+                }
+                if (nextFocusNode != null)
+                  nextFocusNode!.nextFocus();
+                else
+                  FocusScope.of(context).unfocus();
+              },
+              onFieldSubmitted: (value) {
+                if (nextFocusNode != null) {
+                  nextFocusNode!.requestFocus();
+                }
+              },
+              readOnly: isReadOnly,
+              decoration: InputDecoration(
+                enabledBorder: hasInputDecoration
+                    ? OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: kcItemsBackground, width: 1.2),
+                        borderRadius: BorderRadius.circular(8.0),
+                      )
+                    : null,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: hasFocusedBorder
+                      ? BorderSide(
+                          color: hasFocusedBorder && !isReadOnly
+                              ? kcPrimaryColor
+                              : kcItemsBackground,
+                          width: 1.2)
+                      : BorderSide(color: Colors.transparent, width: 1.2),
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                prefixIcon: prefixIcon ?? null,
+                suffixIcon: suffixIcon ?? null,
+                border: InputBorder.none,
+                hintText: placeholder,
+                labelStyle: ktsSmallDarkTextStyle,
+                hintStyle: ktsDarkGreyTextStyle.copyWith(
+                    color: kcDarkGreyColor.withOpacity(0.5)),
+                contentPadding: EdgeInsets.only(
+                  left: 18,
+                  top: 14,
+                  bottom: 12,
+                  right: 10,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
+        )
+      ],
     );
   }
 }

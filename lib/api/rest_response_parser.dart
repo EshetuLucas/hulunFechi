@@ -7,6 +7,7 @@ import 'package:hulunfechi/api/post_apis.dart';
 import 'package:hulunfechi/app/app.locator.dart';
 import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/datamodels/comment/comment_model.dart';
 import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/datamodels/user/user_model.dart';
 import 'package:hulunfechi/services/user_service.dart';
@@ -51,11 +52,38 @@ class RestResponseParser {
     }
   }
 
+  Future<T> runPutRestRequest<T>(
+      {required String url,
+      required Map<String, dynamic> body,
+      required String key}) async {
+    log.v('query:$url');
+    var response;
+    try {
+      var response = await dio.put(
+        url,
+        options: Options(headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+          HttpHeaders.authorizationHeader:
+              "Bearer ${_userService.currentUser.accessToken}"
+        }),
+        data: jsonEncode(body),
+      );
+      log.v('response:$response');
+      return parseUserData<T>(response.data, key: key);
+    } on DioError catch (e) {
+      log.e(e);
+      return Future.error(DioExceptions().getExceptionMessage(e));
+    } catch (e) {
+      return Future.error('Something went wrong. Try Again');
+    }
+  }
+
   Future<T> runPostRestRequest<T>(
       {required String url,
       required Map<String, dynamic> body,
       required String key}) async {
     log.v('query:$url');
+    log.d(jsonEncode(body));
     var response;
     try {
       var response = await dio.post(
@@ -179,6 +207,8 @@ class RestResponseParser {
       case "Sector":
         log.v('Sector model');
         return edge = Sector.fromJson(edge);
+      case "PostComment":
+        return edge = PostComment.fromJson(edge);
 
       default:
         log.d(T);

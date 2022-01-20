@@ -11,6 +11,7 @@ const Color kcMediumLightGrey = const Color(0xFF848B9E);
 const Color kcVeryLightGrey = const Color(0xDDFFFFFF);
 const Color kcLightGrey2 = const Color(0xFCFFFFFF);
 const Color kcLightGrey3 = const Color(0xFFE7E5E5);
+const Color kcLightGrey5 = const Color(0xFFE9E9E9);
 const Color kcWhite = const Color(0xFFFFFFFF);
 const Color kcLightBlue = const Color(0xFF4267B2);
 const Color kcAppBackgroundColor = kcWhite;

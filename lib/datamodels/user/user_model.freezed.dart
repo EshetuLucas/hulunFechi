@@ -32,7 +32,6 @@ class _$UserTearOff {
       String? phone,
       String? profession,
       String? dob,
-      String? country,
       String? region,
       String? city,
       String? woreda,
@@ -44,7 +43,9 @@ class _$UserTearOff {
       String? account,
       String? bank,
       String? accessToken,
-      String? tokenType}) {
+      String? tokenType,
+      List<Country?> usercountry = const [],
+      List<Category?> usercategories = const []}) {
     return _User(
       id: id,
       username: username,
@@ -55,7 +56,6 @@ class _$UserTearOff {
       phone: phone,
       profession: profession,
       dob: dob,
-      country: country,
       region: region,
       city: city,
       woreda: woreda,
@@ -68,6 +68,8 @@ class _$UserTearOff {
       bank: bank,
       accessToken: accessToken,
       tokenType: tokenType,
+      usercountry: usercountry,
+      usercategories: usercategories,
     );
   }
 
@@ -90,7 +92,6 @@ mixin _$User {
   String? get phone => throw _privateConstructorUsedError;
   String? get profession => throw _privateConstructorUsedError;
   String? get dob => throw _privateConstructorUsedError;
-  String? get country => throw _privateConstructorUsedError;
   String? get region => throw _privateConstructorUsedError;
   String? get city => throw _privateConstructorUsedError;
   String? get woreda => throw _privateConstructorUsedError;
@@ -103,6 +104,8 @@ mixin _$User {
   String? get bank => throw _privateConstructorUsedError;
   String? get accessToken => throw _privateConstructorUsedError;
   String? get tokenType => throw _privateConstructorUsedError;
+  List<Country?> get usercountry => throw _privateConstructorUsedError;
+  List<Category?> get usercategories => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -123,7 +126,6 @@ abstract class $UserCopyWith<$Res> {
       String? phone,
       String? profession,
       String? dob,
-      String? country,
       String? region,
       String? city,
       String? woreda,
@@ -135,7 +137,9 @@ abstract class $UserCopyWith<$Res> {
       String? account,
       String? bank,
       String? accessToken,
-      String? tokenType});
+      String? tokenType,
+      List<Country?> usercountry,
+      List<Category?> usercategories});
 }
 
 /// @nodoc
@@ -157,7 +161,6 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? phone = freezed,
     Object? profession = freezed,
     Object? dob = freezed,
-    Object? country = freezed,
     Object? region = freezed,
     Object? city = freezed,
     Object? woreda = freezed,
@@ -170,6 +173,8 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? bank = freezed,
     Object? accessToken = freezed,
     Object? tokenType = freezed,
+    Object? usercountry = freezed,
+    Object? usercategories = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -208,10 +213,6 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.dob
           : dob // ignore: cast_nullable_to_non_nullable
               as String?,
-      country: country == freezed
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String?,
       region: region == freezed
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
@@ -260,6 +261,14 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.tokenType
           : tokenType // ignore: cast_nullable_to_non_nullable
               as String?,
+      usercountry: usercountry == freezed
+          ? _value.usercountry
+          : usercountry // ignore: cast_nullable_to_non_nullable
+              as List<Country?>,
+      usercategories: usercategories == freezed
+          ? _value.usercategories
+          : usercategories // ignore: cast_nullable_to_non_nullable
+              as List<Category?>,
     ));
   }
 }
@@ -279,7 +288,6 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? phone,
       String? profession,
       String? dob,
-      String? country,
       String? region,
       String? city,
       String? woreda,
@@ -291,7 +299,9 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? account,
       String? bank,
       String? accessToken,
-      String? tokenType});
+      String? tokenType,
+      List<Country?> usercountry,
+      List<Category?> usercategories});
 }
 
 /// @nodoc
@@ -314,7 +324,6 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? phone = freezed,
     Object? profession = freezed,
     Object? dob = freezed,
-    Object? country = freezed,
     Object? region = freezed,
     Object? city = freezed,
     Object? woreda = freezed,
@@ -327,6 +336,8 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? bank = freezed,
     Object? accessToken = freezed,
     Object? tokenType = freezed,
+    Object? usercountry = freezed,
+    Object? usercategories = freezed,
   }) {
     return _then(_User(
       id: id == freezed
@@ -365,10 +376,6 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.dob
           : dob // ignore: cast_nullable_to_non_nullable
               as String?,
-      country: country == freezed
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String?,
       region: region == freezed
           ? _value.region
           : region // ignore: cast_nullable_to_non_nullable
@@ -417,6 +424,14 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.tokenType
           : tokenType // ignore: cast_nullable_to_non_nullable
               as String?,
+      usercountry: usercountry == freezed
+          ? _value.usercountry
+          : usercountry // ignore: cast_nullable_to_non_nullable
+              as List<Country?>,
+      usercategories: usercategories == freezed
+          ? _value.usercategories
+          : usercategories // ignore: cast_nullable_to_non_nullable
+              as List<Category?>,
     ));
   }
 }
@@ -434,7 +449,6 @@ class _$_User extends _User {
       this.phone,
       this.profession,
       this.dob,
-      this.country,
       this.region,
       this.city,
       this.woreda,
@@ -446,7 +460,9 @@ class _$_User extends _User {
       this.account,
       this.bank,
       this.accessToken,
-      this.tokenType})
+      this.tokenType,
+      this.usercountry = const [],
+      this.usercategories = const []})
       : super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -469,8 +485,6 @@ class _$_User extends _User {
   final String? profession;
   @override
   final String? dob;
-  @override
-  final String? country;
   @override
   final String? region;
   @override
@@ -495,10 +509,16 @@ class _$_User extends _User {
   final String? accessToken;
   @override
   final String? tokenType;
+  @JsonKey()
+  @override
+  final List<Country?> usercountry;
+  @JsonKey()
+  @override
+  final List<Category?> usercategories;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, fullname: $fullname, firstname: $firstname, lastname: $lastname, email: $email, phone: $phone, profession: $profession, dob: $dob, country: $country, region: $region, city: $city, woreda: $woreda, subcity: $subcity, housenumber: $housenumber, state: $state, street: $street, ssn: $ssn, account: $account, bank: $bank, accessToken: $accessToken, tokenType: $tokenType)';
+    return 'User(id: $id, username: $username, fullname: $fullname, firstname: $firstname, lastname: $lastname, email: $email, phone: $phone, profession: $profession, dob: $dob, region: $region, city: $city, woreda: $woreda, subcity: $subcity, housenumber: $housenumber, state: $state, street: $street, ssn: $ssn, account: $account, bank: $bank, accessToken: $accessToken, tokenType: $tokenType, usercountry: $usercountry, usercategories: $usercategories)';
   }
 
   @override
@@ -516,7 +536,6 @@ class _$_User extends _User {
             const DeepCollectionEquality()
                 .equals(other.profession, profession) &&
             const DeepCollectionEquality().equals(other.dob, dob) &&
-            const DeepCollectionEquality().equals(other.country, country) &&
             const DeepCollectionEquality().equals(other.region, region) &&
             const DeepCollectionEquality().equals(other.city, city) &&
             const DeepCollectionEquality().equals(other.woreda, woreda) &&
@@ -530,7 +549,11 @@ class _$_User extends _User {
             const DeepCollectionEquality().equals(other.bank, bank) &&
             const DeepCollectionEquality()
                 .equals(other.accessToken, accessToken) &&
-            const DeepCollectionEquality().equals(other.tokenType, tokenType));
+            const DeepCollectionEquality().equals(other.tokenType, tokenType) &&
+            const DeepCollectionEquality()
+                .equals(other.usercountry, usercountry) &&
+            const DeepCollectionEquality()
+                .equals(other.usercategories, usercategories));
   }
 
   @override
@@ -545,7 +568,6 @@ class _$_User extends _User {
         const DeepCollectionEquality().hash(phone),
         const DeepCollectionEquality().hash(profession),
         const DeepCollectionEquality().hash(dob),
-        const DeepCollectionEquality().hash(country),
         const DeepCollectionEquality().hash(region),
         const DeepCollectionEquality().hash(city),
         const DeepCollectionEquality().hash(woreda),
@@ -557,7 +579,9 @@ class _$_User extends _User {
         const DeepCollectionEquality().hash(account),
         const DeepCollectionEquality().hash(bank),
         const DeepCollectionEquality().hash(accessToken),
-        const DeepCollectionEquality().hash(tokenType)
+        const DeepCollectionEquality().hash(tokenType),
+        const DeepCollectionEquality().hash(usercountry),
+        const DeepCollectionEquality().hash(usercategories)
       ]);
 
   @JsonKey(ignore: true)
@@ -582,7 +606,6 @@ abstract class _User extends User {
       String? phone,
       String? profession,
       String? dob,
-      String? country,
       String? region,
       String? city,
       String? woreda,
@@ -594,7 +617,9 @@ abstract class _User extends User {
       String? account,
       String? bank,
       String? accessToken,
-      String? tokenType}) = _$_User;
+      String? tokenType,
+      List<Country?> usercountry,
+      List<Category?> usercategories}) = _$_User;
   _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -617,8 +642,6 @@ abstract class _User extends User {
   String? get profession;
   @override
   String? get dob;
-  @override
-  String? get country;
   @override
   String? get region;
   @override
@@ -643,6 +666,10 @@ abstract class _User extends User {
   String? get accessToken;
   @override
   String? get tokenType;
+  @override
+  List<Country?> get usercountry;
+  @override
+  List<Category?> get usercategories;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;

@@ -20,6 +20,7 @@ class PostViewModel extends FormViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
   final _dialogService = locator<DialogService>();
   final _userService = locator<UserService>();
+
   final _postService = locator<PostService>();
   final _snackbarService = locator<SnackbarService>();
 
@@ -58,11 +59,11 @@ class PostViewModel extends FormViewModel {
     notifyListeners();
   }
 
-  List<Sector> get sectors => _userService.sectors;
+  List<Sector> get sectors => _postService.sectors;
   List<Platform> get platforms =>
-      [Platform(id: -1, name: 'All Platform'), ..._userService.platforms];
-  List<Category> get categories => _userService.categories;
-  List<SubCategory> get subCategories => _userService.subCategories;
+      [Platform(id: -1, name: 'All Platform'), ..._postService.platforms];
+  List<Category> get categories => _postService.categories;
+  List<SubCategory> get subCategories => _postService.subCategories;
 
   List<List<dynamic>> get _subLists => [
         categories,

@@ -3,6 +3,7 @@ import 'package:hulunfechi/app/app.locator.dart';
 import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/enums/bottom_sheet_type.dart';
+import 'package:hulunfechi/services/post_service.dart';
 import 'package:hulunfechi/services/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -10,7 +11,7 @@ import 'package:stacked_services/stacked_services.dart';
 class FilterSheetViewModel extends BaseViewModel {
   final log = getLogger('FilterSheetViewModel ');
   final NavigationService _navigationService = locator<NavigationService>();
-  final _userService = locator<UserService>();
+  final _userService = locator<PostService>();
 
   final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
   List<String> _tags = [
@@ -34,29 +35,6 @@ class FilterSheetViewModel extends BaseViewModel {
       ];
 
   List<String> get tags => _tags;
-  List<String> getList(int index) {
-    switch (index) {
-      case 0:
-        return All;
-      case 1:
-        return Belief;
-      case 2:
-        return Technology;
-      case 3:
-        return Knowledge;
-      case 4:
-        return Health;
-      case 5:
-        return Competition;
-      case 6:
-        return Law;
-      case 7:
-        return Finance;
-
-      default:
-        return All;
-    }
-  }
 
   void updateTags(int index, String value) {
     _tags[index] = value;

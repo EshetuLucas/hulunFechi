@@ -110,6 +110,11 @@ class EntertainersView extends StatelessWidget {
                                                             .busy(POST_BUSY_KEY)
                                                     ? _FAKE_POSTS[index]
                                                     : model.listOnScreen[index],
+                                                onLike: () =>
+                                                    model.onLike(index),
+                                                onShare: () => model.onShare(
+                                                    model.listOnScreen[index]
+                                                        .id),
                                                 onComment: () =>
                                                     model.onComment(model
                                                         .listOnScreen[index])),
