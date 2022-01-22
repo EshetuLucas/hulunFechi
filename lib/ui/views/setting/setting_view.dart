@@ -32,32 +32,38 @@ class SettingView extends StatelessWidget {
                           child: Column(
                         children: [
                           _Actions(
+                            onTap: model.onPersonalInfoTap,
                             headerTitle: 'Personal Info',
                             items: [
                               _AccountWidgets(
-                                title: 'Name:',
-                                subTitle: 'Eshetu Lukas',
+                                title: 'First Name:',
+                                subTitle: model.currentUserFirstName,
+                              ),
+                              _AccountWidgets(
+                                title: 'Last Name:',
+                                subTitle: model.currentUserLastName,
                               ),
                               _AccountWidgets(
                                 title: 'DOB:',
-                                subTitle: '20, Oct, 1996',
+                                subTitle: model.currentUserDoB,
                               ),
                               _AccountWidgets(
                                 title: 'Phone No:',
-                                subTitle: '+251916740322',
+                                subTitle: model.currentUserPhonNumber,
                               ),
                               _AccountWidgets(
                                 title: 'Email:',
-                                subTitle: 'tekalukas@gmail.com',
+                                subTitle: model.currentUserEmail,
                               ),
                               _AccountWidgets(
                                 title: 'Profession:',
-                                subTitle: 'Developer',
+                                subTitle: model.currentUserProfession,
                               ),
                             ],
                           ),
                           verticalSpaceMedium,
                           _Actions(
+                            onTap: model.onAdressTap,
                             headerTitle: 'Address',
                             items: [
                               _AccountWidgets(
@@ -66,19 +72,19 @@ class SettingView extends StatelessWidget {
                               ),
                               _AccountWidgets(
                                 title: 'City:',
-                                subTitle: 'Addis Ababa',
+                                subTitle: model.currentUserCity,
                               ),
                               _AccountWidgets(
                                 title: 'Region/State:',
-                                subTitle: 'Addis Ababa',
+                                subTitle: model.currentUserRegion,
                               ),
                               _AccountWidgets(
                                 title: 'Woreda:',
-                                subTitle: '01',
+                                subTitle: model.currentUserWoreda,
                               ),
                               _AccountWidgets(
                                 title: 'Subcity:',
-                                subTitle: 'Bole',
+                                subTitle: model.currentUserSubCity,
                               ),
                               _AccountWidgets(
                                 title: 'House No/Zip Code:',
@@ -86,25 +92,26 @@ class SettingView extends StatelessWidget {
                               ),
                               _AccountWidgets(
                                 title: 'Socila Security No:',
-                                subTitle: '232344',
+                                subTitle: model.currentUserSSN,
                               ),
                             ],
                           ),
                           verticalSpaceMedium,
                           _Actions(
+                            onTap: model.onBankDetail,
                             headerTitle: 'Bank Details',
                             items: [
                               _AccountWidgets(
-                                title: 'Full Nmae:',
-                                subTitle: 'Eshetu Lukas Teka',
+                                title: 'Full Name:',
+                                subTitle: model.currentUserFullName,
                               ),
                               _AccountWidgets(
-                                title: 'Bank Name:',
-                                subTitle: 'Commercial Bank of Ethiopia',
+                                title: 'Bank Name: ',
+                                subTitle: model.currentUserBankName,
                               ),
                               _AccountWidgets(
-                                title: 'Account Number No:',
-                                subTitle: '1000092645362',
+                                title: 'Account No: ',
+                                subTitle: model.currentUserAccountNO,
                               ),
                             ],
                           ),
@@ -122,11 +129,13 @@ class _Actions extends ViewModelWidget<SettingViewModel> {
   const _Actions({
     required this.headerTitle,
     required this.items,
+    required this.onTap,
     Key? key,
   }) : super(key: key);
 
   final String headerTitle;
   final List<Widget> items;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context, SettingViewModel model) {
@@ -142,20 +151,23 @@ class _Actions extends ViewModelWidget<SettingViewModel> {
                 style: ktsDarkGreyTextStyle,
               ),
               horizontalSpaceMedium,
-              Row(
-                children: [
-                  Icon(
-                    Icons.edit,
-                    color: kcPrimaryColor,
-                  ),
-                  horizontalSpaceSmall,
-                  Text(
-                    'Edit',
-                    style: ktsWhiteSmallTextStyle.copyWith(
+              GestureDetector(
+                onTap: onTap,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.edit,
                       color: kcPrimaryColor,
                     ),
-                  ),
-                ],
+                    horizontalSpaceSmall,
+                    Text(
+                      'Edit',
+                      style: ktsWhiteSmallTextStyle.copyWith(
+                        color: kcPrimaryColor,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

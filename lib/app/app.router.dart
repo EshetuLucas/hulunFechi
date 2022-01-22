@@ -22,6 +22,9 @@ import '../ui/views/home/home_view.dart';
 import '../ui/views/login/login_view.dart';
 import '../ui/views/post/post_view.dart';
 import '../ui/views/preference/preference_view.dart';
+import '../ui/views/setting/address/address_view.dart';
+import '../ui/views/setting/bank_details/band_details_view.dart';
+import '../ui/views/setting/personal_info/personal_info_view.dart';
 import '../ui/views/setting/setting_view.dart';
 import '../ui/views/signup/signup_view.dart';
 import '../ui/views/startup/startup_view.dart';
@@ -39,6 +42,9 @@ class Routes {
   static const String preferenceView = '/preference-view';
   static const String aboutView = '/about-view';
   static const String commentView = '/comment-view';
+  static const String personalInfoView = '/personal-info-view';
+  static const String addressView = '/address-view';
+  static const String bankDetailView = '/bank-detail-view';
   static const all = <String>{
     homeView,
     eventDetailView,
@@ -52,6 +58,9 @@ class Routes {
     preferenceView,
     aboutView,
     commentView,
+    personalInfoView,
+    addressView,
+    bankDetailView,
   };
 }
 
@@ -71,6 +80,9 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.preferenceView, page: PreferenceView),
     RouteDef(Routes.aboutView, page: AboutView),
     RouteDef(Routes.commentView, page: CommentView),
+    RouteDef(Routes.personalInfoView, page: PersonalInfoView),
+    RouteDef(Routes.addressView, page: AddressView),
+    RouteDef(Routes.bankDetailView, page: BankDetailView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -170,6 +182,33 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    PersonalInfoView: (data) {
+      var args = data.getArgs<PersonalInfoViewArguments>(
+        orElse: () => PersonalInfoViewArguments(),
+      );
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => PersonalInfoView(key: args.key),
+        settings: data,
+      );
+    },
+    AddressView: (data) {
+      var args = data.getArgs<AddressViewArguments>(
+        orElse: () => AddressViewArguments(),
+      );
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => AddressView(key: args.key),
+        settings: data,
+      );
+    },
+    BankDetailView: (data) {
+      var args = data.getArgs<BankDetailViewArguments>(
+        orElse: () => BankDetailViewArguments(),
+      );
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => BankDetailView(key: args.key),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -214,4 +253,22 @@ class CommentViewArguments {
   final Post post;
   final Key? key;
   CommentViewArguments({required this.post, this.key});
+}
+
+/// PersonalInfoView arguments holder class
+class PersonalInfoViewArguments {
+  final Key? key;
+  PersonalInfoViewArguments({this.key});
+}
+
+/// AddressView arguments holder class
+class AddressViewArguments {
+  final Key? key;
+  AddressViewArguments({this.key});
+}
+
+/// BankDetailView arguments holder class
+class BankDetailViewArguments {
+  final Key? key;
+  BankDetailViewArguments({this.key});
 }

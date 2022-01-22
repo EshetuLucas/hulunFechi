@@ -17,7 +17,7 @@ class AccountViewModel extends BaseViewModel {
 
   final _bottomSheetService = locator<BottomSheetService>();
   final _dialogService = locator<DialogService>();
-
+  String get currentUserProfession => _userService.currentUser.profession ?? '';
   bool get hasUser => _userService.hasUser;
   User get currentUser => _userService.currentUser;
 
@@ -84,5 +84,10 @@ class AccountViewModel extends BaseViewModel {
 
   void onSignUp() {
     _navigationService.navigateTo(Routes.signUpView);
+  }
+
+  Future<void> onPersonalInfoTap() async {
+    await _navigationService.navigateTo(Routes.personalInfoView);
+    notifyListeners();
   }
 }

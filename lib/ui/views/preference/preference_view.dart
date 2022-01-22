@@ -105,7 +105,7 @@ class PreferenceView extends StatelessWidget {
                 padding: appSymmetricEdgePadding,
                 child: Wrap(
                   children: [
-                    for (int i = 0; i < model.platforms.length; i++)
+                    for (int i = 0; i < model.sectorPlatforms.length; i++)
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: GestureDetector(

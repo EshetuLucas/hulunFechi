@@ -245,7 +245,6 @@ class PostView extends StatelessWidget with $PostView {
                     controller: bodyController,
                     maxLine: 6,
                     hasFocusedBorder: true,
-                    textInputType: TextInputType.emailAddress,
                     isReadOnly: model.isBusy,
                     placeholder: 'Description',
                     textInputAction: TextInputAction.done,

@@ -51,6 +51,7 @@ class SearchBar extends StatelessWidget {
                     onChanged: onChange,
                     controller: controller,
                     placeholder: 'Search',
+                    hasFocusedBorder: false,
                     hasInputDecoration: false,
                   ),
                 ),

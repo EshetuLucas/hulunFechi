@@ -54,8 +54,14 @@ class CommentView extends StatelessWidget {
           onBackButtonTap: model.onBack,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        bottomNavigationBar: SafeArea(
-          child: _WriteComment(),
+        floatingActionButton: SafeArea(
+          child: Container(
+            color: kcWhite,
+            child: Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: _WriteComment(),
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -131,25 +137,29 @@ class CommentView extends StatelessWidget {
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return Padding(
-                                            padding: appSymmetricEdgePadding,
-                                            child: SkeletonLoader(
-                                              startColor: kcLightGrey3,
-                                              endColor: kcWhite,
-                                              loading: model.isBusy,
-                                              child: Column(
-                                                children: [
-                                                  Container(
-                                                    padding:
-                                                        EdgeInsets.only(top: 4),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  8)),
-                                                      color: kcLightGrey5,
-                                                    ),
-                                                    alignment:
-                                                        Alignment.centerLeft,
+                                          padding: appSymmetricEdgePadding,
+                                          child: SkeletonLoader(
+                                            startColor: kcLightGrey3,
+                                            endColor: kcWhite,
+                                            loading: model.isBusy,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  padding:
+                                                      EdgeInsets.only(top: 4),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                18)),
+                                                    color: kcLightGrey5,
+                                                  ),
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 10),
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.min,
@@ -203,50 +213,51 @@ class CommentView extends StatelessWidget {
                                                       ],
                                                     ),
                                                   ),
-                                                  if (index ==
-                                                          model.listOnScreen
-                                                                  .length -
-                                                              1 &&
-                                                      model.busy(
-                                                          ADD_COMMENT_BUSY_KEY))
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Align(
-                                                        alignment:
-                                                            Alignment.topRight,
-                                                        child: SizedBox(
-                                                            height: 10,
-                                                            width: 10,
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              color:
-                                                                  kcPrimaryColor,
-                                                            )),
-                                                      ),
-                                                    )
-                                                ],
-                                              ),
-                                            )
+                                                ),
+                                                if (index ==
+                                                        model.listOnScreen
+                                                                .length -
+                                                            1 &&
+                                                    model.busy(
+                                                        ADD_COMMENT_BUSY_KEY))
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.topRight,
+                                                      child: SizedBox(
+                                                          height: 10,
+                                                          width: 10,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            color:
+                                                                kcPrimaryColor,
+                                                          )),
+                                                    ),
+                                                  )
+                                              ],
+                                            ),
+                                          ),
 
-                                            //  PostWidget(
-                                            //     loading: model.isBusy ||
-                                            //         model.busy(POST_BUSY_KEY),
-                                            //     post: model.isBusy ||
-                                            //             model.busy(
-                                            //                 POST_BUSY_KEY)
-                                            //         ? _FAKE_POSTS[index]
-                                            //         : model
-                                            //             .listOnScreen[index],
-                                            //     onComment: () =>
-                                            //         model.onComment(
-                                            //             model.listOnScreen[
-                                            //                 index])),
-                                            );
+                                          //  PostWidget(
+                                          //     loading: model.isBusy ||
+                                          //         model.busy(POST_BUSY_KEY),
+                                          //     post: model.isBusy ||
+                                          //             model.busy(
+                                          //                 POST_BUSY_KEY)
+                                          //         ? _FAKE_POSTS[index]
+                                          //         : model
+                                          //             .listOnScreen[index],
+                                          //     onComment: () =>
+                                          //         model.onComment(
+                                          //             model.listOnScreen[
+                                          //                 index])),
+                                        );
                                       },
                                     ),
-                              //_Others()
+                              verticalSpaceMassive,
                             ],
                           ),
                     verticalSpaceSmall,
@@ -272,14 +283,14 @@ class _WriteComment extends HookViewModelWidget<CommentViewModel> {
     return Padding(
         padding: appSymmetricEdgePadding,
         child: Container(
-          height: 80,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Expanded(
                 child: InputField(
+                  hasFocusedBorder: true,
                   onChanged: model.onChange,
                   textInputAction: TextInputAction.done,
-                  hasFocusedBorder: true,
                   controller: commentController,
                   placeholder: 'Write your comment',
                 ),

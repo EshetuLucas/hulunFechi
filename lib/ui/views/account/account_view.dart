@@ -88,26 +88,36 @@ class _UserProfile extends ViewModelWidget<AccountViewModel> {
                 model.userFullName,
                 style: ktsDarkGreyTextStyle,
               ),
+
+              if (model.currentUserProfession.isNotEmpty)
+                Text(
+                  model.currentUserProfession,
+                  style: ktsDarkSmallTextStyle,
+                ),
+
               Text(
-                'Developer',
+                model.currentUser.email,
                 style: ktsDarkSmallTextStyle,
               ),
               verticalSpaceTiny,
-              Row(
-                children: [
-                  Icon(
-                    Icons.edit,
-                    color: kcPrimaryColor,
-                  ),
-                  horizontalSpaceSmall,
-                  Text(
-                    'Edit',
-                    style: ktsWhiteSmallTextStyle.copyWith(
-                      color: kcPrimaryColor,
-                    ),
-                  ),
-                ],
-              ),
+              // GestureDetector(
+              //   onTap: model.onPersonalInfoTap,
+              //   child: Row(
+              //     children: [
+              //       Icon(
+              //         Icons.edit,
+              //         color: kcPrimaryColor,
+              //       ),
+              //       horizontalSpaceSmall,
+              //       Text(
+              //         'Edit',
+              //         style: ktsWhiteSmallTextStyle.copyWith(
+              //           color: kcPrimaryColor,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           )
         ],
@@ -134,7 +144,7 @@ class _ProfilePic extends ViewModelWidget<AccountViewModel> {
               shape: BoxShape.circle,
             ),
             child: Image.asset(
-              "assets/images/entertainers_images/sample.jpg",
+              "assets/images/entertainers_images/person.jpeg",
               fit: BoxFit.cover,
               height: 100,
               width: 100,

@@ -68,6 +68,13 @@ class PreferenceViewModel extends BaseViewModel {
     [],
   ];
   List<List<int>> get selectedIndex => _selectedIndex;
+  List<Platform> get sectorPlatforms {
+    return List.from(platforms
+        .where((element) =>
+            element.sectors != null &&
+            element.sectors!.id == sectors[_currentIndex].id)
+        .toList());
+  }
 
   Future<void> onSelectPreference(int index) async {
     await onCategories(index);
@@ -80,7 +87,7 @@ class PreferenceViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future onPost() async {
+  Future<void> onPost() async {
     List<Category> listToUpdate = [];
     setBusy(true);
     _selectedIndex.forEach((element) {

@@ -16,6 +16,7 @@ class User with _$User {
     required String firstname,
     required String lastname,
     required String email,
+    String? country,
     String? phone,
     String? profession,
     String? dob,

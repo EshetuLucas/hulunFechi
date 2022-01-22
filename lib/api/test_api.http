@@ -39,7 +39,7 @@ GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/searchEventByCategory/
 ###
 GET  https://apiv2.hulunfechi.com/api/posts
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjY5Nzc5OSwiZXhwIjoxNjQyNzg0MTk5fQ.fXihom_Q_Nyqgz-6SCjVWGd1Y5vihkHUoKPtYEtrZoaJ7tWVXxO3PlYhznw-tzr5esPzOJEyC2r63NeGcevokQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdWthQGFkbWluLmNvbSIsImlhdCI6MTY0Mjc2Njg3NCwiZXhwIjoxNjQyODUzMjc0fQ.yYrskCGReFvAZ4N7p3g8pBk8HTWoDTgnOtJup3meWy65KSN0aBsYUpOfejqgnkwn7B7jhBNqqaGa07bjMz4KcA
 Accept: application/json
 
 ###
@@ -58,7 +58,7 @@ Accept: application/json
 ###
 GET  https://apiv2.hulunfechi.com/api/platforms
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjY5Nzc5OSwiZXhwIjoxNjQyNzg0MTk5fQ.fXihom_Q_Nyqgz-6SCjVWGd1Y5vihkHUoKPtYEtrZoaJ7tWVXxO3PlYhznw-tzr5esPzOJEyC2r63NeGcevokQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
 Accept: application/json
 
 ###
@@ -67,16 +67,16 @@ content-type: application/json
 Accept: application/json
 
 {
-    "username": "test@admin.com",
+    "username": "duka@admin.com",
     "password": "123456"
       
     }
 ###
 POST https://apiv2.hulunfechi.com/api/posts/139/comments
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjY5Nzc5OSwiZXhwIjoxNjQyNzg0MTk5fQ.fXihom_Q_Nyqgz-6SCjVWGd1Y5vihkHUoKPtYEtrZoaJ7tWVXxO3PlYhznw-tzr5esPzOJEyC2r63NeGcevokQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
 Accept: application/json
-
+eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
 
 {
 "comment":"Buki",
@@ -118,31 +118,32 @@ Accept: application/json
 
 POST https://apiv2.hulunfechi.com/api/posts
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWthbHVrYXNAZ21haWwuY29tIiwiaWF0IjoxNjQyNjE4NjUxLCJleHAiOjE2NDI3MDUwNTF9.R5u3Nri202cR4xDi6cUygd9H7-2xycEQyuWCE7BCWTk_hso8y3GjQ5OzXq9T_9EvCUWmpBOdUzQcj0dobh7W-A"
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
 Accept: application/json
 
 {
-        "title": "Post 1 Updated",
-        "description": "descriptions",
+        "title": "The Truth About the Jesus of the Bible",
+        "description": "If we look at the Gospels, however, a totally different picture emerges. Here is no “gentle Jesus meek and mild,” but a person so dynamic and so inspiring that hard-bitten ﬁshermen, tough tax collectors, Roman soldiers, and a man with one of the greatest intellects of his day—the apostle Paul—were all prepared to put their reputations and their lives on the line in order to follow Him.",
         "published": false,
         "likes": 10,
         "shares": 6,
-        "sectors": {"id":3
+        "sectors": {
+            "id":1
         },
         "expiry": "2022-03-20",
         "user": {
-            "id": 1
+            "id": 3
 
         },
         "category": {
-            "id": 8
+            "id": 1
 
         },
         "platform": {
-            "id": 6
+            "id": 1
         },
         "subategory": {
-            "id": 4
+            "id": 1
        
     }
     }
@@ -153,7 +154,7 @@ content-type: application/json
 Accept: application/json
 
 {
-    "username": "esherstu@test.com",
+    "username": "test@admin.com",
     "password": "123456",
     "role": ["user"],
     "email": "eshsretu@test.com",
@@ -164,6 +165,63 @@ Accept: application/json
      
 }
 ###
+
+POST https://apiv2.hulunfechi.com/api/country
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
+Accept: application/json
+
+{
+    
+    "name": "Ethiopia",
+    "description": "descriptions"
+  
+}
+###
+Get https://apiv2.hulunfechi.com/api/categories
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
+Accept: application/json
+
+###
+POST https://apiv2.hulunfechi.com/api/platform
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
+Accept: application/json
+
+{
+    "name": "Wetatoch",
+    "description": "descriptions",
+    "sectors":{"id":3}
+
+}
+###
+
+
+POST https://apiv2.hulunfechi.com/api/subcategory
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
+Accept: application/json
+
+{
+    "name": "Education",
+    "description": "descriptions",
+    "category":{
+        "id":1
+    },
+    "sectors": {
+        "id":3
+    },
+        "platform": {
+        "id":1
+    }
+}
+
+###
+
+
+
+
 POST http://localhost:5001/poly-market-jester/us-central1/order_status-default  /hulunfechi/createUser
 content-type: application/json
 Authorization: token eyJhbGciOiJSUzI1NiIsImtpZCI6IjdiODcxMTIzNzU0MjdkNjU3ZjVlMjVjYTAxZDU2NWU1OTJhMjMxZGIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRXNoZXR1IEx1a2FzIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdpQ2xBendRc0NXUlZiNno5Q1FBWTY3bFQ2STBMN0JuUEt2QWU4TXlBPXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3BvbHktbWFya2V0LWplc3RlciIsImF1ZCI6InBvbHktbWFya2V0LWplc3RlciIsImF1dGhfdGltZSI6MTYzMTYxMTc5NiwidXNlcl9pZCI6InZ5WVZEMzc1b25UWUJSN3FVeEsyTjE5QW9FeTEiLCJzdWIiOiJ2eVlWRDM3NW9uVFlCUjdxVXhLMk4xOUFvRXkxIiwiaWF0IjoxNjMzMDk0Njk2LCJleHAiOjE2MzMwOTgyOTYsImVtYWlsIjoidGVrYWx1a2FzQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7Imdvb2dsZS5jb20iOlsiMTE0MTYwNjUyMDc2NDUyMTYwNTMwIl0sImVtYWlsIjpbInRla2

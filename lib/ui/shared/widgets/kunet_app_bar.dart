@@ -56,7 +56,8 @@ class hulunfechiAppbar extends StatelessWidget implements PreferredSizeWidget {
           : null,
       title: Text(
         title,
-        style: ktsDarkGreyTextStyle.copyWith(fontSize: 20),
+        style: ktsDarkGreyTextStyle.copyWith(
+            fontSize: 18, fontWeight: FontWeight.w600),
         textAlign: TextAlign.center,
       ),
       centerTitle: true,

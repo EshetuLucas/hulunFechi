@@ -129,12 +129,23 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
       [Sector(id: -1, name: 'All'), ..._postService.sectors];
   List<Platform> get platforms =>
       [Platform(id: -1, name: _allPlatforms), ..._postService.platforms];
+
+  List<Platform> get sectorPlatforms {
+    return List.from(platforms
+        .where((element) =>
+            element.sectors != null &&
+            element.sectors!.id == sectors[_currentIndex].id)
+        .toList());
+  }
+
   Future<void> onAllCountries() async {
     log.i('');
     final resut = await _bottomSheetService.showCustomSheet(
         isScrollControlled: false,
         variant: BottomSheetType.EVENT_MORE_TYPE,
-        customData: platforms);
+        customData: _currentIndex == 0
+            ? platforms
+            : [Platform(id: -1, name: 'All Platforms'), ...sectorPlatforms]);
     if (resut != null) {
       _selectedPlatformIndex = resut.data;
       updateTags(1, platforms[resut.data].name);
@@ -172,6 +183,8 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
     _currentIndex = index;
     _isSearchActive = false;
     _searchKeyWord = '';
+    setCurrentPlatform('All Platforms');
+    updateTags(1, 'All Platforms');
 
     notifyListeners();
     await makepostBusy();

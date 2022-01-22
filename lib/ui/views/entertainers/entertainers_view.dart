@@ -1,29 +1,25 @@
-import 'package:country_picker/country_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hulunfechi/api/faker.dart';
 import 'package:hulunfechi/app/app.constant.dart';
-import 'package:hulunfechi/datamodels/app_data_model.dart';
+
 import 'package:hulunfechi/datamodels/post/post_model.dart';
-import 'package:hulunfechi/enums/group.dart';
+
 import 'package:hulunfechi/ui/shared/app_colors.dart';
-import 'package:hulunfechi/ui/widgets/dumb_widgets/app_button.dart';
+
 import 'package:hulunfechi/ui/widgets/dumb_widgets/app_category.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/app_divider.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/hulunfechi_tags.dart';
-import 'package:hulunfechi/ui/widgets/dumb_widgets/hulunfetchi_skeleton_loader.dart';
-import 'package:hulunfechi/ui/widgets/dumb_widgets/input_field.dart';
+
 import 'package:hulunfechi/ui/widgets/dumb_widgets/post.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/search_bar.dart';
-import 'package:like_button/like_button.dart';
+
 import 'package:stacked/stacked.dart';
-import 'package:stacked/stacked_annotations.dart';
+
 import 'entertainers_viewmodel.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
 
-import 'package:stacked_hooks/stacked_hooks.dart';
 import 'package:stacked_hooks/stacked_hooks.dart';
 
 List<Post> _FAKE_POSTS = [

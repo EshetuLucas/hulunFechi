@@ -40,7 +40,7 @@ class InputField extends StatelessWidget {
     this.enterPressed,
     this.expands = false,
     this.fieldFocusNode,
-    this.hasFocusedBorder = false,
+    this.hasFocusedBorder = true,
     this.nextFocusNode,
     this.additionalNote,
     this.onChanged,
@@ -49,7 +49,7 @@ class InputField extends StatelessWidget {
     this.autoFoucus = false,
     this.hasInputDecoration = true,
     this.validationMessage,
-    this.textInputAction = TextInputAction.next,
+    this.textInputAction = TextInputAction.done,
     this.textInputType = TextInputType.text,
     this.password = false,
     this.isReadOnly = false,
@@ -69,6 +69,7 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (floatingPlaceholder != null)
           Text(

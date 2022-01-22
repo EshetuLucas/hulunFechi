@@ -238,7 +238,7 @@ class _ProfilePic extends StatelessWidget {
               endColor: kcWhite,
               loading: loading,
               child: Image.asset(
-                "assets/images/entertainers_images/sample.jpg",
+                "assets/images/entertainers_images/person.jpeg",
                 fit: BoxFit.cover,
                 height: 50,
                 width: 50,

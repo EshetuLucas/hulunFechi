@@ -3,6 +3,7 @@ import 'package:hulunfechi/api/faker.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
+import 'package:hulunfechi/ui/shared/widgets/kunet_app_bar.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/app_divider.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/event_list_view.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/post.dart';
@@ -32,12 +33,14 @@ class SearchView extends StatelessWidget with $SearchView {
       },
       viewModelBuilder: () => SearchViewModel(),
       builder: (context, model, child) => Scaffold(
+        appBar: hulunfechiAppbar(
+          title: 'My Posts',
+        ),
         body: SafeArea(
           child: Padding(
               padding: appSymmetricEdgePadding,
               child: Column(
                 children: [
-                  verticalSpaceMedium,
                   verticalSpaceMedium,
                   Expanded(
                     child: ListView.separated(

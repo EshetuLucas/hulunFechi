@@ -13,6 +13,9 @@ import 'package:hulunfechi/ui/views/event_detail/event_detail_view.dart';
 import 'package:hulunfechi/ui/views/login/login_view.dart';
 import 'package:hulunfechi/ui/views/post/post_view.dart';
 import 'package:hulunfechi/ui/views/preference/preference_view.dart';
+import 'package:hulunfechi/ui/views/setting/address/address_view.dart';
+import 'package:hulunfechi/ui/views/setting/bank_details/band_details_view.dart';
+import 'package:hulunfechi/ui/views/setting/personal_info/personal_info_view.dart';
 import 'package:hulunfechi/ui/views/setting/setting_view.dart';
 import 'package:hulunfechi/ui/views/signup/signup_view.dart';
 import 'package:hulunfechi/ui/views/startup/startup_view.dart';
@@ -39,6 +42,9 @@ import '../ui/views/home/home_view.dart';
     CupertinoRoute(page: PreferenceView),
     CupertinoRoute(page: AboutView),
     CupertinoRoute(page: CommentView),
+    CupertinoRoute(page: PersonalInfoView),
+    CupertinoRoute(page: AddressView),
+    CupertinoRoute(page: BankDetailView),
   ],
   dependencies: [
     LazySingleton(classType: DialogService),

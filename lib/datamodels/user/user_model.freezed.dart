@@ -29,6 +29,7 @@ class _$UserTearOff {
       required String firstname,
       required String lastname,
       required String email,
+      String? country,
       String? phone,
       String? profession,
       String? dob,
@@ -53,6 +54,7 @@ class _$UserTearOff {
       firstname: firstname,
       lastname: lastname,
       email: email,
+      country: country,
       phone: phone,
       profession: profession,
       dob: dob,
@@ -89,6 +91,7 @@ mixin _$User {
   String get firstname => throw _privateConstructorUsedError;
   String get lastname => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String? get country => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get profession => throw _privateConstructorUsedError;
   String? get dob => throw _privateConstructorUsedError;
@@ -123,6 +126,7 @@ abstract class $UserCopyWith<$Res> {
       String firstname,
       String lastname,
       String email,
+      String? country,
       String? phone,
       String? profession,
       String? dob,
@@ -158,6 +162,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? firstname = freezed,
     Object? lastname = freezed,
     Object? email = freezed,
+    Object? country = freezed,
     Object? phone = freezed,
     Object? profession = freezed,
     Object? dob = freezed,
@@ -201,6 +206,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
       phone: phone == freezed
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -285,6 +294,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String firstname,
       String lastname,
       String email,
+      String? country,
       String? phone,
       String? profession,
       String? dob,
@@ -321,6 +331,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? firstname = freezed,
     Object? lastname = freezed,
     Object? email = freezed,
+    Object? country = freezed,
     Object? phone = freezed,
     Object? profession = freezed,
     Object? dob = freezed,
@@ -364,6 +375,10 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      country: country == freezed
+          ? _value.country
+          : country // ignore: cast_nullable_to_non_nullable
+              as String?,
       phone: phone == freezed
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -446,6 +461,7 @@ class _$_User extends _User {
       required this.firstname,
       required this.lastname,
       required this.email,
+      this.country,
       this.phone,
       this.profession,
       this.dob,
@@ -479,6 +495,8 @@ class _$_User extends _User {
   final String lastname;
   @override
   final String email;
+  @override
+  final String? country;
   @override
   final String? phone;
   @override
@@ -518,7 +536,7 @@ class _$_User extends _User {
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, fullname: $fullname, firstname: $firstname, lastname: $lastname, email: $email, phone: $phone, profession: $profession, dob: $dob, region: $region, city: $city, woreda: $woreda, subcity: $subcity, housenumber: $housenumber, state: $state, street: $street, ssn: $ssn, account: $account, bank: $bank, accessToken: $accessToken, tokenType: $tokenType, usercountry: $usercountry, usercategories: $usercategories)';
+    return 'User(id: $id, username: $username, fullname: $fullname, firstname: $firstname, lastname: $lastname, email: $email, country: $country, phone: $phone, profession: $profession, dob: $dob, region: $region, city: $city, woreda: $woreda, subcity: $subcity, housenumber: $housenumber, state: $state, street: $street, ssn: $ssn, account: $account, bank: $bank, accessToken: $accessToken, tokenType: $tokenType, usercountry: $usercountry, usercategories: $usercategories)';
   }
 
   @override
@@ -532,6 +550,7 @@ class _$_User extends _User {
             const DeepCollectionEquality().equals(other.firstname, firstname) &&
             const DeepCollectionEquality().equals(other.lastname, lastname) &&
             const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.country, country) &&
             const DeepCollectionEquality().equals(other.phone, phone) &&
             const DeepCollectionEquality()
                 .equals(other.profession, profession) &&
@@ -565,6 +584,7 @@ class _$_User extends _User {
         const DeepCollectionEquality().hash(firstname),
         const DeepCollectionEquality().hash(lastname),
         const DeepCollectionEquality().hash(email),
+        const DeepCollectionEquality().hash(country),
         const DeepCollectionEquality().hash(phone),
         const DeepCollectionEquality().hash(profession),
         const DeepCollectionEquality().hash(dob),
@@ -603,6 +623,7 @@ abstract class _User extends User {
       required String firstname,
       required String lastname,
       required String email,
+      String? country,
       String? phone,
       String? profession,
       String? dob,
@@ -636,6 +657,8 @@ abstract class _User extends User {
   String get lastname;
   @override
   String get email;
+  @override
+  String? get country;
   @override
   String? get phone;
   @override
