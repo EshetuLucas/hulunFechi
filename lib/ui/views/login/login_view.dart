@@ -82,11 +82,12 @@ class LoginView extends StatelessWidget with $LoginView {
                                     Container(
                                       alignment: Alignment.center,
                                       child: ImageBuilder(
+                                          fit: BoxFit.cover,
+                                          height: 160,
+                                          width: 180,
                                           assetName:
-                                              'assets/images/intro_images/logo.jpg'),
+                                              'assets/images/intro_images/hulunFechi.png'),
                                     ),
-                                    verticalSpaceSmall,
-                                    verticalSpaceSmall,
                                     InputField(
                                       controller: phoneNumberController,
                                       maxLine: 1,
@@ -183,7 +184,7 @@ class LoginView extends StatelessWidget with $LoginView {
                             alignment: Alignment.center,
                             child: ImageBuilder(
                               assetName:
-                                  'assets/images/intro_images/hulunFechi.png',
+                                  'assets/images/intro_images/hulunfechi.jpg',
                             ),
                           ),
                           // Text(
