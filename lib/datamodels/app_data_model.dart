@@ -90,3 +90,17 @@ class Country with _$Country {
   factory Country.fromJson(Map<String, dynamic> json) =>
       _$CountryFromJson(json);
 }
+
+@freezed
+class Filter with _$Filter {
+  factory Filter({
+    int? countryId,
+    String? countryName,
+    @Default(-1) int? sectorId,
+    @Default(-1) int platformId,
+    @Default(-1) int? categoryId,
+    @Default(-1) int? subCategoryId,
+  }) = _Filter;
+
+  factory Filter.fromJson(Map<String, dynamic> json) => _$FilterFromJson(json);
+}

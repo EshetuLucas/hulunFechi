@@ -7,6 +7,7 @@ class ActionsItem extends StatelessWidget {
     required this.title,
     required this.iconData,
     this.hasTrailingIcon = true,
+    this.iconColor = kcPrimaryColor,
     this.onTap,
     Key? key,
   }) : super(key: key);
@@ -15,6 +16,7 @@ class ActionsItem extends StatelessWidget {
   final void Function()? onTap;
   final IconData iconData;
   final bool hasTrailingIcon;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class ActionsItem extends StatelessWidget {
       horizontalTitleGap: 2,
       leading: Icon(
         iconData,
-        color: kcPrimaryColor,
+        color: iconColor,
       ),
       title: Text(
         title,

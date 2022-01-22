@@ -3,6 +3,8 @@ import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/app/app.router.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
 import 'package:hulunfechi/datamodels/post/post_model.dart';
+import 'package:hulunfechi/enums/bottom_sheet_type.dart';
+import 'package:hulunfechi/enums/dialog_type.dart';
 import 'package:hulunfechi/services/event_service.dart';
 import 'package:hulunfechi/services/post_service.dart';
 import 'package:hulunfechi/services/shared_preferences_service.dart';
@@ -11,16 +13,28 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'search_view.form.dart';
 
-class SearchViewModel extends FormViewModel {
+const String POST_BUSY_KEY = 'Post busy key';
+
+class SearchViewModel extends FutureViewModel<List<Post>> {
   final log = getLogger('CategoryViewModel');
   final _userService = locator<UserService>();
   final _postService = locator<PostService>();
   final _navigationService = locator<NavigationService>();
   final EventService _eventService = locator<EventService>();
   final _sharedPreferencesService = locator<SharedPreferencesService>();
+  final _bottomSheetService = locator<BottomSheetService>();
+  final _dialogService = locator<DialogService>();
+  int get userId => _userService.currentUser.id;
+  List<Post> _posts = [];
+  List<Post> get posts => _posts;
+  void setUserPosts() {
+    _posts = List.from(
+      _posts.reversed
+          .where((element) => element.user.id == _userService.currentUser.id),
+    );
+    notifyListeners();
+  }
 
-  List<Post> get posts => List.from(_postService.posts
-      .where((element) => element.user.id == _userService.currentUser.id));
   String searchKey = '';
   List userSearchResult = [];
   List<Event> _searchResultEvents = [];
@@ -70,26 +84,9 @@ class SearchViewModel extends FormViewModel {
     busy(false);
   }
 
-  Future<void> onEventTap(Event event) async {
-    await saveSearchHistory(searchText: searchValue!);
-    _navigationService.navigateTo(Routes.eventDetailView,
-        arguments: EventDetailViewArguments(event: event));
-  }
-
   Future<void> removeSearchKeyWord(int index) async {
     log.i('index:$index');
     await saveSearchHistory(searchText: '', index: index);
-  }
-
-  @override
-  void setFormStatus() async {
-    if (searchValue != null && searchValue!.length > 1) {
-      if (searchKey != searchValue) {
-        searchKey = searchValue!;
-        await getSearchResult(keyWord: searchKey);
-        notifyListeners();
-      }
-    }
   }
 
   void onComment(Post post) {
@@ -99,6 +96,56 @@ class SearchViewModel extends FormViewModel {
     );
   }
 
+  Future<void> onMoreTap(Post post) async {
+    final result = await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.POST_OPTIONS,
+    );
+    if (result != null) {
+      if (result.data == 0) {
+        _navigationService.navigateTo(
+          Routes.postView,
+          arguments: PostViewArguments(post: post),
+        );
+      } else {
+        final result = await _dialogService.showCustomDialog(
+            variant: DialogType.DELETE,
+            title: 'Are you sure?',
+            additionalButtonTitle: 'Yes',
+            description: 'This action will remove the post permanently');
+
+        if (result?.confirmed ?? false) {
+          try {
+            _posts.remove(post);
+            await _postService.deletePost(id: post.id);
+            initialise();
+          } catch (e) {
+            log.e(e);
+          }
+        } else {
+          log.v('result:${result?.data}');
+        }
+      }
+    }
+  }
+
+  void setPostsBusy(bool value) {
+    setBusyForObject(POST_BUSY_KEY, value);
+  }
+
   Future<void> onLike(int id) async {}
   Future<void> onShare(int id) async {}
+
+  @override
+  Future<List<Post>> futureToRun() async {
+    return await _postService.getPosts();
+  }
+
+  @override
+  void onData(List<Post>? data) {
+    if (data != null) {
+      _posts = data;
+      setUserPosts();
+      log.d(posts);
+    }
+  }
 }

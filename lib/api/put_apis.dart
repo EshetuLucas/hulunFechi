@@ -42,4 +42,12 @@ class PutApis {
     return RestResponseParser().runPutRestRequest<Post>(
         url: getPostsUrl + '/$id', body: updatedPost, key: 'PostForm');
   }
+
+  //TODO: This should be removed from there and move into delete class
+
+  Future<void> deletePost({required id}) async {
+    return RestResponseParser().runDeleteRestRequest(
+      url: getPostsUrl + '/$id',
+    );
+  }
 }

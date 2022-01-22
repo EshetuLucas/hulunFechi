@@ -156,7 +156,10 @@ class StackedRouter extends RouterBase {
         orElse: () => PostViewArguments(),
       );
       return CupertinoPageRoute<dynamic>(
-        builder: (context) => PostView(key: args.key),
+        builder: (context) => PostView(
+          post: args.post,
+          key: args.key,
+        ),
         settings: data,
       );
     },
@@ -244,8 +247,9 @@ class SignUpViewArguments {
 
 /// PostView arguments holder class
 class PostViewArguments {
+  final Post? post;
   final Key? key;
-  PostViewArguments({this.key});
+  PostViewArguments({this.post, this.key});
 }
 
 /// CommentView arguments holder class

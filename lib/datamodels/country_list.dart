@@ -1,4 +1,5 @@
 const List<Map<String, String>> COUNTRIES_LIST = [
+  {'name': 'All Countries', 'code': 'AF', 'dialCode': '+93', 'flag': 'all.png'},
   {'name': 'Afghanistan', 'code': 'AF', 'dialCode': '+93', 'flag': 'af.png'},
   {'name': 'Åland Islands', 'code': 'AX', 'dialCode': '+358', 'flag': 'ax.png'},
   {'name': 'Albania', 'code': 'AL', 'dialCode': '+355', 'flag': 'al.png'},

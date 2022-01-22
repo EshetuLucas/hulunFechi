@@ -1139,3 +1139,272 @@ abstract class _Country implements Country {
   _$CountryCopyWith<_Country> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+Filter _$FilterFromJson(Map<String, dynamic> json) {
+  return _Filter.fromJson(json);
+}
+
+/// @nodoc
+class _$FilterTearOff {
+  const _$FilterTearOff();
+
+  _Filter call(
+      {int? countryId,
+      String? countryName,
+      int? sectorId = -1,
+      int platformId = -1,
+      int? categoryId = -1,
+      int? subCategoryId = -1}) {
+    return _Filter(
+      countryId: countryId,
+      countryName: countryName,
+      sectorId: sectorId,
+      platformId: platformId,
+      categoryId: categoryId,
+      subCategoryId: subCategoryId,
+    );
+  }
+
+  Filter fromJson(Map<String, Object?> json) {
+    return Filter.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Filter = _$FilterTearOff();
+
+/// @nodoc
+mixin _$Filter {
+  int? get countryId => throw _privateConstructorUsedError;
+  String? get countryName => throw _privateConstructorUsedError;
+  int? get sectorId => throw _privateConstructorUsedError;
+  int get platformId => throw _privateConstructorUsedError;
+  int? get categoryId => throw _privateConstructorUsedError;
+  int? get subCategoryId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $FilterCopyWith<Filter> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $FilterCopyWith<$Res> {
+  factory $FilterCopyWith(Filter value, $Res Function(Filter) then) =
+      _$FilterCopyWithImpl<$Res>;
+  $Res call(
+      {int? countryId,
+      String? countryName,
+      int? sectorId,
+      int platformId,
+      int? categoryId,
+      int? subCategoryId});
+}
+
+/// @nodoc
+class _$FilterCopyWithImpl<$Res> implements $FilterCopyWith<$Res> {
+  _$FilterCopyWithImpl(this._value, this._then);
+
+  final Filter _value;
+  // ignore: unused_field
+  final $Res Function(Filter) _then;
+
+  @override
+  $Res call({
+    Object? countryId = freezed,
+    Object? countryName = freezed,
+    Object? sectorId = freezed,
+    Object? platformId = freezed,
+    Object? categoryId = freezed,
+    Object? subCategoryId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      countryId: countryId == freezed
+          ? _value.countryId
+          : countryId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      countryName: countryName == freezed
+          ? _value.countryName
+          : countryName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sectorId: sectorId == freezed
+          ? _value.sectorId
+          : sectorId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      platformId: platformId == freezed
+          ? _value.platformId
+          : platformId // ignore: cast_nullable_to_non_nullable
+              as int,
+      categoryId: categoryId == freezed
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      subCategoryId: subCategoryId == freezed
+          ? _value.subCategoryId
+          : subCategoryId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$FilterCopyWith<$Res> implements $FilterCopyWith<$Res> {
+  factory _$FilterCopyWith(_Filter value, $Res Function(_Filter) then) =
+      __$FilterCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {int? countryId,
+      String? countryName,
+      int? sectorId,
+      int platformId,
+      int? categoryId,
+      int? subCategoryId});
+}
+
+/// @nodoc
+class __$FilterCopyWithImpl<$Res> extends _$FilterCopyWithImpl<$Res>
+    implements _$FilterCopyWith<$Res> {
+  __$FilterCopyWithImpl(_Filter _value, $Res Function(_Filter) _then)
+      : super(_value, (v) => _then(v as _Filter));
+
+  @override
+  _Filter get _value => super._value as _Filter;
+
+  @override
+  $Res call({
+    Object? countryId = freezed,
+    Object? countryName = freezed,
+    Object? sectorId = freezed,
+    Object? platformId = freezed,
+    Object? categoryId = freezed,
+    Object? subCategoryId = freezed,
+  }) {
+    return _then(_Filter(
+      countryId: countryId == freezed
+          ? _value.countryId
+          : countryId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      countryName: countryName == freezed
+          ? _value.countryName
+          : countryName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sectorId: sectorId == freezed
+          ? _value.sectorId
+          : sectorId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      platformId: platformId == freezed
+          ? _value.platformId
+          : platformId // ignore: cast_nullable_to_non_nullable
+              as int,
+      categoryId: categoryId == freezed
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      subCategoryId: subCategoryId == freezed
+          ? _value.subCategoryId
+          : subCategoryId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Filter implements _Filter {
+  _$_Filter(
+      {this.countryId,
+      this.countryName,
+      this.sectorId = -1,
+      this.platformId = -1,
+      this.categoryId = -1,
+      this.subCategoryId = -1});
+
+  factory _$_Filter.fromJson(Map<String, dynamic> json) =>
+      _$$_FilterFromJson(json);
+
+  @override
+  final int? countryId;
+  @override
+  final String? countryName;
+  @JsonKey()
+  @override
+  final int? sectorId;
+  @JsonKey()
+  @override
+  final int platformId;
+  @JsonKey()
+  @override
+  final int? categoryId;
+  @JsonKey()
+  @override
+  final int? subCategoryId;
+
+  @override
+  String toString() {
+    return 'Filter(countryId: $countryId, countryName: $countryName, sectorId: $sectorId, platformId: $platformId, categoryId: $categoryId, subCategoryId: $subCategoryId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Filter &&
+            const DeepCollectionEquality().equals(other.countryId, countryId) &&
+            const DeepCollectionEquality()
+                .equals(other.countryName, countryName) &&
+            const DeepCollectionEquality().equals(other.sectorId, sectorId) &&
+            const DeepCollectionEquality()
+                .equals(other.platformId, platformId) &&
+            const DeepCollectionEquality()
+                .equals(other.categoryId, categoryId) &&
+            const DeepCollectionEquality()
+                .equals(other.subCategoryId, subCategoryId));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(countryId),
+      const DeepCollectionEquality().hash(countryName),
+      const DeepCollectionEquality().hash(sectorId),
+      const DeepCollectionEquality().hash(platformId),
+      const DeepCollectionEquality().hash(categoryId),
+      const DeepCollectionEquality().hash(subCategoryId));
+
+  @JsonKey(ignore: true)
+  @override
+  _$FilterCopyWith<_Filter> get copyWith =>
+      __$FilterCopyWithImpl<_Filter>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_FilterToJson(this);
+  }
+}
+
+abstract class _Filter implements Filter {
+  factory _Filter(
+      {int? countryId,
+      String? countryName,
+      int? sectorId,
+      int platformId,
+      int? categoryId,
+      int? subCategoryId}) = _$_Filter;
+
+  factory _Filter.fromJson(Map<String, dynamic> json) = _$_Filter.fromJson;
+
+  @override
+  int? get countryId;
+  @override
+  String? get countryName;
+  @override
+  int? get sectorId;
+  @override
+  int get platformId;
+  @override
+  int? get categoryId;
+  @override
+  int? get subCategoryId;
+  @override
+  @JsonKey(ignore: true)
+  _$FilterCopyWith<_Filter> get copyWith => throw _privateConstructorUsedError;
+}

@@ -17,6 +17,8 @@ class PostWidget extends StatelessWidget {
     required this.onComment,
     required this.onLike,
     required this.onShare,
+    this.onMore,
+    required this.userId,
     Key? key,
   }) : super(key: key);
 
@@ -26,6 +28,8 @@ class PostWidget extends StatelessWidget {
   final Function() onComment;
   final Function() onLike;
   final Function() onShare;
+  final Function()? onMore;
+  final int userId;
 
   @override
   Widget build(BuildContext context) {
@@ -61,14 +65,15 @@ class PostWidget extends StatelessWidget {
                       endColor: kcWhite,
                       loading: loading,
                       child: Text(
-                        '${post.category?.name ?? ''} | ${post.subCategory?.name ?? ''}',
+                        '${post.platform?.name ?? ''}'
+                        ' | ${post.category?.name ?? ''} ',
                         style: ktsGreenBoldTextStyle.copyWith(fontSize: 13),
                       ),
                     )
                   ],
                 ),
               ),
-              if (!isMe)
+              if (post.user.id != userId)
                 SizedBox(
                   width: 85,
                   height: 41,
@@ -92,10 +97,13 @@ class PostWidget extends StatelessWidget {
                   ),
                 )
               else
-                Container(
-                  child: Icon(
-                    Icons.more_vert_rounded,
-                    color: kcPrimaryColor,
+                GestureDetector(
+                  onTap: onMore,
+                  child: Container(
+                    child: Icon(
+                      Icons.more_vert_rounded,
+                      color: kcPrimaryColor,
+                    ),
                   ),
                 ),
             ],

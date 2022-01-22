@@ -19,6 +19,9 @@ void setupDialogUi() {
         SuccessDialog(request: sheetRequest, completer: completer),
     DialogType.LANGUAGE: (context, sheetRequest, completer) =>
         LanguageDialog(request: sheetRequest, completer: completer),
+    DialogType.DELETE: (context, sheetRequest, completer) =>
+        DeletePostConfirmationDialog(
+            request: sheetRequest, completer: completer),
   };
 
   dialogService.registerCustomDialogBuilders(builders);
@@ -257,6 +260,78 @@ class _LanguageDialogState extends State<LanguageDialog> {
               verticalSpaceMedium,
             ],
           )),
+    );
+  }
+}
+
+class DeletePostConfirmationDialog extends StatelessWidget {
+  final DialogRequest request;
+  final Function(DialogResponse) completer;
+  const DeletePostConfirmationDialog(
+      {Key? key, required this.request, required this.completer})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200,
+      child: Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              verticalSpaceMedium,
+              if (request.title != null) verticalSpaceSmall,
+              Text(
+                request.title ?? '',
+                style: ktsDarkGreyBoldTextStyle.copyWith(
+                  color: kcPrimaryColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              verticalSpaceMedium,
+              Text(
+                request.description ?? '',
+                style: ktsDarkGreyTextStyle,
+                textAlign: TextAlign.center,
+              ),
+              verticalSpaceMedium,
+              SizedBox(
+                height: 50,
+                width: double.maxFinite,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                      child: AppButton(
+                        title: 'Cancel',
+                        height: 45.0,
+                        onTap: () =>
+                            completer.call((DialogResponse(confirmed: false))),
+                      ),
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () =>
+                            completer.call((DialogResponse(confirmed: true))),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            request.additionalButtonTitle ?? 'Yes',
+                            style: ktsGreenBoldTextStyle,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

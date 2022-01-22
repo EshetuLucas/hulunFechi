@@ -40,6 +40,7 @@ class _CountryPickerBottomSheetState extends State<CountryPickerBottomSheet> {
   List<Country> allCountries =
       COUNTRIES_LIST.map((country) => Country.fromJson(country)).toList();
   late List<Country> _filteredCountries = allCountries;
+
   late final TextEditingController _controller = TextEditingController()
     ..addListener(_handleQuery);
 

@@ -66,6 +66,15 @@ class PostService {
     }
   }
 
+  Future<void> deletePost({required int id}) async {
+    try {
+      await _putApis.deletePost(id: id);
+    } catch (e) {
+      log.e(e.toString());
+      rethrow;
+    }
+  }
+
   Future<List<Post>> getPosts() async {
     try {
       _posts = await _getApi.getPosts();

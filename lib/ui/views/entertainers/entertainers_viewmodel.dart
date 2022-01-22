@@ -3,9 +3,11 @@ import 'package:hulunfechi/app/app.constant.dart';
 import 'package:hulunfechi/app/app.locator.dart';
 import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/app/app.router.dart';
+import 'package:hulunfechi/datamodels/app_data_model.dart';
 
 import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/enums/bottom_sheet_type.dart';
+import 'package:hulunfechi/enums/dialog_type.dart';
 import 'package:hulunfechi/services/post_service.dart';
 import 'package:hulunfechi/services/user_service.dart';
 import 'package:stacked/stacked.dart';
@@ -18,6 +20,7 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
 
   final _userService = locator<UserService>();
   final _postService = locator<PostService>();
+  final _dialogService = locator<DialogService>();
   final _navigationService = locator<NavigationService>();
 
   final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
@@ -31,10 +34,14 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
     setBusyForObject(POST_BUSY_KEY, value);
   }
 
+  int get userId => _userService.currentUser.id;
+
   List<String> get tags => _tags;
 
   int _currentIndex = 0;
   int get currentIndex => _currentIndex;
+  int _categoryIndex = -1;
+  int _subcategoryIndex = -1;
 
   List<Post> _posts = [];
   List<Post> get posts => _posts;
@@ -76,22 +83,28 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
             )
             .toList());
       }
-    }
-
-    _listOnScreen = List.from(
-      _posts.reversed
-          .where(
-            (element) =>
-                (_currentIndex == 0 ||
-                    element.sectors?.id == sectors[_currentIndex].id) &&
-                (_currentCountry == "All Countries" ||
-                    element.country?.name == _currentCountry) &&
-                (_currentPlatform == _allPlatforms ||
-                    element.platform?.id ==
-                        platforms[_selectedPlatformIndex].id),
-          )
-          .toList(),
-    );
+    } else
+      _listOnScreen = List.from(
+        _posts.reversed
+            .where(
+              (element) =>
+                  (_currentIndex == 0 ||
+                      element.sectors?.id == sectors[_currentIndex].id) &&
+                  (_currentCountry == "All Countries" ||
+                      element.country?.name == _currentCountry) &&
+                  (_currentPlatform == _allPlatforms ||
+                      element.platform?.id ==
+                          sectorPlatforms[_selectedPlatformIndex == 0
+                                  ? 0
+                                  : _selectedPlatformIndex]
+                              .id) &&
+                  (_categoryIndex == -1 ||
+                      element.category?.id == _categoryIndex) &&
+                  (_subcategoryIndex == -1 ||
+                      element.subCategory?.id == _subcategoryIndex),
+            )
+            .toList(),
+      );
     notifyListeners();
   }
 
@@ -118,8 +131,15 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
   }
 
   Future<void> makepostBusy() async {
+    log.i('Setting list on screen');
     setPostsBusy(true);
     await Future.delayed(Duration(seconds: 1));
+
+    log.i('currentSector:${sectors[_currentIndex]}');
+    log.i('currentCountry:$_currentCountry');
+    //log.i('sectorsPlatform: $sectorPlatforms');
+    log.i('currentPlatfrom:${sectorPlatforms[_selectedPlatformIndex]}');
+
     setListOnScreen();
     setPostsBusy(false);
   }
@@ -131,24 +151,29 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
       [Platform(id: -1, name: _allPlatforms), ..._postService.platforms];
 
   List<Platform> get sectorPlatforms {
-    return List.from(platforms
-        .where((element) =>
-            element.sectors != null &&
-            element.sectors!.id == sectors[_currentIndex].id)
-        .toList());
+    if (_currentIndex == 0) return platforms;
+    return [
+      Platform(id: -1, name: _allPlatforms),
+      ...List.from(platforms
+          .where((element) =>
+              element.sectors != null &&
+              element.sectors!.id == sectors[_currentIndex].id)
+          .toList())
+    ];
   }
 
-  Future<void> onAllCountries() async {
+  Future<void> onPlatformTap() async {
     log.i('');
     final resut = await _bottomSheetService.showCustomSheet(
         isScrollControlled: false,
         variant: BottomSheetType.EVENT_MORE_TYPE,
-        customData: _currentIndex == 0
-            ? platforms
-            : [Platform(id: -1, name: 'All Platforms'), ...sectorPlatforms]);
+        customData: _currentIndex == 0 ? platforms : sectorPlatforms);
     if (resut != null) {
       _selectedPlatformIndex = resut.data;
-      updateTags(1, platforms[resut.data].name);
+      updateTags(
+        1,
+        sectorPlatforms[_selectedPlatformIndex].name,
+      );
     }
     await makepostBusy();
   }
@@ -183,9 +208,11 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
     _currentIndex = index;
     _isSearchActive = false;
     _searchKeyWord = '';
+    _selectedPlatformIndex = 0;
+    _categoryIndex = -1;
+    _subcategoryIndex = -1;
     setCurrentPlatform('All Platforms');
     updateTags(1, 'All Platforms');
-
     notifyListeners();
     await makepostBusy();
     notifyListeners();
@@ -205,12 +232,74 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
 
   Future<void> onFilter() async {
     log.i('');
-    await _postService.getCategories();
-    final resut = await _bottomSheetService.showCustomSheet(
+
+    final result = await _bottomSheetService.showCustomSheet(
       isScrollControlled: false,
       variant: BottomSheetType.FILTER,
     );
-    await makepostBusy();
+    if (result != null) {
+      setPostsBusy(true);
+      if (result.data is Filter) {
+        Filter filter = result.data as Filter;
+
+        if (filter.platformId != -1) {
+          for (Platform platform in platforms) {
+            if (platform.id == filter.platformId) {
+              for (Sector sector in sectors) {
+                if (sector.id == platform.sectors!.id) {
+                  _currentIndex = sectors.indexOf(sector);
+                  _selectedPlatformIndex = sectorPlatforms.indexOf(platform);
+                  updateTags(1, platform.name);
+
+                  break;
+                }
+              }
+              _categoryIndex = filter.categoryId ?? -1;
+              _subcategoryIndex = filter.sectorId ?? -1;
+
+              break;
+            }
+          }
+        }
+        if (filter.countryName != null) {
+          setCurrentCountry(filter.countryName!);
+          updateTags(0, _currentCountry);
+        }
+      }
+      setPostsBusy(false);
+      await makepostBusy();
+    }
+  }
+
+  Future<void> onMoreTap(Post post) async {
+    final result = await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.POST_OPTIONS,
+    );
+    if (result != null) {
+      if (result.data == 0) {
+        _navigationService.navigateTo(
+          Routes.postView,
+          arguments: PostViewArguments(post: post),
+        );
+      } else {
+        final result = await _dialogService.showCustomDialog(
+            variant: DialogType.DELETE,
+            title: 'Are you sure?',
+            additionalButtonTitle: 'Yes',
+            description: 'This action will remove the post permanently');
+
+        if (result?.confirmed ?? false) {
+          try {
+            await _postService.deletePost(id: post.id);
+            initialise();
+          } catch (e) {
+            log.e(e);
+          }
+        } else {
+          log.v('result:${result?.data}');
+        }
+      }
+    }
   }
 
   @override

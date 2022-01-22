@@ -39,7 +39,7 @@ GET http://hulunfechi.ethioscholarship.com/api/hulunfechi/searchEventByCategory/
 ###
 GET  https://apiv2.hulunfechi.com/api/posts
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdWthQGFkbWluLmNvbSIsImlhdCI6MTY0Mjc2Njg3NCwiZXhwIjoxNjQyODUzMjc0fQ.yYrskCGReFvAZ4N7p3g8pBk8HTWoDTgnOtJup3meWy65KSN0aBsYUpOfejqgnkwn7B7jhBNqqaGa07bjMz4KcA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdWthQGFkbWluLmNvbSIsImlhdCI6MTY0Mjg1NDUzNSwiZXhwIjoxNjQyOTQwOTM1fQ.nvTK9GNb1mmGXZgA8H8xuubSIWdXzfZWVbuYVRPneV3EBYV9sqeaG_Yzdum8K1orR1vbNFrNb6M6rmjic6N9xg
 Accept: application/json
 
 ###

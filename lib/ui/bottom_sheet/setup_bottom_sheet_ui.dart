@@ -5,6 +5,7 @@ import 'package:hulunfechi/ui/bottom_sheet/country_picker.dart';
 import 'package:hulunfechi/ui/bottom_sheet/date_picker.dart';
 import 'package:hulunfechi/ui/bottom_sheet/filter/filter_sheet.dart';
 import 'package:hulunfechi/ui/bottom_sheet/media_uploading/media_uploading_sheet.dart';
+import 'package:hulunfechi/ui/bottom_sheet/post_option/post_option_sheet.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 void setupBottomSheetUi() {
@@ -33,6 +34,11 @@ void setupBottomSheetUi() {
         ),
     BottomSheetType.COUNTRY_PICKER: (context, sheetRequest, completer) =>
         CountryPickerBottomSheet(
+          completer: completer,
+          request: sheetRequest,
+        ),
+    BottomSheetType.POST_OPTIONS: (context, sheetRequest, completer) =>
+        PostOpetions(
           completer: completer,
           request: sheetRequest,
         ),

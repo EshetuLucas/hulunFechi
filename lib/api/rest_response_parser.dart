@@ -52,6 +52,29 @@ class RestResponseParser {
     }
   }
 
+  Future<void> runDeleteRestRequest({
+    required String url,
+  }) async {
+    log.v('query:$url');
+    var response;
+    try {
+      var response = await dio.delete(
+        url,
+        options: Options(headers: {
+          HttpHeaders.authorizationHeader:
+              "Bearer ${_userService.currentUser.accessToken}"
+        }),
+      );
+      log.v('response:$response');
+      return;
+    } on DioError catch (e) {
+      log.e(e);
+      return Future.error(DioExceptions().getExceptionMessage(e));
+    } catch (e) {
+      return Future.error('Something went wrong. Try Again');
+    }
+  }
+
   Future<T> runPutRestRequest<T>(
       {required String url,
       required Map<String, dynamic> body,

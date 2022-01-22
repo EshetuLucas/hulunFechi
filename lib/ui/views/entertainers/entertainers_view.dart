@@ -22,7 +22,7 @@ import 'package:hulunfechi/ui/shared/ui_helpers.dart';
 
 import 'package:stacked_hooks/stacked_hooks.dart';
 
-List<Post> _FAKE_POSTS = [
+List<Post> FAKE_POSTS = [
   FAKE_POST,
   FAKE_POST1,
   FAKE_POST,
@@ -99,21 +99,22 @@ class EntertainersView extends StatelessWidget {
                                           return Padding(
                                             padding: appSymmetricEdgePadding,
                                             child: PostWidget(
-                                                loading: model.isBusy ||
-                                                    model.busy(POST_BUSY_KEY),
-                                                post: model.isBusy ||
-                                                        model
-                                                            .busy(POST_BUSY_KEY)
-                                                    ? _FAKE_POSTS[index]
-                                                    : model.listOnScreen[index],
-                                                onLike: () =>
-                                                    model.onLike(index),
-                                                onShare: () => model.onShare(
-                                                    model.listOnScreen[index]
-                                                        .id),
-                                                onComment: () =>
-                                                    model.onComment(model
-                                                        .listOnScreen[index])),
+                                              userId: model.userId,
+                                              loading: model.isBusy ||
+                                                  model.busy(POST_BUSY_KEY),
+                                              post: model.isBusy ||
+                                                      model.busy(POST_BUSY_KEY)
+                                                  ? FAKE_POSTS[index]
+                                                  : model.listOnScreen[index],
+                                              onLike: () => model.onLike(index),
+                                              onShare: () => model.onShare(
+                                                  model.listOnScreen[index].id),
+                                              onComment: () => model.onComment(
+                                                model.listOnScreen[index],
+                                              ),
+                                              onMore: () => model.onMoreTap(
+                                                  model.listOnScreen[index]),
+                                            ),
                                           );
                                         },
                                       ),
@@ -177,7 +178,14 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
                       : Padding(
                           padding: const EdgeInsets.all(2.0),
                           child: GestureDetector(
-                            onTap: model.onFilter,
+                            onTap: () {
+                              if (model.isSearchActive) {
+                                searchController.text = '';
+                                model.onChange('');
+                                FocusScope.of(context).unfocus();
+                              }
+                              model.onFilter();
+                            },
                             child: Icon(
                               Icons.tune_rounded,
                               color: kcPrimaryColor,
@@ -200,7 +208,14 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
                         AppCategory(
                           loading: false,
                           text: model.sectors[i].name,
-                          onTap: () => model.setQucikFilterIndex(i),
+                          onTap: () {
+                            if (model.isSearchActive) {
+                              searchController.text = '';
+                              model.onChange('');
+                              FocusScope.of(context).unfocus();
+                            }
+                            model.setQucikFilterIndex(i);
+                          },
                           active: model.currentIndex == i,
                         ),
                         horizontalSpaceSmall,
@@ -226,16 +241,29 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
                 child: HulunfechiTag(
                   loading: model.busyHeader,
                   text: model.tags[0],
-                  onTap: model.onPickCountry,
+                  onTap: () {
+                    if (model.isSearchActive) {
+                      searchController.text = '';
+                      model.onChange('');
+                      FocusScope.of(context).unfocus();
+                    }
+                    model.onPickCountry();
+                  },
                 ),
               ),
               horizontalSpaceSmall,
               Expanded(
                 child: HulunfechiTag(
-                  loading: model.busyHeader,
-                  text: model.tags[1],
-                  onTap: model.onAllCountries,
-                ),
+                    loading: model.busyHeader,
+                    text: model.tags[1],
+                    onTap: () {
+                      if (model.isSearchActive) {
+                        searchController.text = '';
+                        model.onChange('');
+                        FocusScope.of(context).unfocus();
+                      }
+                      model.onPlatformTap();
+                    }),
               ),
               horizontalSpaceSmall,
               horizontalSpaceSmall,

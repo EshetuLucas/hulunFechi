@@ -2,6 +2,7 @@ import 'package:hulunfechi/app/app.constant.dart';
 import 'package:hulunfechi/app/app.locator.dart';
 import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/app/app.router.dart';
+import 'package:hulunfechi/datamodels/app_data_model.dart';
 import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/enums/bottom_sheet_type.dart';
 import 'package:hulunfechi/enums/dialog_type.dart';
@@ -23,18 +24,43 @@ class PostViewModel extends FormViewModel {
 
   final _postService = locator<PostService>();
   final _snackbarService = locator<SnackbarService>();
+  final Post? post;
+
+  PostViewModel({this.post});
 
   void setDatas() {
-    log.e(categories);
+    log.i(post);
+    if (post != null) {
+      for (Sector sector in sectors) {
+        if (sector.id == post!.sectors?.id) {
+          _currentIndex = sectors.indexOf(sector);
+          break;
+        }
+      }
+      _selectedCategory = post!.category!;
+      _categoriesTag[0] = _selectedCategory.name;
+      if (post!.subCategory != null) {
+        _selectedSubCategory = post!.subCategory!;
+        _categoriesTag[1] = _selectedSubCategory.name;
+      }
+    }
     for (Platform platform in platforms) {
-      if (platform.sectors != null) if (platform.sectors!.id ==
-          sectors[_currentIndex].id) {
-        _selectedPlatform = platform;
-        break;
+      if (platform.sectors != null) {
+        if (post != null) {
+          if (platform.id == post!.platform!.id) {
+            _selectedPlatform = platform;
+            break;
+          }
+        } else {
+          if (platform.sectors!.id == sectors[_currentIndex].id) {
+            _selectedPlatform = platform;
+            break;
+          }
+        }
       }
     }
     _tags = [
-      'All Countries',
+      post != null ? post!.country!.name : 'All Countries',
       _selectedPlatform.name,
     ];
   }
@@ -199,7 +225,8 @@ class PostViewModel extends FormViewModel {
       notifyListeners();
       return;
     }
-    PostForm post = PostForm(
+
+    PostForm userPost = PostForm(
       title: subjectValue!,
       description: bodyValue!,
       user: {'id': _userService.currentUser.id},
@@ -219,13 +246,31 @@ class PostViewModel extends FormViewModel {
       country: {'id': 1},
     );
 
-    log.v(post.toJson());
+    log.v(userPost.toJson());
     setBusy(true);
 
     try {
-      await _postService.postPost(post: post);
+      if (post != null) {
+        await _postService.updatePost(
+            post: post!.copyWith(
+          title: subjectValue!,
+          description: bodyValue!,
+          sectors: Sector(id: sectors[_currentIndex].id),
+          platform: Platform(id: _selectedPlatform.id),
+          category: Category(id: _selectedCategory.id),
+          subCategory: SubCategory(id: _selectedSubCategory.id),
+          country: Country(
+            id: 1,
+            name: 'Ethiopia',
+          ),
+        ));
+      } else {
+        await _postService.postPost(post: userPost);
+      }
+      setBusy(false);
       await _dialogService.showCustomDialog(
         variant: DialogType.SUCCESS,
+        description: 'Your changes are saved successfully',
       );
       await _navigationService.clearStackAndShow(Routes.homeView);
     } catch (e) {
@@ -236,7 +281,6 @@ class PostViewModel extends FormViewModel {
           title: 'Something went wrong while creating you post',
           description: 'Please try again');
     }
-    setBusy(false);
   }
 
   @override

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hulunfechi/app/app.constant.dart';
+import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/enums/group.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
@@ -29,30 +30,44 @@ import 'post_viewmodel.dart';
   ],
 )
 class PostView extends StatelessWidget with $PostView {
-  PostView({Key? key}) : super(key: key);
+  PostView({this.post, Key? key}) : super(key: key);
+  final Post? post;
 
   @override
   Widget build(BuildContext context) {
+    bool editMode = post != null;
     return ViewModelBuilder<PostViewModel>.reactive(
+      viewModelBuilder: () => PostViewModel(post: post),
       onModelReady: (model) {
+        if (post != null) {
+          model.setData(
+            model.formValueMap
+              ..addAll({
+                SubjectValueKey: post!.title,
+                BodyValueKey: post!.description,
+              }),
+          );
+          subjectController.text = post!.title;
+          bodyController.text = post!.description;
+        }
         model.setDatas();
         listenToFormUpdated(model);
       },
-      viewModelBuilder: () => PostViewModel(),
       builder: (context, model, child) => Scaffold(
         floatingActionButton: Padding(
           padding: appSymmetricEdgePadding,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: AppButton(
-              title: 'Post',
+              title: editMode ? 'Save' : 'Post',
               onTap: model.onPost,
+              busy: model.isBusy,
             ),
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         appBar: hulunfechiAppbar(
-          title: 'Add Post',
+          title: editMode ? 'Edit Post' : 'Add Post',
           onBackButtonTap: model.onBack,
         ),
         body: SingleChildScrollView(

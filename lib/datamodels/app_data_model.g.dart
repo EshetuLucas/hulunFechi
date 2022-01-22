@@ -87,3 +87,21 @@ Map<String, dynamic> _$$_CountryToJson(_$_Country instance) =>
       'dialCode': instance.dialCode,
       'flag': instance.flag,
     };
+
+_$_Filter _$$_FilterFromJson(Map<String, dynamic> json) => _$_Filter(
+      countryId: json['countryId'] as int?,
+      countryName: json['countryName'] as String?,
+      sectorId: json['sectorId'] as int? ?? -1,
+      platformId: json['platformId'] as int? ?? -1,
+      categoryId: json['categoryId'] as int? ?? -1,
+      subCategoryId: json['subCategoryId'] as int? ?? -1,
+    );
+
+Map<String, dynamic> _$$_FilterToJson(_$_Filter instance) => <String, dynamic>{
+      'countryId': instance.countryId,
+      'countryName': instance.countryName,
+      'sectorId': instance.sectorId,
+      'platformId': instance.platformId,
+      'categoryId': instance.categoryId,
+      'subCategoryId': instance.subCategoryId,
+    };
