@@ -40,21 +40,13 @@ class MyApp extends StatelessWidget {
             color: kcDarkGreyColor,
           ),
         ),
-        // appBarTheme: Theme.of(context).appBarTheme.copyWith(
-        //       backgroundColor: kcVeryLightGrey,
-        //       systemOverlayStyle: SystemUiOverlayStyle(
-        //           systemNavigationBarColor: kcAppBackgroundColor,
-        //           statusBarBrightness: Brightness.light,
-        //           systemNavigationBarDividerColor: kcAppBackgroundColor,
-        //           systemNavigationBarIconBrightness: Brightness.light),
-        //     ),
       ),
       home: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
             systemNavigationBarColor: kcAppBackgroundColor,
-            systemNavigationBarDividerColor: kcAppBackgroundColor,
+            systemNavigationBarDividerColor: kcWhite,
             statusBarBrightness: Brightness.light,
-            systemNavigationBarIconBrightness: Brightness.light),
+            systemNavigationBarIconBrightness: Brightness.dark),
         child: LoginView(),
       ),
       onGenerateRoute: StackedRouter().onGenerateRoute,

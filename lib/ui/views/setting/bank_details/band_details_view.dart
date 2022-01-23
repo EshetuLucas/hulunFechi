@@ -42,7 +42,8 @@ class BankDetailView extends StatelessWidget with $BankDetailView {
             child: Padding(
               padding: appSymmetricEdgePadding,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 child: AppButton(
                   title: 'Save',
                   onTap: model.onSave,

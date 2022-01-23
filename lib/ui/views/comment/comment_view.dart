@@ -54,218 +54,234 @@ class CommentView extends StatelessWidget {
           onBackButtonTap: model.onBack,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: SafeArea(
-          child: Container(
-            color: kcWhite,
-            child: Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: _WriteComment(),
-            ),
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              verticalSpaceSmall,
-              Padding(
-                padding: appSymmetricEdgePadding,
-                child: Text(
-                  post.title,
-                  style: ktsDarkSmallTextStyle,
-                ),
-              ),
-              verticalSpaceTiny,
-              Padding(
-                padding: appSymmetricEdgePadding,
-                child: Text(
-                  post.description,
-                  style: ktsLightGreyMeidumTextStyle.copyWith(
-                      color: kcDarkGreyColor.withOpacity(0.7)),
-                ),
-              ),
-              verticalSpaceMedium,
-              AppDivider(
-                color: kcBackgroundColor.withOpacity(0.2),
-              ),
-              verticalSpaceMedium,
-              RefreshIndicator(
-                onRefresh: model.initialise,
-                backgroundColor: kcBackgroundColor,
-                color: kcPrimaryColor,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    model.hasError
-                        ? GestureDetector(
-                            onTap: model.initialise,
-                            child: Center(
-                              child: Text(
-                                'Something went wrong.\nTap to Try again',
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          )
-                        : Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              !model.isBusy && model.listOnScreen.isEmpty
-                                  ? Center(
-                                      child: Text(
-                                        'No Comments Yet!\nBe first to comment 😊',
-                                        style: ktsButtonTitleTextStyle.copyWith(
-                                          color: kcDarkGreyColor,
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    )
-                                  : ListView.separated(
-                                      shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
-                                      separatorBuilder: (context, index) =>
-                                          Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 8),
-                                        child: Container(),
-                                      ),
-                                      itemCount: model.isBusy
-                                          ? fakeComments.length
-                                          : model.listOnScreen.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return Padding(
-                                          padding: appSymmetricEdgePadding,
-                                          child: SkeletonLoader(
-                                            startColor: kcLightGrey3,
-                                            endColor: kcWhite,
-                                            loading: model.isBusy,
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  padding:
-                                                      EdgeInsets.only(top: 4),
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                18)),
-                                                    color: kcLightGrey5,
-                                                  ),
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 10),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
+        // floatingActionButton: SafeArea(
+        //   child: Container(
+        //     color: kcWhite,
+        //     child: Padding(
+        //       padding: const EdgeInsets.all(3.0),
+        //       child: _WriteComment(),
+        //     ),
+        //   ),
+        // ),
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  verticalSpaceSmall,
+                  Padding(
+                    padding: appSymmetricEdgePadding,
+                    child: Text(
+                      post.title,
+                      style: ktsDarkSmallTextStyle,
+                    ),
+                  ),
+                  verticalSpaceTiny,
+                  Padding(
+                    padding: appSymmetricEdgePadding,
+                    child: Text(
+                      post.description,
+                      style: ktsLightGreyMeidumTextStyle.copyWith(
+                          color: kcDarkGreyColor.withOpacity(0.7)),
+                    ),
+                  ),
+                  verticalSpaceMedium,
+                  AppDivider(
+                    color: kcBackgroundColor.withOpacity(0.2),
+                  ),
+                  verticalSpaceMedium,
+                  RefreshIndicator(
+                    onRefresh: model.initialise,
+                    backgroundColor: kcBackgroundColor,
+                    color: kcPrimaryColor,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        model.hasError
+                            ? GestureDetector(
+                                onTap: model.initialise,
+                                child: Center(
+                                  child: Text(
+                                    'Something went wrong.\nTap to Try again',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              )
+                            : Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  !model.isBusy && model.listOnScreen.isEmpty
+                                      ? Center(
+                                          child: Text(
+                                            'No Comments Yet!\nBe first to comment 😊',
+                                            style: ktsButtonTitleTextStyle
+                                                .copyWith(
+                                              color: kcDarkGreyColor,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        )
+                                      : ListView.separated(
+                                          shrinkWrap: true,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          separatorBuilder: (context, index) =>
+                                              Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 8),
+                                            child: Container(),
+                                          ),
+                                          itemCount: model.isBusy
+                                              ? fakeComments.length
+                                              : model.listOnScreen.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Padding(
+                                              padding: appSymmetricEdgePadding,
+                                              child: SkeletonLoader(
+                                                startColor: kcLightGrey3,
+                                                endColor: kcWhite,
+                                                loading: model.isBusy,
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      padding: EdgeInsets.only(
+                                                          top: 4),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    18)),
+                                                        color: kcLightGrey5,
+                                                      ),
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal: 10),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Padding(
+                                                              padding: const EdgeInsets
                                                                       .symmetric(
                                                                   vertical: 4,
                                                                   horizontal:
                                                                       6),
-                                                          child: Text(
-                                                            model.isBusy
-                                                                ? '  N     '
-                                                                : model
-                                                                        .listOnScreen[
-                                                                            index]
-                                                                        .user
-                                                                        .firstname +
-                                                                    model
-                                                                        .listOnScreen[
-                                                                            index]
-                                                                        .user
-                                                                        .lastname,
-                                                            style: TextStyle(
-                                                              fontSize: 13,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                              child: Text(
+                                                                model.isBusy
+                                                                    ? '  N     '
+                                                                    : model
+                                                                            .listOnScreen[
+                                                                                index]
+                                                                            .user
+                                                                            .firstname +
+                                                                        model
+                                                                            .listOnScreen[index]
+                                                                            .user
+                                                                            .lastname,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                ),
+                                                              ),
                                                             ),
-                                                          ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Text(
+                                                                model.isBusy
+                                                                    ? fakeComments[
+                                                                            index]
+                                                                        .comment
+                                                                    : model
+                                                                        .listOnScreen[
+                                                                            index]
+                                                                        .comment,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Text(
-                                                            model.isBusy
-                                                                ? fakeComments[
-                                                                        index]
-                                                                    .comment
-                                                                : model
-                                                                    .listOnScreen[
-                                                                        index]
-                                                                    .comment,
-                                                          ),
-                                                        ),
-                                                      ],
+                                                      ),
                                                     ),
-                                                  ),
+                                                    if (index ==
+                                                            model.listOnScreen
+                                                                    .length -
+                                                                1 &&
+                                                        model.busy(
+                                                            ADD_COMMENT_BUSY_KEY))
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Align(
+                                                          alignment: Alignment
+                                                              .topRight,
+                                                          child: SizedBox(
+                                                              height: 10,
+                                                              width: 10,
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                                color:
+                                                                    kcPrimaryColor,
+                                                              )),
+                                                        ),
+                                                      )
+                                                  ],
                                                 ),
-                                                if (index ==
-                                                        model.listOnScreen
-                                                                .length -
-                                                            1 &&
-                                                    model.busy(
-                                                        ADD_COMMENT_BUSY_KEY))
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Align(
-                                                      alignment:
-                                                          Alignment.topRight,
-                                                      child: SizedBox(
-                                                          height: 10,
-                                                          width: 10,
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                            color:
-                                                                kcPrimaryColor,
-                                                          )),
-                                                    ),
-                                                  )
-                                              ],
-                                            ),
-                                          ),
+                                              ),
 
-                                          //  PostWidget(
-                                          //     loading: model.isBusy ||
-                                          //         model.busy(POST_BUSY_KEY),
-                                          //     post: model.isBusy ||
-                                          //             model.busy(
-                                          //                 POST_BUSY_KEY)
-                                          //         ? _FAKE_POSTS[index]
-                                          //         : model
-                                          //             .listOnScreen[index],
-                                          //     onComment: () =>
-                                          //         model.onComment(
-                                          //             model.listOnScreen[
-                                          //                 index])),
-                                        );
-                                      },
-                                    ),
-                              verticalSpaceMassive,
-                            ],
-                          ),
-                    verticalSpaceSmall,
-                  ],
+                                              //  PostWidget(
+                                              //     loading: model.isBusy ||
+                                              //         model.busy(POST_BUSY_KEY),
+                                              //     post: model.isBusy ||
+                                              //             model.busy(
+                                              //                 POST_BUSY_KEY)
+                                              //         ? _FAKE_POSTS[index]
+                                              //         : model
+                                              //             .listOnScreen[index],
+                                              //     onComment: () =>
+                                              //         model.onComment(
+                                              //             model.listOnScreen[
+                                              //                 index])),
+                                            );
+                                          },
+                                        ),
+                                  verticalSpaceMassive,
+                                ],
+                              ),
+                        verticalSpaceSmall,
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                color: kcWhite,
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: _WriteComment(),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -282,37 +298,34 @@ class _WriteComment extends HookViewModelWidget<CommentViewModel> {
     final commentController = useTextEditingController();
     return Padding(
         padding: appSymmetricEdgePadding,
-        child: Container(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: InputField(
-                  hasFocusedBorder: true,
-                  onChanged: model.onChange,
-                  textInputAction: TextInputAction.done,
-                  controller: commentController,
-                  placeholder: 'Write your comment',
-                ),
+        child: Row(
+          children: [
+            Expanded(
+              child: InputField(
+                hasFocusedBorder: true,
+                onChanged: model.onChange,
+                textInputAction: TextInputAction.done,
+                controller: commentController,
+                placeholder: 'Write your comment',
               ),
-              horizontalSpaceMedium,
-              GestureDetector(
-                onTap: () {
-                  commentController.text = '';
+            ),
+            horizontalSpaceMedium,
+            GestureDetector(
+              onTap: () {
+                commentController.text = '';
 
-                  FocusScope.of(context).unfocus();
-                  model.onComment();
-                },
-                child: Icon(
-                  send,
-                  color: model.commentText.trim().isNotEmpty
-                      ? kcPrimaryColor
-                      : kcLightGrey,
-                ),
+                FocusScope.of(context).unfocus();
+                model.onComment();
+              },
+              child: Icon(
+                send,
+                color: model.commentText.trim().isNotEmpty
+                    ? kcPrimaryColor
+                    : kcLightGrey,
               ),
-              horizontalSpaceTiny,
-            ],
-          ),
+            ),
+            horizontalSpaceTiny,
+          ],
         ));
   }
 }

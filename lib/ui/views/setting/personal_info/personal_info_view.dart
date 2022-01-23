@@ -57,7 +57,8 @@ class PersonalInfoView extends StatelessWidget with $PersonalInfoView {
             child: Padding(
               padding: appSymmetricEdgePadding,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 child: AppButton(
                   title: 'Save',
                   onTap: model.onSave,

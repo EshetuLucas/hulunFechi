@@ -54,7 +54,6 @@ class EntertainersView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Header(),
-                  verticalSpaceSmall,
                   Expanded(
                     child: model.hasError
                         ? GestureDetector(
@@ -84,10 +83,13 @@ class EntertainersView extends StatelessWidget {
                                         ),
                                       )
                                     : ListView.separated(
+                                        padding: EdgeInsets.only(
+                                            bottom: 10, top: 20),
                                         separatorBuilder: (context, index) =>
                                             Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 30),
+                                          padding: const EdgeInsets.only(
+                                            bottom: 30,
+                                          ),
                                           child: AppDivider(),
                                         ),
                                         itemCount: model.isBusy ||
@@ -269,7 +271,7 @@ class Header extends HookViewModelWidget<EntertainersViewModel> {
               horizontalSpaceSmall,
             ]),
           ),
-          verticalSpaceMedium,
+          verticalSpaceSmall
         ],
       ),
     );

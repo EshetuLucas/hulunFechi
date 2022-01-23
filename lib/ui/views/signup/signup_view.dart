@@ -55,7 +55,7 @@ class SignUpView extends StatelessWidget with $SignUpView {
             body: SafeArea(
               child: Column(
                 children: [
-                  verticalSpaceMedium,
+                  verticalSpaceSmall,
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(

@@ -14,7 +14,7 @@ class PostOpetions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 260,
+      height: 200,
       decoration: BoxDecoration(
         color: kcAppBackgroundColor,
         borderRadius: BorderRadius.only(

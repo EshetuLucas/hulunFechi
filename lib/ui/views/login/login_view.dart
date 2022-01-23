@@ -115,24 +115,24 @@ class LoginView extends StatelessWidget with $LoginView {
                                       _ValidationMessage(
                                         title: 'Password $CantBeEmpty',
                                       ),
-                                    verticalSpaceSmall,
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: TextButton(
-                                        onPressed: model.onForgotPassword,
-                                        style: ButtonStyle(
-                                          splashFactory: NoSplash.splashFactory,
-                                          padding: MaterialStateProperty.all(
-                                            EdgeInsets.fromLTRB(5, 0, 5, 15),
-                                          ),
-                                        ),
-                                        child: Text(
-                                          'Forgot Password?',
-                                          style: ktsDarkGreyTextStyle.copyWith(
-                                              color: kcPrimaryColor),
-                                        ),
-                                      ),
-                                    ),
+                                    verticalSpaceMedium,
+                                    // Align(
+                                    //   alignment: Alignment.centerRight,
+                                    //   child: TextButton(
+                                    //     onPressed: model.onForgotPassword,
+                                    //     style: ButtonStyle(
+                                    //       splashFactory: NoSplash.splashFactory,
+                                    //       padding: MaterialStateProperty.all(
+                                    //         EdgeInsets.fromLTRB(5, 0, 5, 15),
+                                    //       ),
+                                    //     ),
+                                    //     child: Text(
+                                    //       'Forgot Password?',
+                                    //       style: ktsDarkGreyTextStyle.copyWith(
+                                    //           color: kcPrimaryColor),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                     if (model.apiValidationMessage != null)
                                       Column(
                                         children: <Widget>[
