@@ -75,9 +75,11 @@ class PostService {
     }
   }
 
-  Future<List<Post>> getPosts() async {
+  Future<List<Post>> getPosts({bool fetch = false}) async {
     try {
-      _posts = await _getApi.getPosts();
+      if (fetch || _posts.isEmpty) {
+        _posts = await _getApi.getPosts();
+      }
       return _posts;
     } catch (e) {
       log.e(e.toString());
@@ -85,11 +87,12 @@ class PostService {
     }
   }
 
-  Future<void> getHeaders() async {
-    setSectors(await getAllSectors());
-    setplatforms(await getPlatforms());
-    setCategoreis(await getCategories());
-    setSubCategoreis(await getAllSubCategory());
+  Future<void> getHeaders({bool fetch = false}) async {
+    if (fetch || _sectors.isEmpty) setSectors(await getAllSectors());
+    if (fetch || _platforms.isEmpty) setplatforms(await getPlatforms());
+    if (fetch || _categories.isEmpty) setCategoreis(await getCategories());
+    if (fetch || _subCategories.isEmpty)
+      setSubCategoreis(await getAllSubCategory());
   }
 
   Future<List<Category>> getCategories() async {

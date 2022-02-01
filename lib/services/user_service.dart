@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:hulunfechi/api/get_apis.dart';
 import 'package:hulunfechi/api/post_apis.dart';
 import 'package:hulunfechi/api/put_apis.dart';
@@ -6,6 +8,7 @@ import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
 import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/datamodels/user/user_model.dart';
+import 'package:hulunfechi/services/shared_preferences_service.dart';
 import 'package:stacked/stacked.dart';
 
 const String user_type = "Customer";
@@ -14,6 +17,7 @@ class UserService with ReactiveServiceMixin {
   final log = getLogger('UserService');
   final _postApi = locator<PostApi>();
   final _putApis = locator<PutApis>();
+  final _sharedPreferencesService = locator<SharedPreferencesService>();
 
   final _getApi = locator<GetApis>();
 
@@ -51,8 +55,15 @@ class UserService with ReactiveServiceMixin {
   }) async {
     Map<String, dynamic> body = {"username": email, "password": password};
     _currentUser.value = await _postApi.userAuth(body: body, isLogin: true);
-
+    _setUserLocally(_currentUser.value);
     return _currentUser.value!;
+  }
+
+  void _setUserLocally(User? user) {
+    if (user != null) {
+      _sharedPreferencesService.saveToDisk('user', jsonEncode(user.toJson()));
+      _sharedPreferencesService.setUserLoggedIn(true);
+    }
   }
 
   // This function creates user account in the backend
@@ -74,6 +85,7 @@ class UserService with ReactiveServiceMixin {
       'gender': gender,
     };
     _currentUser.value = await _postApi.userAuth(body: body);
+    _setUserLocally(_currentUser.value);
     return _currentUser.value!;
   }
 
@@ -84,7 +96,9 @@ class UserService with ReactiveServiceMixin {
       _currentUser.value = newUserData.copyWith(
         accessToken: currentUser.accessToken,
       );
+
       notifyListeners();
+      _setUserLocally(newUserData);
       return newUserData;
     } catch (e) {
       log.e(e);
@@ -93,4 +107,8 @@ class UserService with ReactiveServiceMixin {
   }
 
   Future<void> syncUser() async {}
+  Future<void> logOut() async {
+    _currentUser.value = null;
+    _sharedPreferencesService.dispose();
+  }
 }

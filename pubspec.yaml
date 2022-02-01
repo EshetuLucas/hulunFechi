@@ -35,11 +35,13 @@ dependencies:
   like_button: ^2.0.4
   country_picker: ^2.0.9
   intl: ^0.17.0
+  image_cropper: ^1.4.1
+  file_picker:
+  image_picker: ^0.8.4+4
 
   # animations
   animations: ^2.0.0
   auto_animated: ^3.0.0
-
 
   # api
   dio: ^4.0.0

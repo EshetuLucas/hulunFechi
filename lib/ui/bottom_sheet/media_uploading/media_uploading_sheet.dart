@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
+import 'package:hulunfechi/enums/media_source_type_enum.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
@@ -80,7 +81,11 @@ class _Header extends ViewModelWidget<MediaUploadingViewModel> {
                 title: 'Take from camera',
                 iconData: Icons.camera_alt_outlined,
                 hasTrailingIcon: false,
-                onTap: () => completer?.call(SheetResponse(data: 0)),
+                onTap: () => completer?.call(
+                  SheetResponse(
+                    data: MediaSourceType.camera_image,
+                  ),
+                ),
               ),
               verticalSpaceSmall,
               AppDivider(),
@@ -88,7 +93,11 @@ class _Header extends ViewModelWidget<MediaUploadingViewModel> {
                 title: 'Select from file',
                 iconData: Icons.file_copy_rounded,
                 hasTrailingIcon: false,
-                onTap: () => completer?.call(SheetResponse(data: 0)),
+                onTap: () => completer?.call(
+                  SheetResponse(
+                    data: MediaSourceType.file,
+                  ),
+                ),
               ),
             ],
           ),

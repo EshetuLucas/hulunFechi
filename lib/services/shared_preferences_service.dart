@@ -7,15 +7,12 @@ class SharedPreferencesService {
   static SharedPreferences? _preferences;
 
   final bool? enableLogs;
-
   SharedPreferencesService({this.enableLogs});
-
   static Future<SharedPreferencesService> getInstance(
       {bool enableLogs = false}) async {
     if (_instance == null) {
       _instance = SharedPreferencesService(enableLogs: enableLogs);
     }
-
     if (_preferences == null) {
       _preferences = await SharedPreferences.getInstance();
     }
@@ -33,7 +30,7 @@ class SharedPreferencesService {
 
   bool get isUserLoggedIn =>
       (getFromDisk(_isUserLoggedInKey) as bool?) ?? false;
-  set isUserLoggedIn(bool value) => saveToDisk(_isUserLoggedInKey, value);
+  void setUserLoggedIn(bool value) => saveToDisk(_isUserLoggedInKey, value);
 
   /// returns true if the [_FreshInstall] key returns null, hasUser returns false and guestMode
   /// returns false.

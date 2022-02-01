@@ -64,12 +64,7 @@ class PreferenceView extends StatelessWidget {
                           child: HulunfechiTag(
                             loading: false,
                             text: model.tags[0],
-                            onTap: () => showCountryPicker(
-                              context: context,
-                              onSelect: (Country country) {
-                                model.updateTags(0, country.name);
-                              },
-                            ),
+                            onTap: model.onPickCountry,
                           ),
                         ),
                         horizontalSpaceSmall,

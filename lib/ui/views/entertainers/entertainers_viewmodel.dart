@@ -60,9 +60,6 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
   List<Post> _listOnScreen = [];
   List<Post> get listOnScreen => _listOnScreen;
   void setListOnScreen() {
-    if (_posts == null) {
-      _listOnScreen = [];
-    }
     if (_searchKeyWord.isNotEmpty) {
       setCurrentCountry('All Countries');
       setCurrentPlatform('All Platforms');
@@ -101,6 +98,7 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
                   (_categoryIndex == -1 ||
                       element.category?.id == _categoryIndex) &&
                   (_subcategoryIndex == -1 ||
+                      element.subCategory == null ||
                       element.subCategory?.id == _subcategoryIndex),
             )
             .toList(),
@@ -174,8 +172,8 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
         1,
         sectorPlatforms[_selectedPlatformIndex].name,
       );
+      await makepostBusy();
     }
-    await makepostBusy();
   }
 
   void onAddPost() {
@@ -255,7 +253,7 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
                 }
               }
               _categoryIndex = filter.categoryId ?? -1;
-              _subcategoryIndex = filter.sectorId ?? -1;
+              _subcategoryIndex = filter.subCategoryId ?? -1;
 
               break;
             }
@@ -302,10 +300,17 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
     }
   }
 
+  bool _fetchAgain = false;
+
+  Future<void> onRefresh() async {
+    _fetchAgain = true;
+    initialise();
+  }
+
   @override
   Future<List<Post>> futureToRun() async {
-    await _postService.getHeaders();
-    return await _postService.getPosts();
+    await _postService.getHeaders(fetch: _fetchAgain);
+    return await _postService.getPosts(fetch: _fetchAgain);
   }
 
   @override

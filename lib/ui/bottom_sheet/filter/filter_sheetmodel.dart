@@ -86,7 +86,7 @@ class FilterSheetViewModel extends BaseViewModel {
           filterList = filterList.copyWith(categoryId: id);
           break;
         case 3:
-          filterList = filterList.copyWith(platformId: id);
+          filterList = filterList.copyWith(subCategoryId: id);
           break;
 
         default:

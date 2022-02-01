@@ -43,7 +43,6 @@ class Category with _$Category {
     required int id,
     @Default('') String name,
     @Default('') String content,
-    Sector? sectors,
     Platform? platform,
   }) = _Category;
 
@@ -57,8 +56,6 @@ class SubCategory with _$SubCategory {
     required int id,
     @Default('') String name,
     @Default('') String description,
-    Sector? sectors,
-    Platform? platform,
     Category? category,
   }) = _SubCategory;
 

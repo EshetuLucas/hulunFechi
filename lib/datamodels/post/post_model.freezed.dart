@@ -717,13 +717,11 @@ class _$CategoryTearOff {
       {required int id,
       String name = '',
       String content = '',
-      Sector? sectors,
       Platform? platform}) {
     return _Category(
       id: id,
       name: name,
       content: content,
-      sectors: sectors,
       platform: platform,
     );
   }
@@ -741,7 +739,6 @@ mixin _$Category {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  Sector? get sectors => throw _privateConstructorUsedError;
   Platform? get platform => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -754,14 +751,8 @@ mixin _$Category {
 abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res>;
-  $Res call(
-      {int id,
-      String name,
-      String content,
-      Sector? sectors,
-      Platform? platform});
+  $Res call({int id, String name, String content, Platform? platform});
 
-  $SectorCopyWith<$Res>? get sectors;
   $PlatformCopyWith<$Res>? get platform;
 }
 
@@ -778,7 +769,6 @@ class _$CategoryCopyWithImpl<$Res> implements $CategoryCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? content = freezed,
-    Object? sectors = freezed,
     Object? platform = freezed,
   }) {
     return _then(_value.copyWith(
@@ -794,26 +784,11 @@ class _$CategoryCopyWithImpl<$Res> implements $CategoryCopyWith<$Res> {
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      sectors: sectors == freezed
-          ? _value.sectors
-          : sectors // ignore: cast_nullable_to_non_nullable
-              as Sector?,
       platform: platform == freezed
           ? _value.platform
           : platform // ignore: cast_nullable_to_non_nullable
               as Platform?,
     ));
-  }
-
-  @override
-  $SectorCopyWith<$Res>? get sectors {
-    if (_value.sectors == null) {
-      return null;
-    }
-
-    return $SectorCopyWith<$Res>(_value.sectors!, (value) {
-      return _then(_value.copyWith(sectors: value));
-    });
   }
 
   @override
@@ -833,15 +808,8 @@ abstract class _$CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
   factory _$CategoryCopyWith(_Category value, $Res Function(_Category) then) =
       __$CategoryCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int id,
-      String name,
-      String content,
-      Sector? sectors,
-      Platform? platform});
+  $Res call({int id, String name, String content, Platform? platform});
 
-  @override
-  $SectorCopyWith<$Res>? get sectors;
   @override
   $PlatformCopyWith<$Res>? get platform;
 }
@@ -860,7 +828,6 @@ class __$CategoryCopyWithImpl<$Res> extends _$CategoryCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? content = freezed,
-    Object? sectors = freezed,
     Object? platform = freezed,
   }) {
     return _then(_Category(
@@ -876,10 +843,6 @@ class __$CategoryCopyWithImpl<$Res> extends _$CategoryCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      sectors: sectors == freezed
-          ? _value.sectors
-          : sectors // ignore: cast_nullable_to_non_nullable
-              as Sector?,
       platform: platform == freezed
           ? _value.platform
           : platform // ignore: cast_nullable_to_non_nullable
@@ -892,11 +855,7 @@ class __$CategoryCopyWithImpl<$Res> extends _$CategoryCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Category implements _Category {
   _$_Category(
-      {required this.id,
-      this.name = '',
-      this.content = '',
-      this.sectors,
-      this.platform});
+      {required this.id, this.name = '', this.content = '', this.platform});
 
   factory _$_Category.fromJson(Map<String, dynamic> json) =>
       _$$_CategoryFromJson(json);
@@ -910,13 +869,11 @@ class _$_Category implements _Category {
   @override
   final String content;
   @override
-  final Sector? sectors;
-  @override
   final Platform? platform;
 
   @override
   String toString() {
-    return 'Category(id: $id, name: $name, content: $content, sectors: $sectors, platform: $platform)';
+    return 'Category(id: $id, name: $name, content: $content, platform: $platform)';
   }
 
   @override
@@ -927,7 +884,6 @@ class _$_Category implements _Category {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.content, content) &&
-            const DeepCollectionEquality().equals(other.sectors, sectors) &&
             const DeepCollectionEquality().equals(other.platform, platform));
   }
 
@@ -937,7 +893,6 @@ class _$_Category implements _Category {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(content),
-      const DeepCollectionEquality().hash(sectors),
       const DeepCollectionEquality().hash(platform));
 
   @JsonKey(ignore: true)
@@ -956,7 +911,6 @@ abstract class _Category implements Category {
       {required int id,
       String name,
       String content,
-      Sector? sectors,
       Platform? platform}) = _$_Category;
 
   factory _Category.fromJson(Map<String, dynamic> json) = _$_Category.fromJson;
@@ -967,8 +921,6 @@ abstract class _Category implements Category {
   String get name;
   @override
   String get content;
-  @override
-  Sector? get sectors;
   @override
   Platform? get platform;
   @override
@@ -989,15 +941,11 @@ class _$SubCategoryTearOff {
       {required int id,
       String name = '',
       String description = '',
-      Sector? sectors,
-      Platform? platform,
       Category? category}) {
     return _SubCategory(
       id: id,
       name: name,
       description: description,
-      sectors: sectors,
-      platform: platform,
       category: category,
     );
   }
@@ -1015,8 +963,6 @@ mixin _$SubCategory {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  Sector? get sectors => throw _privateConstructorUsedError;
-  Platform? get platform => throw _privateConstructorUsedError;
   Category? get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1030,16 +976,8 @@ abstract class $SubCategoryCopyWith<$Res> {
   factory $SubCategoryCopyWith(
           SubCategory value, $Res Function(SubCategory) then) =
       _$SubCategoryCopyWithImpl<$Res>;
-  $Res call(
-      {int id,
-      String name,
-      String description,
-      Sector? sectors,
-      Platform? platform,
-      Category? category});
+  $Res call({int id, String name, String description, Category? category});
 
-  $SectorCopyWith<$Res>? get sectors;
-  $PlatformCopyWith<$Res>? get platform;
   $CategoryCopyWith<$Res>? get category;
 }
 
@@ -1056,8 +994,6 @@ class _$SubCategoryCopyWithImpl<$Res> implements $SubCategoryCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
-    Object? sectors = freezed,
-    Object? platform = freezed,
     Object? category = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1073,41 +1009,11 @@ class _$SubCategoryCopyWithImpl<$Res> implements $SubCategoryCopyWith<$Res> {
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      sectors: sectors == freezed
-          ? _value.sectors
-          : sectors // ignore: cast_nullable_to_non_nullable
-              as Sector?,
-      platform: platform == freezed
-          ? _value.platform
-          : platform // ignore: cast_nullable_to_non_nullable
-              as Platform?,
       category: category == freezed
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as Category?,
     ));
-  }
-
-  @override
-  $SectorCopyWith<$Res>? get sectors {
-    if (_value.sectors == null) {
-      return null;
-    }
-
-    return $SectorCopyWith<$Res>(_value.sectors!, (value) {
-      return _then(_value.copyWith(sectors: value));
-    });
-  }
-
-  @override
-  $PlatformCopyWith<$Res>? get platform {
-    if (_value.platform == null) {
-      return null;
-    }
-
-    return $PlatformCopyWith<$Res>(_value.platform!, (value) {
-      return _then(_value.copyWith(platform: value));
-    });
   }
 
   @override
@@ -1129,18 +1035,8 @@ abstract class _$SubCategoryCopyWith<$Res>
           _SubCategory value, $Res Function(_SubCategory) then) =
       __$SubCategoryCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int id,
-      String name,
-      String description,
-      Sector? sectors,
-      Platform? platform,
-      Category? category});
+  $Res call({int id, String name, String description, Category? category});
 
-  @override
-  $SectorCopyWith<$Res>? get sectors;
-  @override
-  $PlatformCopyWith<$Res>? get platform;
   @override
   $CategoryCopyWith<$Res>? get category;
 }
@@ -1160,8 +1056,6 @@ class __$SubCategoryCopyWithImpl<$Res> extends _$SubCategoryCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? description = freezed,
-    Object? sectors = freezed,
-    Object? platform = freezed,
     Object? category = freezed,
   }) {
     return _then(_SubCategory(
@@ -1177,14 +1071,6 @@ class __$SubCategoryCopyWithImpl<$Res> extends _$SubCategoryCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      sectors: sectors == freezed
-          ? _value.sectors
-          : sectors // ignore: cast_nullable_to_non_nullable
-              as Sector?,
-      platform: platform == freezed
-          ? _value.platform
-          : platform // ignore: cast_nullable_to_non_nullable
-              as Platform?,
       category: category == freezed
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -1197,12 +1083,7 @@ class __$SubCategoryCopyWithImpl<$Res> extends _$SubCategoryCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_SubCategory implements _SubCategory {
   _$_SubCategory(
-      {required this.id,
-      this.name = '',
-      this.description = '',
-      this.sectors,
-      this.platform,
-      this.category});
+      {required this.id, this.name = '', this.description = '', this.category});
 
   factory _$_SubCategory.fromJson(Map<String, dynamic> json) =>
       _$$_SubCategoryFromJson(json);
@@ -1216,15 +1097,11 @@ class _$_SubCategory implements _SubCategory {
   @override
   final String description;
   @override
-  final Sector? sectors;
-  @override
-  final Platform? platform;
-  @override
   final Category? category;
 
   @override
   String toString() {
-    return 'SubCategory(id: $id, name: $name, description: $description, sectors: $sectors, platform: $platform, category: $category)';
+    return 'SubCategory(id: $id, name: $name, description: $description, category: $category)';
   }
 
   @override
@@ -1236,8 +1113,6 @@ class _$_SubCategory implements _SubCategory {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.sectors, sectors) &&
-            const DeepCollectionEquality().equals(other.platform, platform) &&
             const DeepCollectionEquality().equals(other.category, category));
   }
 
@@ -1247,8 +1122,6 @@ class _$_SubCategory implements _SubCategory {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(sectors),
-      const DeepCollectionEquality().hash(platform),
       const DeepCollectionEquality().hash(category));
 
   @JsonKey(ignore: true)
@@ -1267,8 +1140,6 @@ abstract class _SubCategory implements SubCategory {
       {required int id,
       String name,
       String description,
-      Sector? sectors,
-      Platform? platform,
       Category? category}) = _$_SubCategory;
 
   factory _SubCategory.fromJson(Map<String, dynamic> json) =
@@ -1280,10 +1151,6 @@ abstract class _SubCategory implements SubCategory {
   String get name;
   @override
   String get description;
-  @override
-  Sector? get sectors;
-  @override
-  Platform? get platform;
   @override
   Category? get category;
   @override

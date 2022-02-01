@@ -54,9 +54,8 @@ class AccountViewModel extends BaseViewModel {
 
   Future<void> onCamera() async {
     log.i('');
-    await _bottomSheetService.showCustomSheet(
-      isScrollControlled: false,
-      variant: BottomSheetType.MEDIA_UPLOADING,
+    await _navigationService.navigateTo(
+      Routes.profileUploadView,
     );
   }
 
@@ -75,6 +74,7 @@ class AccountViewModel extends BaseViewModel {
   }
 
   Future<void> onLogout() async {
+    await _userService.logOut();
     await _navigationService.clearStackAndShow(Routes.loginView);
   }
 

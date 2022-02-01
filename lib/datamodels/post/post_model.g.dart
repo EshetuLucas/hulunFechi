@@ -64,9 +64,6 @@ _$_Category _$$_CategoryFromJson(Map<String, dynamic> json) => _$_Category(
       id: json['id'] as int,
       name: json['name'] as String? ?? '',
       content: json['content'] as String? ?? '',
-      sectors: json['sectors'] == null
-          ? null
-          : Sector.fromJson(json['sectors'] as Map<String, dynamic>),
       platform: json['platform'] == null
           ? null
           : Platform.fromJson(json['platform'] as Map<String, dynamic>),
@@ -77,7 +74,6 @@ Map<String, dynamic> _$$_CategoryToJson(_$_Category instance) =>
       'id': instance.id,
       'name': instance.name,
       'content': instance.content,
-      'sectors': instance.sectors,
       'platform': instance.platform,
     };
 
@@ -86,12 +82,6 @@ _$_SubCategory _$$_SubCategoryFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
-      sectors: json['sectors'] == null
-          ? null
-          : Sector.fromJson(json['sectors'] as Map<String, dynamic>),
-      platform: json['platform'] == null
-          ? null
-          : Platform.fromJson(json['platform'] as Map<String, dynamic>),
       category: json['category'] == null
           ? null
           : Category.fromJson(json['category'] as Map<String, dynamic>),
@@ -102,8 +92,6 @@ Map<String, dynamic> _$$_SubCategoryToJson(_$_SubCategory instance) =>
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,
-      'sectors': instance.sectors,
-      'platform': instance.platform,
       'category': instance.category,
     };
 

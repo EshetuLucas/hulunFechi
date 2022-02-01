@@ -139,4 +139,15 @@ class PreferenceViewModel extends BaseViewModel {
     }
     notifyListeners();
   }
+
+  Future<void> onPickCountry() async {
+    log.i('');
+    final result = await _bottomSheetService.showCustomSheet(
+      isScrollControlled: false,
+      variant: BottomSheetType.COUNTRY_PICKER,
+    );
+    if (result != null) {
+      updateTags(0, result.data.name);
+    }
+  }
 }

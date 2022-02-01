@@ -133,7 +133,7 @@ class RestResponseParser {
       required Map<String, dynamic> body,
       required String key}) async {
     log.v('query:$url');
-    log.v(T);
+    log.d(jsonEncode(body));
     var response;
     try {
       var response = await dio.post(

@@ -56,18 +56,18 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhd
 Accept: application/json
 
 ###
-GET  https://apiv2.hulunfechi.com/api/platforms
+GET  https://apiv2.hulunfechi.com/api/posts
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMDIyQGFkbWluLmNvbSIsImlhdCI6MTY0MzY5NTk3NSwiZXhwIjoxNjQzNzgyMzc1fQ.MBtf9hy6K3ZCeSmLONZqfgIHWYa3r52MUGizw7p6meZ_NrDDuVeIp-ArWq2Z76GH7kQxpTvtoTme0hubV4n_0Q
 Accept: application/json
 
 ###
-POST https://apiv2.hulunfechi.com/api/auth/signin
+POST https://apiv2-dev.hulunfechi.com/api/auth/signin
 content-type: application/json
 Accept: application/json
 
 {
-    "username": "duka@admin.com",
+    "username": "2022@admin.com",
     "password": "123456"
       
     }
@@ -90,12 +90,12 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhd
 Accept: application/json
 
 {
-    "username": "userc",
+    "username": "shewitreda20222@gmail.com",
     "firstname": "tam tesh  test",
     "fathername": "tam tesh g",
     "lastname": "tam tesh g",
     "role": ["user"],
-    "email": "test@test.com",
+    "email": "shewitreda2022@gmail.com",
     "phone": "911509977",
     "bank": "Awash",
     "region": "Addis",
@@ -149,15 +149,15 @@ Accept: application/json
     }
     
 ###
-POST https://apiv2.hulunfechi.com/api/auth/signup
+POST https://apiv2-dev.hulunfechi.com/api/auth/signup
 content-type: application/json
 Accept: application/json
 
 {
-    "username": "test@admin.com",
+   "username": "2022@admin.com",
     "password": "123456",
     "role": ["user"],
-    "email": "eshsretu@test.com",
+    "email": "2022@admin.com",
     "firstname": "Eshetu",
     "lastname": "Lukas",
     "gender":"Male",

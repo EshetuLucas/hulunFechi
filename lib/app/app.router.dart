@@ -22,6 +22,7 @@ import '../ui/views/home/home_view.dart';
 import '../ui/views/login/login_view.dart';
 import '../ui/views/post/post_view.dart';
 import '../ui/views/preference/preference_view.dart';
+import '../ui/views/profile_upload_view/profile_upload_view.dart';
 import '../ui/views/setting/address/address_view.dart';
 import '../ui/views/setting/bank_details/band_details_view.dart';
 import '../ui/views/setting/personal_info/personal_info_view.dart';
@@ -45,6 +46,7 @@ class Routes {
   static const String personalInfoView = '/personal-info-view';
   static const String addressView = '/address-view';
   static const String bankDetailView = '/bank-detail-view';
+  static const String profileUploadView = '/profile-upload-view';
   static const all = <String>{
     homeView,
     eventDetailView,
@@ -61,6 +63,7 @@ class Routes {
     personalInfoView,
     addressView,
     bankDetailView,
+    profileUploadView,
   };
 }
 
@@ -83,6 +86,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.personalInfoView, page: PersonalInfoView),
     RouteDef(Routes.addressView, page: AddressView),
     RouteDef(Routes.bankDetailView, page: BankDetailView),
+    RouteDef(Routes.profileUploadView, page: ProfileUploadView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -209,6 +213,12 @@ class StackedRouter extends RouterBase {
       );
       return CupertinoPageRoute<dynamic>(
         builder: (context) => BankDetailView(key: args.key),
+        settings: data,
+      );
+    },
+    ProfileUploadView: (data) {
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => const ProfileUploadView(),
         settings: data,
       );
     },

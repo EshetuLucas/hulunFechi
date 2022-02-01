@@ -46,7 +46,7 @@ class EntertainersView extends StatelessWidget {
           backgroundColor: kcVeryLightGrey,
           body: SafeArea(
             child: RefreshIndicator(
-              onRefresh: model.initialise,
+              onRefresh: model.onRefresh,
               backgroundColor: kcBackgroundColor,
               color: kcPrimaryColor,
               child: Column(
