@@ -70,7 +70,11 @@ class FilterSheetViewModel extends BaseViewModel {
     final resut = await _bottomSheetService.showCustomSheet(
       isScrollControlled: false,
       variant: BottomSheetType.EVENT_MORE_TYPE,
-      customData: _subLists[index],
+      customData: index == 2
+          ? List.from(_subLists[index]
+              .where((element) => element.platform.id == filterList.platformId)
+              .toList())
+          : _subLists[index],
     );
     if (resut != null) {
       int id = _subLists[index][resut.data].id;

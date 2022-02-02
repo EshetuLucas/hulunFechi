@@ -101,7 +101,7 @@ class EventDetailView extends StatelessWidget {
                               child: Hero(
                                 tag: '${event.id}${event.eventName}',
                                 child: Text(
-                                  event.eventName ?? '',
+                                  event.eventName,
                                   style: ktsWhiteMediumTextStyle,
                                   textAlign: TextAlign.center,
                                 ),
@@ -148,7 +148,7 @@ class EventDetailView extends StatelessWidget {
                             ),
                             verticalSpaceSmall,
                             Text(
-                              event.eventDescription ?? '',
+                              event.eventDescription,
                               style: ktsSmallWhiteTextStyle.copyWith(
                                 fontSize: 13,
                               ),
