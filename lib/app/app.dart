@@ -1,6 +1,7 @@
 import 'package:hulunfechi/api/get_apis.dart';
 import 'package:hulunfechi/api/post_apis.dart';
 import 'package:hulunfechi/api/put_apis.dart';
+import 'package:hulunfechi/services/cloud_storage_service.dart';
 import 'package:hulunfechi/services/crop_image_service.dart';
 import 'package:hulunfechi/services/event_service.dart';
 import 'package:hulunfechi/services/media_services.dart';
@@ -63,6 +64,7 @@ import '../ui/views/home/home_view.dart';
     LazySingleton(classType: PostService),
     LazySingleton(classType: CropImageService),
     LazySingleton(classType: MediaService),
+    LazySingleton(classType: CloudStorageService),
     Presolve(
       classType: SharedPreferencesService,
       presolveUsing: SharedPreferencesService.getInstance,
