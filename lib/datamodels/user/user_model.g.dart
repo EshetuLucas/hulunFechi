@@ -29,10 +29,17 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       bank: json['bank'] as String?,
       accessToken: json['accessToken'] as String?,
       tokenType: json['tokenType'] as String?,
+      tin: json['tin'] as String?,
+      profilePicPath: json['profilePicPath'] as String?,
       usercountry: (json['usercountry'] as List<dynamic>?)
               ?.map((e) => e == null
                   ? null
                   : Country.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      following: (json['following'] as List<dynamic>?)
+              ?.map((e) =>
+                  e == null ? null : User.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       usercategories: (json['usercategories'] as List<dynamic>?)
@@ -66,7 +73,10 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'bank': instance.bank,
       'accessToken': instance.accessToken,
       'tokenType': instance.tokenType,
+      'tin': instance.tin,
+      'profilePicPath': instance.profilePicPath,
       'usercountry': instance.usercountry,
+      'following': instance.following,
       'usercategories': instance.usercategories,
     };
 

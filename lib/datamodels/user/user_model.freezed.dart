@@ -45,7 +45,10 @@ class _$UserTearOff {
       String? bank,
       String? accessToken,
       String? tokenType,
+      String? tin,
+      String? profilePicPath,
       List<Country?> usercountry = const [],
+      List<User?> following = const [],
       List<Category?> usercategories = const []}) {
     return _User(
       id: id,
@@ -70,7 +73,10 @@ class _$UserTearOff {
       bank: bank,
       accessToken: accessToken,
       tokenType: tokenType,
+      tin: tin,
+      profilePicPath: profilePicPath,
       usercountry: usercountry,
+      following: following,
       usercategories: usercategories,
     );
   }
@@ -107,7 +113,10 @@ mixin _$User {
   String? get bank => throw _privateConstructorUsedError;
   String? get accessToken => throw _privateConstructorUsedError;
   String? get tokenType => throw _privateConstructorUsedError;
+  String? get tin => throw _privateConstructorUsedError;
+  String? get profilePicPath => throw _privateConstructorUsedError;
   List<Country?> get usercountry => throw _privateConstructorUsedError;
+  List<User?> get following => throw _privateConstructorUsedError;
   List<Category?> get usercategories => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -142,7 +151,10 @@ abstract class $UserCopyWith<$Res> {
       String? bank,
       String? accessToken,
       String? tokenType,
+      String? tin,
+      String? profilePicPath,
       List<Country?> usercountry,
+      List<User?> following,
       List<Category?> usercategories});
 }
 
@@ -178,7 +190,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? bank = freezed,
     Object? accessToken = freezed,
     Object? tokenType = freezed,
+    Object? tin = freezed,
+    Object? profilePicPath = freezed,
     Object? usercountry = freezed,
+    Object? following = freezed,
     Object? usercategories = freezed,
   }) {
     return _then(_value.copyWith(
@@ -270,10 +285,22 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.tokenType
           : tokenType // ignore: cast_nullable_to_non_nullable
               as String?,
+      tin: tin == freezed
+          ? _value.tin
+          : tin // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePicPath: profilePicPath == freezed
+          ? _value.profilePicPath
+          : profilePicPath // ignore: cast_nullable_to_non_nullable
+              as String?,
       usercountry: usercountry == freezed
           ? _value.usercountry
           : usercountry // ignore: cast_nullable_to_non_nullable
               as List<Country?>,
+      following: following == freezed
+          ? _value.following
+          : following // ignore: cast_nullable_to_non_nullable
+              as List<User?>,
       usercategories: usercategories == freezed
           ? _value.usercategories
           : usercategories // ignore: cast_nullable_to_non_nullable
@@ -310,7 +337,10 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? bank,
       String? accessToken,
       String? tokenType,
+      String? tin,
+      String? profilePicPath,
       List<Country?> usercountry,
+      List<User?> following,
       List<Category?> usercategories});
 }
 
@@ -347,7 +377,10 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? bank = freezed,
     Object? accessToken = freezed,
     Object? tokenType = freezed,
+    Object? tin = freezed,
+    Object? profilePicPath = freezed,
     Object? usercountry = freezed,
+    Object? following = freezed,
     Object? usercategories = freezed,
   }) {
     return _then(_User(
@@ -439,10 +472,22 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.tokenType
           : tokenType // ignore: cast_nullable_to_non_nullable
               as String?,
+      tin: tin == freezed
+          ? _value.tin
+          : tin // ignore: cast_nullable_to_non_nullable
+              as String?,
+      profilePicPath: profilePicPath == freezed
+          ? _value.profilePicPath
+          : profilePicPath // ignore: cast_nullable_to_non_nullable
+              as String?,
       usercountry: usercountry == freezed
           ? _value.usercountry
           : usercountry // ignore: cast_nullable_to_non_nullable
               as List<Country?>,
+      following: following == freezed
+          ? _value.following
+          : following // ignore: cast_nullable_to_non_nullable
+              as List<User?>,
       usercategories: usercategories == freezed
           ? _value.usercategories
           : usercategories // ignore: cast_nullable_to_non_nullable
@@ -477,7 +522,10 @@ class _$_User extends _User {
       this.bank,
       this.accessToken,
       this.tokenType,
+      this.tin,
+      this.profilePicPath,
       this.usercountry = const [],
+      this.following = const [],
       this.usercategories = const []})
       : super._();
 
@@ -527,16 +575,23 @@ class _$_User extends _User {
   final String? accessToken;
   @override
   final String? tokenType;
+  @override
+  final String? tin;
+  @override
+  final String? profilePicPath;
   @JsonKey()
   @override
   final List<Country?> usercountry;
+  @JsonKey()
+  @override
+  final List<User?> following;
   @JsonKey()
   @override
   final List<Category?> usercategories;
 
   @override
   String toString() {
-    return 'User(id: $id, username: $username, fullname: $fullname, firstname: $firstname, lastname: $lastname, email: $email, country: $country, phone: $phone, profession: $profession, dob: $dob, region: $region, city: $city, woreda: $woreda, subcity: $subcity, housenumber: $housenumber, state: $state, street: $street, ssn: $ssn, account: $account, bank: $bank, accessToken: $accessToken, tokenType: $tokenType, usercountry: $usercountry, usercategories: $usercategories)';
+    return 'User(id: $id, username: $username, fullname: $fullname, firstname: $firstname, lastname: $lastname, email: $email, country: $country, phone: $phone, profession: $profession, dob: $dob, region: $region, city: $city, woreda: $woreda, subcity: $subcity, housenumber: $housenumber, state: $state, street: $street, ssn: $ssn, account: $account, bank: $bank, accessToken: $accessToken, tokenType: $tokenType, tin: $tin, profilePicPath: $profilePicPath, usercountry: $usercountry, following: $following, usercategories: $usercategories)';
   }
 
   @override
@@ -569,8 +624,12 @@ class _$_User extends _User {
             const DeepCollectionEquality()
                 .equals(other.accessToken, accessToken) &&
             const DeepCollectionEquality().equals(other.tokenType, tokenType) &&
+            const DeepCollectionEquality().equals(other.tin, tin) &&
+            const DeepCollectionEquality()
+                .equals(other.profilePicPath, profilePicPath) &&
             const DeepCollectionEquality()
                 .equals(other.usercountry, usercountry) &&
+            const DeepCollectionEquality().equals(other.following, following) &&
             const DeepCollectionEquality()
                 .equals(other.usercategories, usercategories));
   }
@@ -600,7 +659,10 @@ class _$_User extends _User {
         const DeepCollectionEquality().hash(bank),
         const DeepCollectionEquality().hash(accessToken),
         const DeepCollectionEquality().hash(tokenType),
+        const DeepCollectionEquality().hash(tin),
+        const DeepCollectionEquality().hash(profilePicPath),
         const DeepCollectionEquality().hash(usercountry),
+        const DeepCollectionEquality().hash(following),
         const DeepCollectionEquality().hash(usercategories)
       ]);
 
@@ -639,7 +701,10 @@ abstract class _User extends User {
       String? bank,
       String? accessToken,
       String? tokenType,
+      String? tin,
+      String? profilePicPath,
       List<Country?> usercountry,
+      List<User?> following,
       List<Category?> usercategories}) = _$_User;
   _User._() : super._();
 
@@ -690,7 +755,13 @@ abstract class _User extends User {
   @override
   String? get tokenType;
   @override
+  String? get tin;
+  @override
+  String? get profilePicPath;
+  @override
   List<Country?> get usercountry;
+  @override
+  List<User?> get following;
   @override
   List<Category?> get usercategories;
   @override
