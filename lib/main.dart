@@ -9,9 +9,11 @@ import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/snack_bar/setup_snack_bar.dart';
 import 'package:hulunfechi/ui/views/startup/startup_view.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await setupLocator();
   setupSnackbarUi();
   setupBottomSheetUi();

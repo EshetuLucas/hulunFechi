@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1059134926915",
+    "project_id": "hulunfechi",
+    "storage_bucket": "hulunfechi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059134926915:android:d35a75d5a3e640d3b2e4f6",
+        "android_client_info": {
+          "package_name": "com.example.hulunfechi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059134926915-8hb60a0tb0vtps9s6nglj62t5e1rso68.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDmzP_IuyOyDRME2hz_oBevOVC6FM9Q44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059134926915-8hb60a0tb0vtps9s6nglj62t5e1rso68.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
