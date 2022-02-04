@@ -76,10 +76,9 @@ class RestResponseParser {
   }
 
   Future<T> runPutRestRequest<T>(
-      {required String url,
-      required Map<String, dynamic> body,
-      required String key}) async {
+      {required String url, required dynamic body, required String key}) async {
     log.v('query:$url');
+    log.v('body:$body');
     var response;
     try {
       var response = await dio.put(
@@ -97,6 +96,32 @@ class RestResponseParser {
       log.e(e);
       return Future.error(DioExceptions().getExceptionMessage(e));
     } catch (e) {
+      return Future.error('Something went wrong. Try Again');
+    }
+  }
+
+  Future<T> runPatchRestRequest<T>(
+      {required String url, required dynamic body, required String key}) async {
+    log.v('query:$url');
+    log.v('body:$body');
+    var response;
+    try {
+      var response = await dio.patch(
+        url,
+        options: Options(headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+          HttpHeaders.authorizationHeader:
+              "Bearer ${_userService.currentUser.accessToken}"
+        }),
+        data: body,
+      );
+      log.v('response:$response');
+      return parseUserData<T>(response.data, key: key);
+    } on DioError catch (e) {
+      log.e(e);
+      return Future.error(DioExceptions().getExceptionMessage(e));
+    } catch (e) {
+      log.e(e);
       return Future.error('Something went wrong. Try Again');
     }
   }

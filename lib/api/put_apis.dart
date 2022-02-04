@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:hulunfechi/api/post_apis.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
 import 'package:hulunfechi/datamodels/comment/comment_model.dart';
@@ -12,21 +13,32 @@ const String getSubCategoriesUrl = base_url + "subcategories";
 const String getSectorUrl = base_url + "sectors";
 const String getPlatformsUrl = base_url + "platforms";
 const String updateUserUrl = base_url + "auth/user/";
+const String uploadFileUrl = base_url + "auth/uploadFile";
 
 class PutApis {
-  Future<User> updateUser(
-      {required Map<String, dynamic> body, required int id}) async {
+  Future<User> updateUser({
+    required Map<String, dynamic> body,
+    required int id,
+    String? imagePath,
+  }) async {
     body.remove('id');
     body.remove('accessToken');
     body.remove('tokenType');
     body['role'] = ["user"];
     final userCategoriesMap = [];
+    final userFollowingsMap = [];
     List<Category> userCategories = body['usercategories'];
+    List<User> userFollowing = body['following'];
     userCategories.forEach((element) {
+      userFollowingsMap.add({'id': element.id});
+    });
+    userFollowing.forEach((element) {
       userCategoriesMap.add({'id': element.id});
     });
 
     body['usercategories'] = userCategoriesMap;
+    body['following'] = userFollowingsMap;
+    print('duka');
 
     return RestResponseParser().runPutRestRequest<User>(
       url: updateUserUrl + '$id',
@@ -48,6 +60,20 @@ class PutApis {
   Future<void> deletePost({required id}) async {
     return RestResponseParser().runDeleteRestRequest(
       url: getPostsUrl + '/$id',
+    );
+  }
+
+  Future<User> uploadFile(
+      {required String filePath, required int userId}) async {
+    return RestResponseParser().runPatchRestRequest<User>(
+      url: uploadFileUrl,
+      key: 'UserForm',
+      body: FormData.fromMap({
+        'file': await MultipartFile.fromFile(
+          filePath,
+        ),
+        'userId': userId,
+      }),
     );
   }
 }

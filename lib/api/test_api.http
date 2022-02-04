@@ -58,16 +58,16 @@ Accept: application/json
 ###
 GET  https://apiv2.hulunfechi.com/api/posts
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMDIyQGFkbWluLmNvbSIsImlhdCI6MTY0MzY5NTk3NSwiZXhwIjoxNjQzNzgyMzc1fQ.MBtf9hy6K3ZCeSmLONZqfgIHWYa3r52MUGizw7p6meZ_NrDDuVeIp-ArWq2Z76GH7kQxpTvtoTme0hubV4n_0Q
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMDIyQGFkbWluLmNvbSIsImlhdCI6MTY0MzgxNjc0MSwiZXhwIjoxNjQzOTAzMTQxfQ.BxomSsvD3SQlqC3ai1yD1nTTukhEU_MWTa9_8cpHBMk9ViU0lf0UtMzJPwdyu-qDK9btUXV9ngt7rd6HGZ1vxg
 Accept: application/json
 
 ###
-POST https://apiv2-dev.hulunfechi.com/api/auth/signin
+POST https://apiv2.hulunfechi.com/api/auth/signin
 content-type: application/json
 Accept: application/json
 
 {
-    "username": "2022@admin.com",
+    "username": "duka@admin.com",
     "password": "123456"
       
     }
@@ -76,7 +76,6 @@ POST https://apiv2.hulunfechi.com/api/posts/139/comments
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
 Accept: application/json
-eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
 
 {
 "comment":"Buki",
@@ -84,41 +83,44 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXh
 "dateAdded":"2022-01-21"
 }
 ###
-PUT https://apiv2.hulunfechi.com/api/auth/user/40
+PUT https://apiv2.hulunfechi.com/api/auth/user/3
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0MjY5ODE5MywiZXhwIjoxNjQyNzg0NTkzfQ.F4jnTwlbOyKxkS3ODmoFCWbpVxKqY_degtJYA-htFPMIaN34jQcp6wDbLP-Uy9G6kTgQshP-OGBC2lm8lPofXw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMDIyQGFkbWluLmNvbSIsImlhdCI6MTY0MzgxNjc0MSwiZXhwIjoxNjQzOTAzMTQxfQ.BxomSsvD3SQlqC3ai1yD1nTTukhEU_MWTa9_8cpHBMk9ViU0lf0UtMzJPwdyu-qDK9btUXV9ngt7rd6HGZ1vxg
 Accept: application/json
 
 {
-    "username": "shewitreda20222@gmail.com",
-    "firstname": "tam tesh  test",
-    "fathername": "tam tesh g",
-    "lastname": "tam tesh g",
-    "role": ["user"],
-    "email": "shewitreda2022@gmail.com",
-    "phone": "911509977",
-    "bank": "Awash",
-    "region": "Addis",
-    "dob": "null",
-    "profession": "Engieer",
-    "city": "ss",
-    "state": "Cal",
-    "street": "KK",
-    "woreda": "01",
-    "ssn": "ssn",
-    "subcity": "test",
-    "housenumber": "009",
-    "account": "1000445599",
-    "usercategories": [{"id":8}],
-    "usercountry": [{"id":1},{"id":2}]
-       
-    }
+
+    "username": "duka@admin.com", 
+     "fullname": null,
+      "firstname": "Eshetu",
+       "lastname": "Lukas",
+        "email": "duka@admin.com",
+         "country": "Ethiopiaaaa", 
+         "phone": "0916740322",
+          "profession": "Software",
+           "dob": null,
+            "region": "Addis Ababa", 
+            "city": "Addis ababa",
+             "woreda": null,
+              "subcity": null, 
+              "housenumber": null, 
+              "state": null, 
+              "street": null, 
+              "ssn": 1234567, 
+              "account": 1222,
+               "bank": "CBE",
+                "tin": 1234567555, 
+                "usercountry": [], "following": [{"id": 1}, {"id": 7}], 
+                "usercategories": [{"id": 7}],
+                 "role": ["user"]
+                 
+                 }
     
 ###
 
 POST https://apiv2.hulunfechi.com/api/posts
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGFkbWluLmNvbSIsImlhdCI6MTY0Mjc1MjgzMiwiZXhwIjoxNjQyODM5MjMyfQ.tB1ZBdIW_AOBuqQ9UTdEoH43ClolhKNdMzmlDO1n9rb65qAOWHWxrpc3EAvh8pSw4sv36g7JuvpeGQfXcDk2CA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyMDIyQGFkbWluLmNvbSIsImlhdCI6MTY0MzgxNjc0MSwiZXhwIjoxNjQzOTAzMTQxfQ.BxomSsvD3SQlqC3ai1yD1nTTukhEU_MWTa9_8cpHBMk9ViU0lf0UtMzJPwdyu-qDK9btUXV9ngt7rd6HGZ1vxg
 Accept: application/json
 
 {
@@ -140,6 +142,9 @@ Accept: application/json
 
         },
         "platform": {
+            "id": 1
+        },
+        "country": {
             "id": 1
         },
         "subategory": {
