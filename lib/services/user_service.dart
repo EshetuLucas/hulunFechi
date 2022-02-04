@@ -89,10 +89,41 @@ class UserService with ReactiveServiceMixin {
     return _currentUser.value!;
   }
 
-  Future<User> updateUser({required User user}) async {
+  Future<User> updateUser({
+    required User user,
+  }) async {
     try {
       final newUserData =
           await _putApis.updateUser(body: user.toJson(), id: user.id);
+      _currentUser.value = newUserData.copyWith(
+        accessToken: currentUser.accessToken,
+      );
+
+      notifyListeners();
+      _setUserLocally(newUserData);
+      return newUserData;
+    } catch (e) {
+      log.e(e);
+      rethrow;
+    }
+  }
+
+  Future<User> uploadFile(
+      {required String filePath, required int userId}) async {
+    return _putApis.uploadFile(
+      filePath: filePath,
+      userId: userId,
+    );
+  }
+
+  Future<User> uploadProfilePic(
+      {required User user, required String imagePath}) async {
+    try {
+      final newUserData = await _putApis.updateUser(
+        body: user.toJson(),
+        id: user.id,
+        imagePath: imagePath,
+      );
       _currentUser.value = newUserData.copyWith(
         accessToken: currentUser.accessToken,
       );
