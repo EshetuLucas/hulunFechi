@@ -5,6 +5,7 @@ import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/enums/bottom_sheet_type.dart';
 import 'package:hulunfechi/enums/dialog_type.dart';
 import 'package:hulunfechi/enums/media_source_type_enum.dart';
+import 'package:hulunfechi/services/cloud_storage_service.dart';
 import 'package:hulunfechi/services/media_services.dart';
 import 'package:hulunfechi/services/user_service.dart';
 
@@ -20,6 +21,7 @@ class ProfileUploadViewModel extends BaseViewModel {
   final _userService = locator<UserService>();
   final _navigationService = locator<NavigationService>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _cloudStorageService = locator<CloudStorageService>();
 
   bool get imageSelected => _selectedImage != null;
 
@@ -53,11 +55,22 @@ class ProfileUploadViewModel extends BaseViewModel {
     }
   }
 
-  Future<void> saveProfilePhoto() async {
-    log.i('_selectedImage:$_selectedImage');
+  Future<void> onUpload() async {
+    log.i('_selectedImage:${_selectedImage!.absolute.path}');
     setBusy(true);
 
-    try {} catch (e) {
+    try {
+      final uploadedFileUrl = await _cloudStorageService.uploadFile(
+        fileToUpload: _selectedImage!,
+      );
+      log.v('uploadedFileUrl:$uploadedFileUrl');
+      await _userService.updateUser(
+        user: _userService.currentUser.copyWith(
+          ssn: uploadedFileUrl,
+        ),
+      );
+      _navigationService.back();
+    } catch (e) {
       log.e('Image upload failed. $e');
 
       await await _dialogService.showCustomDialog(

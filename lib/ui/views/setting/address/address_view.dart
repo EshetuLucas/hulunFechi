@@ -31,7 +31,7 @@ import 'address_view.form.dart';
       name: "houseNO",
     ),
     FormTextField(
-      name: "ssn",
+      name: "tin",
     ),
   ],
 )
@@ -48,7 +48,7 @@ class AddressView extends StatelessWidget with $AddressView {
         regionController.text = model.currentUserRegion;
         subcityController.text = model.currentUserSubCity;
         houseNOController.text = model.currentUserHouseNO;
-        ssnController.text = model.currentUserSSN;
+        tinController.text = model.currentUserTIN;
         listenToFormUpdated(model);
       },
       builder: (context, model, child) => Scaffold(
@@ -116,9 +116,9 @@ class AddressView extends StatelessWidget with $AddressView {
                   ),
                   verticalSpaceSmall,
                   InputField(
-                    controller: ssnController,
-                    placeholder: 'Socila Security No',
-                    floatingPlaceholder: 'Socila Security No',
+                    controller: tinController,
+                    placeholder: 'TIN',
+                    floatingPlaceholder: 'Tax Identification Number',
                   ),
                   verticalSpaceSmall,
                 ],

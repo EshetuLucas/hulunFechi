@@ -22,7 +22,7 @@ class AddressViewModel extends FormViewModel {
   String get currentUserWoreda => _currentUser.woreda ?? '';
   String get currentUserSubCity => _currentUser.subcity ?? '';
   String get currentUserHouseNO => _currentUser.housenumber ?? '';
-  String get currentUserSSN => _currentUser.ssn ?? '';
+  String get currentUserTIN => _currentUser.tin ?? '';
   String get currentUserCountry => _currentUser.country ?? '';
   void onBack() => _navigationService.back();
 
@@ -42,7 +42,7 @@ class AddressViewModel extends FormViewModel {
             !subcityValue.isNullOrEmpty ? subcityValue! : currentUserSubCity,
         housenumber:
             houseNOValue.isNullOrEmpty ? houseNOValue! : currentUserHouseNO,
-        ssn: !ssnValue.isNullOrEmpty ? ssnValue! : currentUserSSN,
+        tin: !tinValue.isNullOrEmpty ? tinValue! : currentUserTIN,
         country:
             !countryValue.isNullOrEmpty ? countryValue : currentUserCountry);
 
@@ -76,7 +76,7 @@ class AddressViewModel extends FormViewModel {
         woredaValue != currentUserWoreda ||
         subcityValue != currentUserCity ||
         houseNOValue != currentUserHouseNO ||
-        ssnValue != currentUserSSN) {
+        tinValue != currentUserTIN) {
       _enableSaveButton = true;
     } else {
       _enableSaveButton = false;

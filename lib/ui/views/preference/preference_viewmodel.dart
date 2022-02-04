@@ -87,7 +87,7 @@ class PreferenceViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> onPost() async {
+  Future<void> onSave() async {
     List<Category> listToUpdate = [];
     setBusy(true);
     _selectedIndex.forEach((element) {
@@ -126,7 +126,8 @@ class PreferenceViewModel extends BaseViewModel {
         mainButtonTitle: 'Save',
         variant: BottomSheetType.EVENT_MORE_TYPE,
         customData: List.from(categories)
-            .where((element) => element.platform!.id == platforms[index].id)
+            .where(
+                (element) => element.platform!.id == sectorPlatforms[index].id)
             .toList());
     if (result != null) {
       log.i(index);

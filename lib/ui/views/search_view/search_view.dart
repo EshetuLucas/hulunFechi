@@ -89,6 +89,7 @@ class SearchView extends StatelessWidget with $SearchView {
                                           return Padding(
                                             padding: appSymmetricEdgePadding,
                                             child: PostWidget(
+                                              onFollow: () {},
                                               userId: model.userId,
                                               loading: model.isBusy ||
                                                   model.busy(POST_BUSY_KEY),

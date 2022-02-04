@@ -108,6 +108,8 @@ class _Header extends ViewModelWidget<AllPlatformBottomSheetModel> {
               verticalSpaceTiny,
               Expanded(
                 child: ListView.separated(
+                  padding: EdgeInsets.only(
+                      bottom: request.mainButtonTitle != null ? 60 : 5),
                   shrinkWrap: true,
                   itemCount: request.customData.length,
                   separatorBuilder: (BuildContext context, int index) {

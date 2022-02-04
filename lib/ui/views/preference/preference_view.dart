@@ -26,7 +26,8 @@ class PreferenceView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: AppButton(
               title: 'Save',
-              onTap: model.onPost,
+              onTap: model.onSave,
+              busy: model.isBusy,
             ),
           ),
         ),
@@ -123,7 +124,7 @@ class PreferenceView extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  model.platforms[i].name,
+                                  model.sectorPlatforms[i].name,
                                   style: model.selectedIndex[model.currentIndex]
                                           .contains(i)
                                       ? ktsDarkSmallTextStyle.copyWith(

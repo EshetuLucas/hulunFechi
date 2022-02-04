@@ -101,6 +101,26 @@ class EntertainersView extends StatelessWidget {
                                           return Padding(
                                             padding: appSymmetricEdgePadding,
                                             child: PostWidget(
+                                              followButtonBusy:
+                                                  model.busyIndex == index,
+                                              isFolowing: model.isBusy ||
+                                                      model.busy(POST_BUSY_KEY)
+                                                  ? false
+                                                  : model.followings.contains(
+                                                      model.listOnScreen[index]
+                                                          .user,
+                                                    ),
+                                              onFollow: () => model.isBusy ||
+                                                      model.busy(
+                                                          POST_BUSY_KEY) ||
+                                                      model.busy(
+                                                        FOLLOW_BUTTON_BUSY_KEY,
+                                                      )
+                                                  ? null
+                                                  : model.onFollow(
+                                                      model.listOnScreen[index]
+                                                          .user,
+                                                      index),
                                               userId: model.userId,
                                               loading: model.isBusy ||
                                                   model.busy(POST_BUSY_KEY),

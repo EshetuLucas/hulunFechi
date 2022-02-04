@@ -4,6 +4,7 @@ import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/ui/shared/app_colors.dart';
 import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
+import 'package:hulunfechi/ui/widgets/dumb_widgets/profile_pic_builder.dart';
 import 'package:like_button/like_button.dart';
 import 'package:stacked/stacked.dart';
 
@@ -19,6 +20,9 @@ class PostWidget extends StatelessWidget {
     required this.onShare,
     this.onMore,
     required this.userId,
+    required this.onFollow,
+    this.isFolowing = false,
+    this.followButtonBusy = false,
     Key? key,
   }) : super(key: key);
 
@@ -29,7 +33,10 @@ class PostWidget extends StatelessWidget {
   final Function() onLike;
   final Function() onShare;
   final Function()? onMore;
+  final Function onFollow;
   final int userId;
+  final bool isFolowing;
+  final bool followButtonBusy;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +53,8 @@ class PostWidget extends StatelessWidget {
             children: [
               _ProfilePic(
                 loading: loading,
+                url: post.user.ssn ??
+                    'assets/images/entertainers_images/person.jpeg',
               ),
               horizontalSpaceSmall,
               Expanded(
@@ -74,26 +83,31 @@ class PostWidget extends StatelessWidget {
                 ),
               ),
               if (post.user.id != userId)
-                SizedBox(
-                  width: 85,
-                  height: 41,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(50),
-                      ),
-                    ),
-                    elevation: 8,
-                    child: SkeletonLoader(
-                      startColor: kcLightGrey3,
-                      endColor: kcWhite,
-                      loading: loading,
-                      child: AppButton(
-                        title: '+ Follow',
-                        onTap: () => null,
-                        shadow: false,
-                      ),
-                    ),
+                Container(
+                  child: SizedBox(
+                    width: 85,
+                    height: 41,
+                    child: isFolowing
+                        ? Text('')
+                        : Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(50),
+                              ),
+                            ),
+                            elevation: 8,
+                            child: SkeletonLoader(
+                              startColor: kcLightGrey3,
+                              endColor: kcWhite,
+                              loading: loading,
+                              child: AppButton(
+                                busy: followButtonBusy,
+                                title: '+ Follow',
+                                onTap: onFollow,
+                                shadow: false,
+                              ),
+                            ),
+                          ),
                   ),
                 )
               else
@@ -224,10 +238,12 @@ class PostWidget extends StatelessWidget {
 class _ProfilePic extends StatelessWidget {
   const _ProfilePic({
     required this.loading,
+    required this.url,
     Key? key,
   }) : super(key: key);
 
   final bool loading;
+  final String url;
 
   @override
   Widget build(BuildContext context) {
@@ -245,11 +261,10 @@ class _ProfilePic extends StatelessWidget {
               startColor: kcLightGrey3,
               endColor: kcWhite,
               loading: loading,
-              child: Image.asset(
-                "assets/images/entertainers_images/person.jpeg",
-                fit: BoxFit.cover,
+              child: ProfilePicBuilder(
                 height: 50,
                 width: 50,
+                url: url,
               ),
             ),
           ),

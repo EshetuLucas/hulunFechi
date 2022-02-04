@@ -57,6 +57,7 @@ class AccountViewModel extends BaseViewModel {
     await _navigationService.navigateTo(
       Routes.profileUploadView,
     );
+    notifyListeners();
   }
 
   Future<void> onPreference() async {

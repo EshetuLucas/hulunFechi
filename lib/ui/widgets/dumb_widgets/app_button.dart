@@ -51,7 +51,7 @@ class AppButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: isOutlined
               ? Colors.transparent
-              : enabled
+              : enabled || busy
                   ? backgroundColor
                   : kcLightGrey,
           border: isOutlined
@@ -80,10 +80,12 @@ class AppButton extends StatelessWidget {
           firstChild: SizedBox(
               width: height - 10,
               height: height - 10,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CircularProgressIndicator(
-                  color: kcWhite,
+              child: FittedBox(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircularProgressIndicator(
+                    color: kcWhite,
+                  ),
                 ),
               )),
           secondChild: Padding(

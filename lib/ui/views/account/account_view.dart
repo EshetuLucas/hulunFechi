@@ -7,6 +7,8 @@ import 'package:hulunfechi/ui/shared/ui_helpers.dart';
 import 'package:hulunfechi/ui/shared/widgets/action_item.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/app_button.dart';
 import 'package:hulunfechi/ui/widgets/dumb_widgets/app_divider.dart';
+import 'package:hulunfechi/ui/widgets/dumb_widgets/placeholder_image.dart';
+import 'package:hulunfechi/ui/widgets/dumb_widgets/profile_pic_builder.dart';
 import 'package:stacked/stacked.dart';
 
 import 'account_viewmodel.dart';
@@ -99,6 +101,7 @@ class _UserProfile extends ViewModelWidget<AccountViewModel> {
                 model.currentUser.email,
                 style: ktsDarkSmallTextStyle,
               ),
+
               verticalSpaceTiny,
               // GestureDetector(
               //   onTap: model.onPersonalInfoTap,
@@ -138,17 +141,9 @@ class _ProfilePic extends ViewModelWidget<AccountViewModel> {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 0, right: 8),
-          child: Container(
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            child: Image.asset(
-              "assets/images/entertainers_images/person.jpeg",
-              fit: BoxFit.cover,
-              height: 100,
-              width: 100,
-            ),
+          child: ProfilePicBuilder(
+            url: model.currentUser.ssn ??
+                'assets/images/entertainers_images/person.jpeg',
           ),
         ),
         Padding(

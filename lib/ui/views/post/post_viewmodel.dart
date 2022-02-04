@@ -168,9 +168,16 @@ class PostViewModel extends FormViewModel {
       return;
     }
     final resut = await _bottomSheetService.showCustomSheet(
-        isScrollControlled: false,
-        variant: BottomSheetType.EVENT_MORE_TYPE,
-        customData: _subLists[index]);
+      isScrollControlled: false,
+      variant: BottomSheetType.EVENT_MORE_TYPE,
+      customData: index == 0
+          ? List.from(_subLists[index]
+              .where(
+                (element) => element.platform.id == _selectedPlatform.id,
+              )
+              .toList())
+          : _subLists[index],
+    );
     if (resut != null) {
       if (index == 0)
         _selectedCategory = _subLists[index][resut.data];

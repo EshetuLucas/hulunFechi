@@ -25,7 +25,7 @@ class SettingViewModel extends ReactiveViewModel {
   String get currentUserWoreda => _currentUser.woreda ?? '';
   String get currentUserSubCity => _currentUser.subcity ?? '';
   String get currentUserHouseNO => _currentUser.housenumber ?? '';
-  String get currentUserSSN => _currentUser.ssn ?? '';
+  String get currentUserTIN => _currentUser.tin ?? '';
   String get currentUserFullName =>
       currentUserFirstName + ' ' + currentUserLastName;
   String get currentUserBankName => _currentUser.bank ?? '';

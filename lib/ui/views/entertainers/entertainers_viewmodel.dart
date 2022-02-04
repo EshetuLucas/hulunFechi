@@ -6,6 +6,7 @@ import 'package:hulunfechi/app/app.router.dart';
 import 'package:hulunfechi/datamodels/app_data_model.dart';
 
 import 'package:hulunfechi/datamodels/post/post_model.dart';
+import 'package:hulunfechi/datamodels/user/user_model.dart';
 import 'package:hulunfechi/enums/bottom_sheet_type.dart';
 import 'package:hulunfechi/enums/dialog_type.dart';
 import 'package:hulunfechi/services/post_service.dart';
@@ -14,6 +15,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 const String POST_BUSY_KEY = 'Post busy key';
+const String FOLLOW_BUTTON_BUSY_KEY = 'Follow button key';
 
 class EntertainersViewModel extends FutureViewModel<List<Post>> {
   final log = getLogger('EntertainersViewModel ');
@@ -30,9 +32,15 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
     'All Platforms',
   ];
 
+  void setFollowBusy(bool value) {
+    setBusyForObject(FOLLOW_BUTTON_BUSY_KEY, value);
+  }
+
   void setPostsBusy(bool value) {
     setBusyForObject(POST_BUSY_KEY, value);
   }
+
+  List<User?> get followings => _userService.currentUser.following;
 
   int get userId => _userService.currentUser.id;
 
@@ -298,6 +306,25 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
         }
       }
     }
+  }
+
+  int _busyIndex = -1;
+  int get busyIndex => _busyIndex;
+  Future<void> onFollow(User user, int index) async {
+    _busyIndex = index;
+    setFollowBusy(true);
+    try {
+      await _userService.updateUser(
+        user: _userService.currentUser.copyWith(
+          following: [
+            user,
+            ..._userService.currentUser.following,
+          ],
+        ),
+      );
+    } catch (e) {}
+    _busyIndex = -1;
+    setFollowBusy(false);
   }
 
   bool _fetchAgain = false;

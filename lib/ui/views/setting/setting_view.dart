@@ -91,8 +91,8 @@ class SettingView extends StatelessWidget {
                                 subTitle: '12344',
                               ),
                               _AccountWidgets(
-                                title: 'Socila Security No:',
-                                subTitle: model.currentUserSSN,
+                                title: 'TIN:',
+                                subTitle: model.currentUserTIN,
                               ),
                             ],
                           ),

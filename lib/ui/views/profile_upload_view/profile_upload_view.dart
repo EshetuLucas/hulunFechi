@@ -54,7 +54,7 @@ class ProfileUploadView extends StatelessWidget {
                   padding: appSymmetricEdgePadding,
                   child: AppButton(
                     title: 'Upload',
-                    onTap: () => model.saveProfilePhoto(),
+                    onTap: () => model.onUpload(),
                     enabled: model.imageSelected,
                     busy: model.isBusy,
                   ),
@@ -100,7 +100,6 @@ class _ProfilePhotoHolder extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Colors.red,
               ),
               child: !imageSelected
                   ? Image.asset(
