@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hulunfechi/api/get_apis.dart';
 import 'package:hulunfechi/api/post_apis.dart';
 import 'package:hulunfechi/api/put_apis.dart';
@@ -97,11 +98,16 @@ class UserService with ReactiveServiceMixin {
           await _putApis.updateUser(body: user.toJson(), id: user.id);
       _currentUser.value = newUserData.copyWith(
         accessToken: currentUser.accessToken,
+        id: currentUser.id,
       );
+      // This is the best thing to do,
+      // This is should be removed from this part
+      // We need to have a unit test for the service and other base
+      // Functionalities
 
       notifyListeners();
-      _setUserLocally(newUserData);
-      return newUserData;
+      _setUserLocally(_currentUser.value);
+      return _currentUser.value!;
     } catch (e) {
       log.e(e);
       rethrow;

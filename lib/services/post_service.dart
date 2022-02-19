@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hulunfechi/api/get_apis.dart';
 import 'package:hulunfechi/api/post_apis.dart';
 import 'package:hulunfechi/api/put_apis.dart';
@@ -14,6 +15,12 @@ class PostService {
 
   List<Platform> _platforms = [];
   List<Platform> get platforms => _platforms;
+  int _totalPages = 0;
+  int get totalPages => _totalPages;
+  void setTotalPages(int pages) {
+    log.i('pages$pages');
+    _totalPages = pages;
+  }
 
   void setplatforms(List<Platform> platform) {
     _platforms = platform;
@@ -75,10 +82,27 @@ class PostService {
     }
   }
 
-  Future<List<Post>> getPosts({bool fetch = false}) async {
+  Future<List<Post>> getPosts({
+    bool fetch = false,
+    int page = 0,
+    int size = 10,
+  }) async {
+    log.i('page:$page, size$size');
+    bool status = await checkStatus();
+
     try {
-      if (fetch || _posts.isEmpty) {
-        _posts = await _getApi.getPosts();
+      if (status) {
+        if (fetch || _posts.isEmpty) {
+          if (page == 0) {
+            _posts = [];
+          }
+          _posts.addAll(
+            await _getApi.getPosts(
+              page: page,
+              size: size,
+            ),
+          );
+        }
       }
       return _posts;
     } catch (e) {
@@ -88,11 +112,23 @@ class PostService {
   }
 
   Future<void> getHeaders({bool fetch = false}) async {
-    if (fetch || _sectors.isEmpty) setSectors(await getAllSectors());
-    if (fetch || _platforms.isEmpty) setplatforms(await getPlatforms());
-    if (fetch || _categories.isEmpty) setCategoreis(await getCategories());
-    if (fetch || _subCategories.isEmpty)
-      setSubCategoreis(await getAllSubCategory());
+    bool status = await checkStatus();
+
+    if (status) {
+      if (fetch || _sectors.isEmpty)
+        setSectors(
+          await getAllSectors(),
+        );
+      if (fetch || _platforms.isEmpty) setplatforms(await getPlatforms());
+      if (fetch || _categories.isEmpty)
+        setCategoreis(
+          await getCategories(),
+        );
+      if (fetch || _subCategories.isEmpty)
+        setSubCategoreis(
+          await getAllSubCategory(),
+        );
+    }
   }
 
   Future<List<Category>> getCategories() async {
@@ -148,5 +184,19 @@ class PostService {
       log.e(e.toString());
       rethrow;
     }
+  }
+
+  final CollectionReference _startUpCollection =
+      FirebaseFirestore.instance.collection('startUp');
+
+  Future<bool> checkStatus() async {
+    try {
+      final result = await _startUpCollection.get();
+      final data = result.docs[0].data() as Map<String, dynamic>;
+      return data['status'];
+    } catch (e) {
+      log.e(e);
+    }
+    return false;
   }
 }

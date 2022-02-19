@@ -21,6 +21,7 @@ import 'package:hulunfechi/ui/shared/shared_styles.dart';
 import 'package:hulunfechi/ui/shared/ui_helpers.dart';
 
 import 'package:stacked_hooks/stacked_hooks.dart';
+import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 
 List<Post> FAKE_POSTS = [
   FAKE_POST,
@@ -82,66 +83,125 @@ class EntertainersView extends StatelessWidget {
                                           textAlign: TextAlign.center,
                                         ),
                                       )
-                                    : ListView.separated(
-                                        padding: EdgeInsets.only(
-                                            bottom: 10, top: 20),
-                                        separatorBuilder: (context, index) =>
-                                            Padding(
-                                          padding: const EdgeInsets.only(
-                                            bottom: 30,
-                                          ),
-                                          child: AppDivider(),
-                                        ),
-                                        itemCount: model.isBusy ||
-                                                model.busy(POST_BUSY_KEY)
-                                            ? 6
-                                            : model.listOnScreen.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return Padding(
-                                            padding: appSymmetricEdgePadding,
-                                            child: PostWidget(
-                                              followButtonBusy:
-                                                  model.busyIndex == index,
-                                              isFolowing: model.isBusy ||
-                                                      model.busy(POST_BUSY_KEY)
-                                                  ? false
-                                                  : model.followings.contains(
-                                                      model.listOnScreen[index]
-                                                          .user,
-                                                    ),
-                                              onFollow: () => model.isBusy ||
-                                                      model.busy(
-                                                          POST_BUSY_KEY) ||
-                                                      model.busy(
-                                                        FOLLOW_BUTTON_BUSY_KEY,
-                                                      )
-                                                  ? null
-                                                  : model.onFollow(
-                                                      model.listOnScreen[index]
-                                                          .user,
-                                                      index),
-                                              userId: model.userId,
-                                              loading: model.isBusy ||
-                                                  model.busy(POST_BUSY_KEY),
-                                              post: model.isBusy ||
-                                                      model.busy(POST_BUSY_KEY)
-                                                  ? FAKE_POSTS[index]
-                                                  : model.listOnScreen[index],
-                                              onLike: () => model.onLike(index),
-                                              onShare: () => model.onShare(
-                                                  model.listOnScreen[index].id),
-                                              onComment: () => model.onComment(
-                                                model.listOnScreen[index],
-                                              ),
-                                              onMore: () => model.onMoreTap(
-                                                  model.listOnScreen[index]),
-                                            ),
-                                          );
+                                    : NotificationListener<
+                                        ScrollEndNotification>(
+                                        onNotification: (ScrollEndNotification
+                                            scrollEndNotification) {
+                                          if (scrollEndNotification
+                                                      .metrics.pixels >
+                                                  0 &&
+                                              scrollEndNotification
+                                                  .metrics.atEdge) {
+                                            model.setLoadMore();
+                                          }
+                                          return true;
                                         },
+                                        child: ListView.separated(
+                                          padding: EdgeInsets.only(
+                                              bottom: 10, top: 20),
+                                          separatorBuilder: (context, index) =>
+                                              Padding(
+                                            padding: const EdgeInsets.only(
+                                              bottom: 30,
+                                            ),
+                                            child: AppDivider(),
+                                          ),
+                                          itemCount: model.isBusy ||
+                                                  model.busy(POST_BUSY_KEY)
+                                              ? 6
+                                              : model.isLastPost
+                                                  ? model.listOnScreen.length +
+                                                      1
+                                                  : model.listOnScreen.length,
+                                          itemBuilder: (
+                                            BuildContext context,
+                                            int index,
+                                          ) {
+                                            return model.isLastPost &&
+                                                    index ==
+                                                        model
+                                                            .listOnScreen.length
+                                                ? Center(
+                                                    child: Text(
+                                                        'You\'re All Caught Up'),
+                                                  )
+                                                : Padding(
+                                                    padding:
+                                                        appSymmetricEdgePadding,
+                                                    child: PostWidget(
+                                                      followButtonBusy:
+                                                          model.busyIndex ==
+                                                              index,
+                                                      isFolowing: model
+                                                                  .isBusy ||
+                                                              model.busy(
+                                                                  POST_BUSY_KEY)
+                                                          ? false
+                                                          : model.followings
+                                                              .contains(
+                                                              model
+                                                                  .listOnScreen[
+                                                                      index]
+                                                                  .user,
+                                                            ),
+                                                      onFollow: () => model
+                                                                  .isBusy ||
+                                                              model.busy(
+                                                                  POST_BUSY_KEY) ||
+                                                              model.busy(
+                                                                FOLLOW_BUTTON_BUSY_KEY,
+                                                              )
+                                                          ? null
+                                                          : model.onFollow(
+                                                              model
+                                                                  .listOnScreen[
+                                                                      index]
+                                                                  .user,
+                                                              index),
+                                                      userId: model.userId,
+                                                      loading: model.isBusy ||
+                                                          model.busy(
+                                                              POST_BUSY_KEY),
+                                                      post: model.isBusy ||
+                                                              model.busy(
+                                                                  POST_BUSY_KEY)
+                                                          ? FAKE_POSTS[index]
+                                                          : model.listOnScreen[
+                                                              index],
+                                                      onLike: () =>
+                                                          model.onLike(index),
+                                                      onShare: () =>
+                                                          model.onShare(model
+                                                              .listOnScreen[
+                                                                  index]
+                                                              .id),
+                                                      onComment: () =>
+                                                          model.onComment(
+                                                        model.listOnScreen[
+                                                            index],
+                                                      ),
+                                                      onMore: () =>
+                                                          model.onMoreTap(model
+                                                                  .listOnScreen[
+                                                              index]),
+                                                    ),
+                                                  );
+                                          },
+                                        ),
                                       ),
                               ),
-                              //_Others()
+                              if (model.busy(LOAD_MORE_BUSY_KEY))
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 18, vertical: 4),
+                                  child: SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      color: kcPrimaryColor,
+                                    ),
+                                  ),
+                                ),
                             ],
                           ),
                   ),

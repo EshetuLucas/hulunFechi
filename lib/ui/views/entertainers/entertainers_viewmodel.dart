@@ -15,6 +15,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 const String POST_BUSY_KEY = 'Post busy key';
+const String LOAD_MORE_BUSY_KEY = 'Load more busy key';
 const String FOLLOW_BUTTON_BUSY_KEY = 'Follow button key';
 
 class EntertainersViewModel extends FutureViewModel<List<Post>> {
@@ -24,6 +25,7 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
   final _postService = locator<PostService>();
   final _dialogService = locator<DialogService>();
   final _navigationService = locator<NavigationService>();
+  final _snackbarService = locator<SnackbarService>();
 
   final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
   String _allPlatforms = 'All Platforms';
@@ -31,6 +33,8 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
     'All Countries',
     'All Platforms',
   ];
+
+  bool get isLastPost => !isBusy && _postService.totalPages < _page;
 
   void setFollowBusy(bool value) {
     setBusyForObject(FOLLOW_BUTTON_BUSY_KEY, value);
@@ -56,6 +60,27 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
 
   bool _isSearchActive = false;
   bool get isSearchActive => _isSearchActive;
+  bool _loadMore = false;
+  bool get loadMore => _loadMore;
+  Future<void> setLoadMore() async {
+    log.i('called');
+    _page = _page + 1;
+    if (_postService.totalPages >= _page) {
+      _fetchAgain = true;
+
+      setBusyForObject(LOAD_MORE_BUSY_KEY, true);
+
+      try {
+        final result = await getPosts();
+        onData(result);
+      } catch (e) {
+        _page = _page - 1;
+        log.e('Unable to load more posts $e');
+        _snackbarService.showSnackbar(message: 'Unable to load more posts');
+      }
+      setBusyForObject(LOAD_MORE_BUSY_KEY, false);
+    } else {}
+  }
 
   bool get busyHeader => _postService.sectors.isEmpty && isBusy;
   String _searchKeyWord = '';
@@ -331,13 +356,27 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
 
   Future<void> onRefresh() async {
     _fetchAgain = true;
+    _page = 0;
+    _size = 10;
     initialise();
   }
+
+  int _page = 0;
+  int _size = 10;
 
   @override
   Future<List<Post>> futureToRun() async {
     await _postService.getHeaders(fetch: _fetchAgain);
-    return await _postService.getPosts(fetch: _fetchAgain);
+    return await getPosts();
+  }
+
+  Future<List<Post>> getPosts() async {
+    log.i('getPosts called');
+    return await _postService.getPosts(
+      fetch: _fetchAgain,
+      size: _size,
+      page: _page,
+    );
   }
 
   @override

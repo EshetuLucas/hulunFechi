@@ -40,6 +40,7 @@ dependencies:
   image_cropper: ^1.4.1
   file_picker:
   image_picker: ^0.8.4+4
+  
 
   # animations
   animations: ^2.0.0
@@ -73,6 +74,7 @@ dependencies:
   shared_preferences: ^2.0.11
   flutter_hooks: ^0.17.0
   cached_network_image: ^3.2.0
+  stacked_themes: ^0.3.8+1
 
 dependency_overrides:
   get_it: ^7.1.3

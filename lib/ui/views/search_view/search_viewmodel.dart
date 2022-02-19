@@ -134,10 +134,14 @@ class SearchViewModel extends FutureViewModel<List<Post>> {
 
   Future<void> onLike(int id) async {}
   Future<void> onShare(int id) async {}
-
+  int _page = 0;
+  int _size = 10;
   @override
   Future<List<Post>> futureToRun() async {
-    return await _postService.getPosts();
+    return await _postService.getPosts(
+      size: _size,
+      page: _page,
+    );
   }
 
   @override

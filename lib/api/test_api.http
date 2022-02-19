@@ -159,7 +159,7 @@ content-type: application/json
 Accept: application/json
 
 {
-   "username": "2022@admin.com",
+    "username": "2022@admin.com",
     "password": "123456",
     "role": ["user"],
     "email": "2022@admin.com",

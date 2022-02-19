@@ -37,8 +37,9 @@ class GetApis {
         .runRestRequest<Platform>(url: getPlatformsUrl, key: "Platform");
   }
 
-  Future<List<Post>> getPosts() async {
-    String searchEventByCategoryUrl = getPostsUrl;
+  Future<List<Post>> getPosts({required int page, required int size}) async {
+    String searchEventByCategoryUrl =
+        'https://apiv2.hulunfechi.com/api/postspage?page=$page&size=$size';
     return RestResponseParser()
         .runRestRequest<Post>(url: searchEventByCategoryUrl, key: "Posts");
   }

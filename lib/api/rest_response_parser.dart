@@ -10,6 +10,7 @@ import 'package:hulunfechi/datamodels/app_data_model.dart';
 import 'package:hulunfechi/datamodels/comment/comment_model.dart';
 import 'package:hulunfechi/datamodels/post/post_model.dart';
 import 'package:hulunfechi/datamodels/user/user_model.dart';
+import 'package:hulunfechi/services/post_service.dart';
 import 'package:hulunfechi/services/user_service.dart';
 import 'package:requests/requests.dart';
 import 'package:dio/dio.dart';
@@ -18,6 +19,7 @@ import 'package:dio/dio.dart';
 class RestResponseParser {
   final log = getLogger('RestResponseParser');
   final _userService = locator<UserService>();
+  final _postService = locator<PostService>();
   var dio = Dio();
 
   /// Runs a rest query and parses the response with the assumption that it will return a
@@ -26,29 +28,24 @@ class RestResponseParser {
   Future<List<T>> runRestRequest<T>(
       {required String url, required String key}) async {
     log.v('query:$url');
-    var response = await Requests.get(
-      url,
-      headers: {
-        HttpHeaders.contentTypeHeader: "application/json",
-        HttpHeaders.authorizationHeader:
-            "Bearer ${_userService.currentUser.accessToken}"
-      },
-    );
+    try {
+      var response = await dio.get(
+        url,
+        options: Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+            HttpHeaders.authorizationHeader:
+                "Bearer ${_userService.currentUser.accessToken}"
+          },
+        ),
+      );
 
-    log.v(
-        'RESPONSE: - hasData: ${response.json() != null}  "data:${response.json()}" : '
-        '}');
-
-    if (!response.hasError) {
-      try {
-        return parseData<T>(response.json(), key: key);
-      } catch (e, stacktrace) {
-        log.e('failed: $e');
-
-        return Future.error("");
-      }
-    } else {
-      return Future.error(response.raiseForStatus());
+      return parseData<T>(response.data, key: key);
+    } on DioError catch (e) {
+      log.e(e);
+      return Future.error(DioExceptions().getExceptionMessage(e));
+    } catch (e) {
+      return Future.error('Something went wrong. Try Again');
     }
   }
 
@@ -219,6 +216,13 @@ class RestResponseParser {
 
   /// Takes in a raw response and parses it into a list of results of [T]
   List<T> parseData<T>(data, {required String key}) {
+    log.e(data);
+    if (key == 'Posts') {
+      _postService.setTotalPages(
+        data['totalPages'],
+      );
+      data = data['posts'];
+    }
     var edges;
     if (key == null)
       edges = data;

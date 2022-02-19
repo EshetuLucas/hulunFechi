@@ -10,9 +10,12 @@ import 'package:hulunfechi/ui/snack_bar/setup_snack_bar.dart';
 import 'package:hulunfechi/ui/views/startup/startup_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:stacked_themes/stacked_themes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //await ThemeManager.initialise();
+
   await Firebase.initializeApp();
   await setupLocator();
   setupSnackbarUi();

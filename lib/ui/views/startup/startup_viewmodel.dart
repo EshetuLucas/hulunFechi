@@ -17,11 +17,22 @@ class StartupViewModel extends BaseViewModel {
   final _sharedPreferencesService = locator<SharedPreferencesService>();
   Future<void> runStartupLogic() async {
     log.i('');
+
     if (!_sharedPreferencesService.freshInstall &&
         _sharedPreferencesService.isUserLoggedIn) {
       User user = User.fromJson(
-          jsonDecode(_sharedPreferencesService.getFromDisk('user')));
+        jsonDecode(
+          _sharedPreferencesService.getFromDisk('user'),
+        ),
+      );
+
       _userService.setCurrentuser(user: user);
+      log.v(_userService.currentUser);
+      try {
+        _userService.updateUser(user: user);
+      } catch (e) {
+        _navigationService.clearStackAndShow(Routes.loginView);
+      }
       _navigationService.clearStackAndShow(Routes.homeView);
     } else {
       _navigationService.navigateTo(Routes.loginView);
