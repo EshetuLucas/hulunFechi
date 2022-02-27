@@ -37,11 +37,15 @@ class AccountViewModel extends BaseViewModel {
         onSavedEvents();
         break;
       case 3:
+        onFollowingTap();
         break;
       case 4:
+        onHelpCenter();
         break;
       case 5:
+        onContactUs();
         break;
+
       case 6:
         onAbout();
         break;
@@ -50,6 +54,29 @@ class AccountViewModel extends BaseViewModel {
         break;
       default:
     }
+  }
+
+  void onHelpCenter() {
+    _navigationService.navigateTo(
+      Routes.termsOfServiceWebView,
+      arguments: TermsOfServiceWebViewArguments(
+        url: 'https://www.africanpride.et/index.php/faq/',
+        title: 'Help Center',
+      ),
+    );
+  }
+
+  void onContactUs() {
+    _navigationService.navigateTo(
+      Routes.termsOfServiceWebView,
+      arguments: TermsOfServiceWebViewArguments(
+          url: 'https://www.africanpride.et/index.php/contact/',
+          title: 'Contact Us'),
+    );
+  }
+
+  void onFollowingTap() {
+    _navigationService.navigateTo(Routes.followingView);
   }
 
   Future<void> onCamera() async {

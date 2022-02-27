@@ -37,6 +37,8 @@ class PersonalInfoViewModel extends FormViewModel {
       firstname: !firstNameValue.isNullOrEmpty
           ? firstNameValue!
           : currentUserFirstName,
+      lastname:
+          !lastNameValue.isNullOrEmpty ? lastNameValue! : currentUserLastName,
       email: !emailValue.isNullOrEmpty ? emailValue! : currentUserEmail,
       phone: !phoneNumberValue.isNullOrEmpty
           ? phoneNumberValue!

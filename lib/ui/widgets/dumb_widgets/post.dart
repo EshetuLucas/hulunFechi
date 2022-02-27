@@ -51,7 +51,7 @@ class PostWidget extends StatelessWidget {
           // ),
           Row(
             children: [
-              _ProfilePic(
+              ProfilePic(
                 loading: loading,
                 url: post.user.ssn ??
                     'assets/images/entertainers_images/person.jpeg',
@@ -208,24 +208,24 @@ class PostWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: onShare,
-                child: Row(
-                  children: [
-                    Icon(CupertinoIcons.arrowshape_turn_up_right),
-                    horizontalSpaceSmall,
-                    SkeletonLoader(
-                      startColor: kcLightGrey3,
-                      endColor: kcWhite,
-                      loading: loading,
-                      child: Text(
-                        post.shares.toString(),
-                        style: ktsLightGreyMeidumTextStyle,
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              // GestureDetector(
+              //   onTap: onShare,
+              //   child: Row(
+              //     children: [
+              //       Icon(CupertinoIcons.arrowshape_turn_up_right),
+              //       horizontalSpaceSmall,
+              //       SkeletonLoader(
+              //         startColor: kcLightGrey3,
+              //         endColor: kcWhite,
+              //         loading: loading,
+              //         child: Text(
+              //           post.shares.toString(),
+              //           style: ktsLightGreyMeidumTextStyle,
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
             ],
           ),
           verticalSpaceMedium,
@@ -235,15 +235,19 @@ class PostWidget extends StatelessWidget {
   }
 }
 
-class _ProfilePic extends StatelessWidget {
-  const _ProfilePic({
+class ProfilePic extends StatelessWidget {
+  const ProfilePic({
     required this.loading,
     required this.url,
+    this.height = 50,
+    this.width = 50,
     Key? key,
   }) : super(key: key);
 
   final bool loading;
   final String url;
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -262,8 +266,8 @@ class _ProfilePic extends StatelessWidget {
               endColor: kcWhite,
               loading: loading,
               child: ProfilePicBuilder(
-                height: 50,
-                width: 50,
+                height: height,
+                width: width,
                 url: url,
               ),
             ),

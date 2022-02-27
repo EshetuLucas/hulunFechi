@@ -21,7 +21,7 @@ class PreferenceViewModel extends BaseViewModel {
   List<Sector> get sectors => _postService.sectors;
   List<Platform> get platforms => _postService.platforms;
   List<Category> get categories => _postService.categories;
-  List<Category?> get userCategories => _userService.currentUser.usercategories;
+  List<Category> get userCategories => _userService.currentUser.usercategories;
   List<String> _tags = [
     'All Countries',
     'Tilket',

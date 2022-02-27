@@ -25,8 +25,11 @@ class RestResponseParser {
   /// Runs a rest query and parses the response with the assumption that it will return a
   /// list of single information.
 
-  Future<List<T>> runRestRequest<T>(
-      {required String url, required String key}) async {
+  Future<List<T>> runRestRequest<T>({
+    required String url,
+    required String key,
+    bool hasPagination = false,
+  }) async {
     log.v('query:$url');
     try {
       var response = await dio.get(
@@ -40,7 +43,11 @@ class RestResponseParser {
         ),
       );
 
-      return parseData<T>(response.data, key: key);
+      return parseData<T>(
+        response.data,
+        key: key,
+        hasPagination: hasPagination,
+      );
     } on DioError catch (e) {
       log.e(e);
       return Future.error(DioExceptions().getExceptionMessage(e));
@@ -215,9 +222,10 @@ class RestResponseParser {
   }
 
   /// Takes in a raw response and parses it into a list of results of [T]
-  List<T> parseData<T>(data, {required String key}) {
-    log.e(data);
-    if (key == 'Posts') {
+  List<T> parseData<T>(data,
+      {required String key, bool hasPagination = false}) {
+    log.d(data);
+    if (hasPagination) {
       _postService.setTotalPages(
         data['totalPages'],
       );

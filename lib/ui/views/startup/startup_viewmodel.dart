@@ -5,6 +5,7 @@ import 'package:hulunfechi/app/app.logger.dart';
 import 'package:hulunfechi/app/app.router.dart';
 import 'package:hulunfechi/datamodels/user/user_model.dart';
 import 'package:hulunfechi/services/event_service.dart';
+import 'package:hulunfechi/services/post_service.dart';
 import 'package:hulunfechi/services/shared_preferences_service.dart';
 import 'package:hulunfechi/services/user_service.dart';
 import 'package:stacked/stacked.dart';
@@ -15,6 +16,7 @@ class StartupViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
   final _sharedPreferencesService = locator<SharedPreferencesService>();
+  final _postService = locator<PostService>();
   Future<void> runStartupLogic() async {
     log.i('');
 
@@ -29,7 +31,7 @@ class StartupViewModel extends BaseViewModel {
       _userService.setCurrentuser(user: user);
       log.v(_userService.currentUser);
       try {
-        _userService.updateUser(user: user);
+        await _postService.getAllSectors();
       } catch (e) {
         _navigationService.clearStackAndShow(Routes.loginView);
       }

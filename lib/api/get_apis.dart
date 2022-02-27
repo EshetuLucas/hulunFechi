@@ -40,8 +40,19 @@ class GetApis {
   Future<List<Post>> getPosts({required int page, required int size}) async {
     String searchEventByCategoryUrl =
         'https://apiv2.hulunfechi.com/api/postspage?page=$page&size=$size';
+    return RestResponseParser().runRestRequest<Post>(
+      url: searchEventByCategoryUrl,
+      key: "Posts",
+      hasPagination: true,
+    );
+  }
+
+  Future<List<Post>> getUserPosts({
+    required int id,
+  }) async {
+    String getUserPostsUrl = 'https://apiv2.hulunfechi.com/api/postbyuser/$id';
     return RestResponseParser()
-        .runRestRequest<Post>(url: searchEventByCategoryUrl, key: "Posts");
+        .runRestRequest<Post>(url: getUserPostsUrl, key: "Posts");
   }
 
   Future<List<Event>> getAllPosts(

@@ -64,6 +64,7 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
   bool get loadMore => _loadMore;
   Future<void> setLoadMore() async {
     log.i('called');
+    _fetchAgain = false;
     _page = _page + 1;
     if (_postService.totalPages >= _page) {
       _fetchAgain = true;
@@ -98,7 +99,7 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
       setCurrentPlatform('All Platforms');
       _currentIndex = 0;
       if (_searchKeyWord.isNotEmpty) {
-        _listOnScreen = List.from(_posts.reversed
+        _listOnScreen = List.from(_posts
             .where(
               (element) =>
                   element.user.firstname.toLowerCase().contains(
@@ -115,7 +116,7 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
       }
     } else
       _listOnScreen = List.from(
-        _posts.reversed
+        _posts
             .where(
               (element) =>
                   (_currentIndex == 0 ||
@@ -347,7 +348,9 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
           ],
         ),
       );
-    } catch (e) {}
+    } catch (e) {
+      log.e(e);
+    }
     _busyIndex = -1;
     setFollowBusy(false);
   }
@@ -366,6 +369,7 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
 
   @override
   Future<List<Post>> futureToRun() async {
+    _fetchAgain = true;
     await _postService.getHeaders(fetch: _fetchAgain);
     return await getPosts();
   }
@@ -384,6 +388,7 @@ class EntertainersViewModel extends FutureViewModel<List<Post>> {
     if (data != null) {
       _posts = data;
       setListOnScreen();
+      _fetchAgain = false;
       log.d(posts);
     }
   }

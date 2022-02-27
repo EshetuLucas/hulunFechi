@@ -13,6 +13,7 @@ import 'package:hulunfechi/ui/views/account/account_view.dart';
 import 'package:hulunfechi/ui/views/category_view/category_view.dart';
 import 'package:hulunfechi/ui/views/comment/comment_view.dart';
 import 'package:hulunfechi/ui/views/event_detail/event_detail_view.dart';
+import 'package:hulunfechi/ui/views/following/following_view.dart';
 import 'package:hulunfechi/ui/views/login/login_view.dart';
 import 'package:hulunfechi/ui/views/post/post_view.dart';
 import 'package:hulunfechi/ui/views/preference/preference_view.dart';
@@ -23,6 +24,7 @@ import 'package:hulunfechi/ui/views/setting/personal_info/personal_info_view.dar
 import 'package:hulunfechi/ui/views/setting/setting_view.dart';
 import 'package:hulunfechi/ui/views/signup/signup_view.dart';
 import 'package:hulunfechi/ui/views/startup/startup_view.dart';
+import 'package:hulunfechi/ui/views/terms_of_service/terms_of_service_web_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -50,6 +52,8 @@ import '../ui/views/home/home_view.dart';
     CupertinoRoute(page: AddressView),
     CupertinoRoute(page: BankDetailView),
     CupertinoRoute(page: ProfileUploadView),
+    CupertinoRoute(page: FollowingView),
+    CupertinoRoute(page: TermsOfServiceWebView),
   ],
   dependencies: [
     LazySingleton(classType: DialogService),

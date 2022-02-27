@@ -29,14 +29,17 @@ const List<Map<String, dynamic>> ACCOUNT_OPTIONS = [
     'title': 'Setting',
     'iconData': Icons.settings,
   },
-  {'title': 'Following', 'iconData': Icons.thumb_up_alt_outlined},
   {
-    'title': 'Terms & Conditions',
-    'iconData': CupertinoIcons.signature,
+    'title': 'Following',
+    'iconData': Icons.thumb_up_alt_outlined,
   },
   {
     'title': 'Help center',
     'iconData': Icons.help_outline,
+  },
+  {
+    'title': 'Contact Us',
+    'iconData': CupertinoIcons.conversation_bubble,
   },
   {
     'title': 'About',

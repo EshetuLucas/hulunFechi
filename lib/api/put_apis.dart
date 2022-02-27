@@ -30,10 +30,10 @@ class PutApis {
     List<Category> userCategories = body['usercategories'];
     List<User> userFollowing = body['following'];
     userCategories.forEach((element) {
-      userFollowingsMap.add({'id': element.id});
+      userCategoriesMap.add({'id': element.id});
     });
     userFollowing.forEach((element) {
-      userCategoriesMap.add({'id': element.id});
+      userFollowingsMap.add({'id': element.id});
     });
 
     body['usercategories'] = userCategoriesMap;

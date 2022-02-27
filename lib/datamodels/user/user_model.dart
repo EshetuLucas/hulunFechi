@@ -34,9 +34,9 @@ class User with _$User {
     String? tokenType,
     String? tin,
     String? profilePicPath,
-    @Default([]) List<Country?> usercountry,
-    @Default([]) List<User?> following,
-    @Default([]) List<Category?> usercategories,
+    @Default([]) List<Country> usercountry,
+    @Default([]) List<User> following,
+    @Default([]) List<Category> usercategories,
   }) = _User;
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }

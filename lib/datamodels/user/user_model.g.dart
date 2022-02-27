@@ -32,20 +32,15 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       tin: json['tin'] as String?,
       profilePicPath: json['profilePicPath'] as String?,
       usercountry: (json['usercountry'] as List<dynamic>?)
-              ?.map((e) => e == null
-                  ? null
-                  : Country.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Country.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       following: (json['following'] as List<dynamic>?)
-              ?.map((e) =>
-                  e == null ? null : User.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => User.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       usercategories: (json['usercategories'] as List<dynamic>?)
-              ?.map((e) => e == null
-                  ? null
-                  : Category.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );

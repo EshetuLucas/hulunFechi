@@ -1,12 +1,28 @@
 import 'package:dio/dio.dart';
+import 'package:hulunfechi/app/app.locator.dart';
+import 'package:hulunfechi/app/app.logger.dart';
+import 'package:hulunfechi/app/app.router.dart';
+import 'package:hulunfechi/services/shared_preferences_service.dart';
+import 'package:hulunfechi/services/user_service.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class DioExceptions {
+  final log = getLogger('DioExceptions');
+  final _userService = locator<UserService>();
+  final _navigationService = locator<NavigationService>();
+    final _sharedPreferencesService = locator<SharedPreferencesService>();
   // This function will parse the dio exception and retruns exception string accordingly
   // We should add more exception handling methods like returning, exception methods base on error code.
   // We can't use response package right now because the owners did not moved the package to the null safty right now
   // We need to test this as we go deploy the new apk.
   String getExceptionMessage(DioError e) {
+    log.e(e);
     if (e.type == DioErrorType.response) {
+      if (e.response?.statusCode == 401 && _userService.hasUser &&!_sharedPreferencesService.freshInstall &&
+        _sharedPreferencesService.isUserLoggedIn) {
+        _userService.logOut();
+        _navigationService.clearStackAndShow(Routes.loginView);
+      }
       print(e.response);
 
       return e.response?.data['message'] ?? '';

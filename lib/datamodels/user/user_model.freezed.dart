@@ -47,9 +47,9 @@ class _$UserTearOff {
       String? tokenType,
       String? tin,
       String? profilePicPath,
-      List<Country?> usercountry = const [],
-      List<User?> following = const [],
-      List<Category?> usercategories = const []}) {
+      List<Country> usercountry = const [],
+      List<User> following = const [],
+      List<Category> usercategories = const []}) {
     return _User(
       id: id,
       username: username,
@@ -115,9 +115,9 @@ mixin _$User {
   String? get tokenType => throw _privateConstructorUsedError;
   String? get tin => throw _privateConstructorUsedError;
   String? get profilePicPath => throw _privateConstructorUsedError;
-  List<Country?> get usercountry => throw _privateConstructorUsedError;
-  List<User?> get following => throw _privateConstructorUsedError;
-  List<Category?> get usercategories => throw _privateConstructorUsedError;
+  List<Country> get usercountry => throw _privateConstructorUsedError;
+  List<User> get following => throw _privateConstructorUsedError;
+  List<Category> get usercategories => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -153,9 +153,9 @@ abstract class $UserCopyWith<$Res> {
       String? tokenType,
       String? tin,
       String? profilePicPath,
-      List<Country?> usercountry,
-      List<User?> following,
-      List<Category?> usercategories});
+      List<Country> usercountry,
+      List<User> following,
+      List<Category> usercategories});
 }
 
 /// @nodoc
@@ -296,15 +296,15 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       usercountry: usercountry == freezed
           ? _value.usercountry
           : usercountry // ignore: cast_nullable_to_non_nullable
-              as List<Country?>,
+              as List<Country>,
       following: following == freezed
           ? _value.following
           : following // ignore: cast_nullable_to_non_nullable
-              as List<User?>,
+              as List<User>,
       usercategories: usercategories == freezed
           ? _value.usercategories
           : usercategories // ignore: cast_nullable_to_non_nullable
-              as List<Category?>,
+              as List<Category>,
     ));
   }
 }
@@ -339,9 +339,9 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? tokenType,
       String? tin,
       String? profilePicPath,
-      List<Country?> usercountry,
-      List<User?> following,
-      List<Category?> usercategories});
+      List<Country> usercountry,
+      List<User> following,
+      List<Category> usercategories});
 }
 
 /// @nodoc
@@ -483,15 +483,15 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       usercountry: usercountry == freezed
           ? _value.usercountry
           : usercountry // ignore: cast_nullable_to_non_nullable
-              as List<Country?>,
+              as List<Country>,
       following: following == freezed
           ? _value.following
           : following // ignore: cast_nullable_to_non_nullable
-              as List<User?>,
+              as List<User>,
       usercategories: usercategories == freezed
           ? _value.usercategories
           : usercategories // ignore: cast_nullable_to_non_nullable
-              as List<Category?>,
+              as List<Category>,
     ));
   }
 }
@@ -581,13 +581,13 @@ class _$_User extends _User {
   final String? profilePicPath;
   @JsonKey()
   @override
-  final List<Country?> usercountry;
+  final List<Country> usercountry;
   @JsonKey()
   @override
-  final List<User?> following;
+  final List<User> following;
   @JsonKey()
   @override
-  final List<Category?> usercategories;
+  final List<Category> usercategories;
 
   @override
   String toString() {
@@ -703,9 +703,9 @@ abstract class _User extends User {
       String? tokenType,
       String? tin,
       String? profilePicPath,
-      List<Country?> usercountry,
-      List<User?> following,
-      List<Category?> usercategories}) = _$_User;
+      List<Country> usercountry,
+      List<User> following,
+      List<Category> usercategories}) = _$_User;
   _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -759,11 +759,11 @@ abstract class _User extends User {
   @override
   String? get profilePicPath;
   @override
-  List<Country?> get usercountry;
+  List<Country> get usercountry;
   @override
-  List<User?> get following;
+  List<User> get following;
   @override
-  List<Category?> get usercategories;
+  List<Category> get usercategories;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;

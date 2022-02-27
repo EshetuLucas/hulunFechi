@@ -100,10 +100,6 @@ class UserService with ReactiveServiceMixin {
         accessToken: currentUser.accessToken,
         id: currentUser.id,
       );
-      // This is the best thing to do,
-      // This is should be removed from this part
-      // We need to have a unit test for the service and other base
-      // Functionalities
 
       notifyListeners();
       _setUserLocally(_currentUser.value);

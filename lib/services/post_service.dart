@@ -50,8 +50,14 @@ class PostService {
 
   List<Post> _posts = [];
   List<Post> get posts => _posts;
+  List<Post> _userPosts = [];
+  List<Post> get userPosts => _userPosts;
 
   void setPosts(List<Post> value) {
+    _posts = value;
+  }
+
+  void setUserPosts(List<Post> value) {
     _posts = value;
   }
 
@@ -105,6 +111,19 @@ class PostService {
         }
       }
       return _posts;
+    } catch (e) {
+      log.e(e.toString());
+      rethrow;
+    }
+  }
+
+  Future<List<Post>> getUserPosts({required int id}) async {
+    bool status = await checkStatus();
+    try {
+      if (status) {
+        _userPosts = await _getApi.getUserPosts(id: id);
+      }
+      return _userPosts;
     } catch (e) {
       log.e(e.toString());
       rethrow;

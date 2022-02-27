@@ -18,6 +18,7 @@ import '../ui/views/account/account_view.dart';
 import '../ui/views/category_view/category_view.dart';
 import '../ui/views/comment/comment_view.dart';
 import '../ui/views/event_detail/event_detail_view.dart';
+import '../ui/views/following/following_view.dart';
 import '../ui/views/home/home_view.dart';
 import '../ui/views/login/login_view.dart';
 import '../ui/views/post/post_view.dart';
@@ -29,6 +30,7 @@ import '../ui/views/setting/personal_info/personal_info_view.dart';
 import '../ui/views/setting/setting_view.dart';
 import '../ui/views/signup/signup_view.dart';
 import '../ui/views/startup/startup_view.dart';
+import '../ui/views/terms_of_service/terms_of_service_web_view.dart';
 
 class Routes {
   static const String homeView = '/home-view';
@@ -47,6 +49,8 @@ class Routes {
   static const String addressView = '/address-view';
   static const String bankDetailView = '/bank-detail-view';
   static const String profileUploadView = '/profile-upload-view';
+  static const String followingView = '/following-view';
+  static const String termsOfServiceWebView = '/terms-of-service-web-view';
   static const all = <String>{
     homeView,
     eventDetailView,
@@ -64,6 +68,8 @@ class Routes {
     addressView,
     bankDetailView,
     profileUploadView,
+    followingView,
+    termsOfServiceWebView,
   };
 }
 
@@ -87,6 +93,8 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.addressView, page: AddressView),
     RouteDef(Routes.bankDetailView, page: BankDetailView),
     RouteDef(Routes.profileUploadView, page: ProfileUploadView),
+    RouteDef(Routes.followingView, page: FollowingView),
+    RouteDef(Routes.termsOfServiceWebView, page: TermsOfServiceWebView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -222,6 +230,23 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    FollowingView: (data) {
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => const FollowingView(),
+        settings: data,
+      );
+    },
+    TermsOfServiceWebView: (data) {
+      var args = data.getArgs<TermsOfServiceWebViewArguments>(nullOk: false);
+      return CupertinoPageRoute<dynamic>(
+        builder: (context) => TermsOfServiceWebView(
+          title: args.title,
+          url: args.url,
+          key: args.key,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -285,4 +310,13 @@ class AddressViewArguments {
 class BankDetailViewArguments {
   final Key? key;
   BankDetailViewArguments({this.key});
+}
+
+/// TermsOfServiceWebView arguments holder class
+class TermsOfServiceWebViewArguments {
+  final String title;
+  final String url;
+  final Key? key;
+  TermsOfServiceWebViewArguments(
+      {required this.title, required this.url, this.key});
 }
